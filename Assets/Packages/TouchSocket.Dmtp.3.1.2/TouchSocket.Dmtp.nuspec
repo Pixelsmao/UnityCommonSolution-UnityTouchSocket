@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+  <metadata>
+    <id>TouchSocket.Dmtp</id>
+    <version>3.1.2</version>
+    <title>TouchSocket.Dmtp</title>
+    <authors>若汝棋茗</authors>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <license type="file">LICENSE.txt</license>
+    <licenseUrl>https://aka.ms/deprecateLicenseUrl</licenseUrl>
+    <icon>logo.png</icon>
+    <readme>Readme.md</readme>
+    <projectUrl>https://touchsocket.net/</projectUrl>
+    <description>DMTP（Duplex Message Transport Protocol双工消息传输协议）是一个简单易用，便捷高效，且易于扩展的二进制数据协议。目前基于该协议，已实现的功能包括：连接验证、同步Id、Rpc（包括客户端请求服务器，服务器请求客户端、客户端请求客户端）、文件传输（包括客户端向服务器请求文件、客户端向服务器推送文件、服务器向客户端请求文件、服务器向客户端推送文件、
+客户端之间请求、推送文件）、Redis等。
+
+说明文档：https://touchsocket.net/</description>
+    <copyright>Copyright © 2025 若汝棋茗</copyright>
+    <tags>Duplex Rpc FileTransfer Redis TouchSocket</tags>
+    <repository type="git" url="https://github.com/RRQM/TouchSocket" commit="be3f4f8e985bac4e376f507697776473c49d06a7" />
+    <dependencies>
+      <group targetFramework=".NETFramework4.5">
+        <dependency id="TouchSocket.Http" version="3.1.2" exclude="Build,Analyzers" />
+        <dependency id="TouchSocket.Rpc" version="3.1.2" exclude="Build,Analyzers" />
+      </group>
+      <group targetFramework=".NETFramework4.6.2">
+        <dependency id="TouchSocket.Http" version="3.1.2" exclude="Build,Analyzers" />
+        <dependency id="TouchSocket.Rpc" version="3.1.2" exclude="Build,Analyzers" />
+      </group>
+      <group targetFramework=".NETFramework4.7.2">
+        <dependency id="TouchSocket.Http" version="3.1.2" exclude="Build,Analyzers" />
+        <dependency id="TouchSocket.Rpc" version="3.1.2" exclude="Build,Analyzers" />
+      </group>
+      <group targetFramework=".NETFramework4.8.1">
+        <dependency id="TouchSocket.Http" version="3.1.2" exclude="Build,Analyzers" />
+        <dependency id="TouchSocket.Rpc" version="3.1.2" exclude="Build,Analyzers" />
+        <dependency id="System.Reflection.DispatchProxy" version="4.7.1" exclude="Build,Analyzers" />
+      </group>
+      <group targetFramework="net6.0">
+        <dependency id="TouchSocket.Http" version="3.1.2" exclude="Build,Analyzers" />
+        <dependency id="TouchSocket.Rpc" version="3.1.2" exclude="Build,Analyzers" />
+      </group>
+      <group targetFramework="net8.0">
+        <dependency id="TouchSocket.Http" version="3.1.2" exclude="Build,Analyzers" />
+        <dependency id="TouchSocket.Rpc" version="3.1.2" exclude="Build,Analyzers" />
+      </group>
+      <group targetFramework="net9.0">
+        <dependency id="TouchSocket.Http" version="3.1.2" exclude="Build,Analyzers" />
+        <dependency id="TouchSocket.Rpc" version="3.1.2" exclude="Build,Analyzers" />
+      </group>
+      <group targetFramework=".NETStandard2.0">
+        <dependency id="TouchSocket.Http" version="3.1.2" exclude="Build,Analyzers" />
+        <dependency id="TouchSocket.Rpc" version="3.1.2" exclude="Build,Analyzers" />
+      </group>
+      <group targetFramework=".NETStandard2.1">
+        <dependency id="TouchSocket.Http" version="3.1.2" exclude="Build,Analyzers" />
+        <dependency id="TouchSocket.Rpc" version="3.1.2" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+    <frameworkAssemblies>
+      <frameworkAssembly assemblyName="System.IO" targetFramework=".NETFramework4.8.1" />
+      <frameworkAssembly assemblyName="System.Net.Http" targetFramework=".NETFramework4.8.1" />
+      <frameworkAssembly assemblyName="System.Runtime" targetFramework=".NETFramework4.8.1" />
+      <frameworkAssembly assemblyName="System.Security.Cryptography.Algorithms" targetFramework=".NETFramework4.8.1" />
+      <frameworkAssembly assemblyName="System.Security.Cryptography.Encoding" targetFramework=".NETFramework4.8.1" />
+      <frameworkAssembly assemblyName="System.Security.Cryptography.Primitives" targetFramework=".NETFramework4.8.1" />
+      <frameworkAssembly assemblyName="System.Security.Cryptography.X509Certificates" targetFramework=".NETFramework4.8.1" />
+    </frameworkAssemblies>
+  </metadata>
+</package>

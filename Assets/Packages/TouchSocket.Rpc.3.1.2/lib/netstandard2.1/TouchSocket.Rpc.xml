@@ -1,0 +1,1852 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TouchSocket.Rpc</name>
+    </assembly>
+    <members>
+        <member name="T:TouchSocket.Rpc.FromServicesAttribute">
+            <summary>
+            标识Rpc参数来自于IOC服务
+            </summary>
+        </member>
+        <member name="T:TouchSocket.Rpc.IRpcActionFilter">
+            <summary>
+            Rpc行为过滤器。
+            </summary>
+        </member>
+        <member name="P:TouchSocket.Rpc.IRpcActionFilter.MutexAccessTypes">
+            <summary>
+            互斥访问类型。
+            <para>
+            当互斥访问类型或其派生类和本类型同时添加特性时，只有优先级更高的会生效。
+            </para>
+            </summary>
+        </member>
+        <member name="M:TouchSocket.Rpc.IRpcActionFilter.ExecutedAsync(TouchSocket.Rpc.ICallContext,System.Object[],TouchSocket.Rpc.InvokeResult,System.Exception)">
+            <summary>
+            执行Rpc之后。
+            <para>如果修改<paramref name="invokeResult"/>的InvokeStatus，或Result。则会影响Rpc最终结果</para>
+            </summary>
+            <param name="callContext">调用上下文，包含有关Rpc调用的上下文信息</param>
+            <param name="parameters">Rpc调用的参数</param>
+            <param name="invokeResult">Rpc调用的结果，可以通过此参数修改Rpc的最终结果</param>
+            <param name="exception">在Rpc调用期间发生的任何异常</param>
+            <returns>返回一个<see cref="T:System.Threading.Tasks.Task`1"/>，该任务表示Rpc调用的最终结果</returns>
+        </member>
+        <member name="M:TouchSocket.Rpc.IRpcActionFilter.ExecutingAsync(TouchSocket.Rpc.ICallContext,System.Object[],TouchSocket.Rpc.InvokeResult)">
+            <summary>
+            在执行Rpc之前。
+            <para>当<paramref name="invokeResult"/>的InvokeStatus不为<see cref="F:TouchSocket.Rpc.InvokeStatus.Ready"/>。则不会执行Rpc</para>
+            <para>同时，当<paramref name="invokeResult"/>的InvokeStatus为<see cref="F:TouchSocket.Rpc.InvokeStatus.Success"/>。会直接返回结果</para>
+            </summary>
+            <param name="callContext">调用上下文，包含有关Rpc调用的信息和上下文</param>
+            <param name="parameters">Rpc调用的参数，以对象数组的形式提供</param>
+            <param name="invokeResult">Rpc调用的结果，包含调用状态和结果数据</param>
+            <returns>返回一个<see cref="T:System.Threading.Tasks.Task"/>，该任务完成后将返回Rpc调用的结果<see cref="T:TouchSocket.Rpc.InvokeResult"/></returns>
+        </member>
+        <member name="T:TouchSocket.Rpc.ReenterableAttribute">
+            <summary>
+            标识一个方法或类是否可重新进入。
+            </summary>
+            <remarks>
+            该属性主要用于并发控制和同步机制中，指示被标记的方法或类是否可以在尚未完成执行时再次被调用。
+            </remarks>
+        </member>
+        <member name="M:TouchSocket.Rpc.ReenterableAttribute.#ctor(System.Boolean)">
+            <summary>
+            初始化 ReenterableAttribute 类的新实例。
+            </summary>
+            <param name="reenterable">指示是否可重新进入。true 表示可重新进入；false 表示不可重新进入。</param>
+        </member>
+        <member name="P:TouchSocket.Rpc.ReenterableAttribute.Reenterable">
+            <summary>
+            获取一个值，指示是否可重新进入。
+            </summary>
+        </member>
+        <member name="T:TouchSocket.Rpc.RpcActionFilterAttribute">
+            <summary>
+            表示一个抽象类，用于实现RPC操作的过滤器属性。
+            继承自系统基类Attribute，并实现IRpcActionFilter接口。
+            </summary>
+        </member>
+        <member name="P:TouchSocket.Rpc.RpcActionFilterAttribute.MutexAccessTypes">
+            <inheritdoc/>
+        </member>
+        <member name="M:TouchSocket.Rpc.RpcActionFilterAttribute.ExecutedAsync(TouchSocket.Rpc.ICallContext,System.Object[],TouchSocket.Rpc.InvokeResult,System.Exception)">
+            <inheritdoc/>
+        </member>
+        <member name="M:TouchSocket.Rpc.RpcActionFilterAttribute.ExecutingAsync(TouchSocket.Rpc.ICallContext,System.Object[],TouchSocket.Rpc.InvokeResult)">
+            <inheritdoc/>
+        </member>
+        <member name="T:TouchSocket.Rpc.RpcAttribute">
+            <summary>
+            Rpc方法属性基类
+            </summary>
+        </member>
+        <member name="M:TouchSocket.Rpc.RpcAttribute.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="P:TouchSocket.Rpc.RpcAttribute.ClassCodeGenerator">
+            <summary>
+            类生成器
+            </summary>
+        </member>
+        <member name="P:TouchSocket.Rpc.RpcAttribute.Exceptions">
+            <summary>
+            异常提示
+            </summary>
+        </member>
+        <member name="P:TouchSocket.Rpc.RpcAttribute.GeneratorFlag">
+            <summary>
+            生成代码
+            </summary>
+        </member>
+        <member name="P:TouchSocket.Rpc.RpcAttribute.GenericConstraintTypes">
+            <summary>
+            生成泛型方法的约束
+            </summary>
+        </member>
+        <member name="P:TouchSocket.Rpc.RpcAttribute.InvokeKey">
+            <summary>
+            调用键。
+            </summary>
+        </member>
+        <member name="P:TouchSocket.Rpc.RpcAttribute.MethodInvoke">
+            <summary>
+            是否仅以函数名调用，当为True是，调用时仅需要传入方法名即可。
+            </summary>
+        </member>
+        <member name="P:TouchSocket.Rpc.RpcAttribute.MethodName">
+            <summary>
+            重新指定生成的函数名称。可以使用类似“JsonRpc_{0}”的模板格式。
+            </summary>
+        </member>
+        <member name="P:TouchSocket.Rpc.RpcAttribute.Namespaces">
+            <summary>
+            生成代理时，额外的命名空间
+            </summary>
+        </member>
+        <member name="P:TouchSocket.Rpc.RpcAttribute.PropertyNames">
+            <summary>
+            获取或设置属性名称的字典。
+            </summary>
+        </member>
+        <member name="M:TouchSocket.Rpc.RpcAttribute.GetDescription(TouchSocket.Rpc.RpcMethod)">
+            <summary>
+            获取注释信息
+            </summary>
+            <param name="rpcMethod"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TouchSocket.Rpc.RpcAttribute.GetExtensionsMethodProxyCode(TouchSocket.Rpc.RpcMethod)">
+            <summary>
+            获取扩展的代理代码
+            </summary>
+            <param name="rpcMethod"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TouchSocket.Rpc.RpcAttribute.GetGenericConstraintTypes">
+            <summary>
+            获取生成的函数泛型限定名称。默认<see cref="T:TouchSocket.Rpc.IRpcClient"/>
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TouchSocket.Rpc.RpcAttribute.GetInstanceProxyCode(TouchSocket.Rpc.RpcMethod)">
+            <summary>
+            获取生成实体类时的代码块
+            </summary>
+            <param name="rpcMethod"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TouchSocket.Rpc.RpcAttribute.GetInterfaceProxyCode(TouchSocket.Rpc.RpcMethod)">
+            <summary>
+            获取接口的代理代码
+            </summary>
+            <param name="rpcMethod"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TouchSocket.Rpc.RpcAttribute.GetInvokeKey(TouchSocket.Rpc.RpcMethod)">
+            <summary>
+            获取调用键
+            </summary>
+            <param name="rpcMethod"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TouchSocket.Rpc.RpcAttribute.GetInvokeOption">
+            <summary>
+            获取调用配置
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TouchSocket.Rpc.RpcAttribute.GetMethodName(TouchSocket.Rpc.RpcMethod,System.Boolean)">
+            <summary>
+            获取生成的函数名称
+            </summary>
+            <param name="rpcMethod"></param>
+            <param name="isAsync"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TouchSocket.Rpc.RpcAttribute.GetParameters(TouchSocket.Rpc.RpcMethod,TouchSocket.Rpc.RpcParameter[]@)">
+            <summary>
+            根据指定的RPC方法获取参数信息。
+            </summary>
+            <param name="rpcMethod">RPC方法的枚举值，用于指定需要获取参数信息的RPC方法。</param>
+            <param name="parameters">输出参数，包含RPC方法所有参数的信息。</param>
+            <returns>返回一个字符串列表，包含RPC方法的参数。</returns>
+        </member>
+        <member name="M:TouchSocket.Rpc.RpcAttribute.GetProxyParameterName(System.Reflection.ParameterInfo)">
+            <summary>
+            从类型获取代理名
+            </summary>
+            <param name="parameterInfo">参数信息对象，用于提取类型信息</param>
+            <returns>返回根据类型生成的代理名</returns>
+        </member>
+        <member name="M:TouchSocket.Rpc.RpcAttribute.GetReturn(TouchSocket.Rpc.RpcMethod,System.Boolean)">
+            <summary>
+            获取返回值
+            </summary>
+            <param name="rpcMethod">远程过程调用方法的信息</param>
+            <param name="isAsync">是否为异步调用</param>
+            <returns>返回值类型字符串</returns>
+        </member>
+        <member name="M:TouchSocket.Rpc.RpcAttribute.GetExtensionInstanceMethod(TouchSocket.Rpc.RpcMethod,System.Collections.Generic.List{System.String},TouchSocket.Rpc.RpcParameter[],System.Boolean)">
+            <summary>
+            生成扩展函数的内容
+            </summary>
+            <param name="rpcMethod"></param>
+            <param name="parametersStr"></param>
+            <param name="parameters"></param>
+            <param name="isAsync"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TouchSocket.Rpc.RpcAttribute.GetInstanceMethod(TouchSocket.Rpc.RpcMethod,System.Collections.Generic.List{System.String},TouchSocket.Rpc.RpcParameter[],System.Boolean)">
+            <summary>
+            生成实现函数的内容
+            </summary>
+            <param name="rpcMethod"></param>
+            <param name="parametersStr"></param>
+            <param name="parameters"></param>
+            <param name="isAsync"></param>
+            <returns></returns>
+        </member>
+        <member name="T:TouchSocket.Rpc.RpcProxyAttribute">
+            <summary>
+            代理类
+            </summary>
+        </member>
+        <member name="M:TouchSocket.Rpc.RpcProxyAttribute.#ctor(System.String)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="className"></param>
+        </member>
+        <member name="M:TouchSocket.Rpc.RpcProxyAttribute.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="P:TouchSocket.Rpc.RpcProxyAttribute.ClassName">
+            <summary>
+            代理类名
+            </summary>
+        </member>
+        <member name="T:TouchSocket.Rpc.IRpcCallContextAccessor">
+            <summary>
+            提供对当前 RPC 调用上下文的访问。
+            </summary>
+        </member>
+        <member name="P:TouchSocket.Rpc.IRpcCallContextAccessor.CallContext">
+            <summary>
+            获取或设置当前的调用上下文。
+            </summary>
+        </member>
+        <member name="P:TouchSocket.Rpc.RpcCallContextAccessor.CallContext">
+            <inheritdoc/>
+        </member>
+        <member name="T:TouchSocket.Rpc.ClassCellCode">
+            <summary>
+            属性单元代码。
+            </summary>
+        </member>
+        <member name="P:TouchSocket.Rpc.ClassCellCode.Name">
+            <summary>
+            属性名
+            </summary>
+        </member>
+        <member name="P:TouchSocket.Rpc.ClassCellCode.Code">
+            <summary>
+            代码本体
+            </summary>
+        </member>
+        <member name="T:TouchSocket.Rpc.ClassCodeGenerator">
+            <summary>
+            代码辅助类
+            </summary>
+        </member>
+        <member name="M:TouchSocket.Rpc.ClassCodeGenerator.#ctor(System.Reflection.Assembly[])">
+            <summary>
+            构造函数
+            </summary>
+            <param name="assembly"></param>
+        </member>
+        <member name="P:TouchSocket.Rpc.ClassCodeGenerator.Assembly">
+            <summary>
+            程序集
+            </summary>
+        </member>
+        <member name="P:TouchSocket.Rpc.ClassCodeGenerator.PropertyDic">
+            <summary>
+            属性类型字典。
+            </summary>
+        </member>
+        <member name="M:TouchSocket.Rpc.ClassCodeGenerator.AddTypeString(System.Type)">
+            <summary>
+            添加类型字符串
+            </summary>
+            <param name="type"></param>
+        </member>
+        <member name="M:TouchSocket.Rpc.ClassCodeGenerator.GetClassCellCodes">
+            <summary>
+            获取类单元参数
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TouchSocket.Rpc.ClassCodeGenerator.GetTypeFullName(System.Type)">
+            <summary>
+            获取类型全名
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TouchSocket.Rpc.ClassCodeGenerator.GetTypeFullName(System.Reflection.ParameterInfo)">
+            <summary>
+            获取类型全名
+            </summary>
+            <param name="parameterInfo"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TouchSocket.Rpc.ClassCodeGenerator.GetTypeFullName(System.Reflection.PropertyInfo)">
+            <summary>
+            获取类型全名
+            </summary>
+            <param name="propertyInfo"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TouchSocket.Rpc.ClassCodeGenerator.GetTypeFullName(System.Reflection.FieldInfo)">
+            <summary>
+            获取类型全名
+            </summary>
+            <param name="fieldInfo"></param>
+            <returns></returns>
+        </member>
+        <member name="T:TouchSocket.Rpc.CodeGenerator">
+            <summary>
+            代码生成器
+            </summary>
+        </member>
+        <member name="M:TouchSocket.Rpc.CodeGenerator.AddIgnoreProxyAssembly(System.Reflection.Assembly)">
+            <summary>
+            添加不需要代理的程序集
+            </summary>
+            <param name="assembly"></param>
+        </member>
+        <member name="M:TouchSocket.Rpc.CodeGenerator.AddIgnoreProxyType(System.Type)">
+            <summary>
+            添加不需要代理的类型
+            </summary>
+            <param name="type"></param>
+        </member>
+        <member name="M:TouchSocket.Rpc.CodeGenerator.AddProxyAssembly(System.Reflection.Assembly)">
+            <summary>
+            添加需要代理的程序集
+            </summary>
+            <param name="assembly"></param>
+        </member>
+        <member name="M:TouchSocket.Rpc.CodeGenerator.AddProxyType(System.Type,System.Boolean)">
+            <summary>
+            添加代理类型
+            </summary>
+            <param name="type"></param>
+            <param name="deepSearch"></param>
+        </member>
+        <member name="M:TouchSocket.Rpc.CodeGenerator.AddProxyType``1(System.Boolean)">
+            <summary>
+            添加代理类型
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="deepSearch"></param>
+        </member>
+        <member name="M:TouchSocket.Rpc.CodeGenerator.ContainsType(System.Type)">
+            <summary>
+            是否包含类型
+            </summary>
+            <param name="type"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TouchSocket.Rpc.CodeGenerator.ConvertToCode(System.String,TouchSocket.Rpc.ServerCellCode[])">
+            <summary>
+            转换为cs代码。
+            </summary>
+            <param name="namespace"></param>
+            <param name="serverCodes"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TouchSocket.Rpc.CodeGenerator.Generator``2">
+            <summary>
+            生成代码代理
+            </summary>
+            <typeparam name="TServer">服务类型</typeparam>
+            <typeparam name="TAttribute">属性标签</typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:TouchSocket.Rpc.CodeGenerator.Generator(System.Type,System.Type)">
+            <summary>
+            生成代码代理
+            </summary>
+            <param name="serverType">服务类型</param>
+            <param name="attributeType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TouchSocket.Rpc.CodeGenerator.GetMethodId(System.Reflection.MethodInfo)">
+            <summary>
+            获取函数唯一Id
+            </summary>
+            <param name="method"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TouchSocket.Rpc.CodeGenerator.GetMethodInfos(System.Type,System.Collections.Generic.Dictionary{System.String,System.Reflection.MethodInfo}@)">
+            <summary>
+            获取Method
+            </summary>
+            <param name="type"></param>
+            <param name="methods"></param>
+        </member>
+        <member name="M:TouchSocket.Rpc.CodeGenerator.GetToMethodInfo(System.Reflection.MethodInfo,System.Type,System.Type)">
+            <summary>
+            获取映射到目标类型的方法信息。
+            </summary>
+            <param name="method">源方法信息。</param>
+            <param name="serverFromType">源服务类型。</param>
+            <param name="serverToType">目标服务类型。</param>
+            <returns>映射到目标类型的方法信息。</returns>
+            <exception cref="T:TouchSocket.Rpc.RpcException">如果未找到映射方法，则抛出异常。</exception>
+        </member>
+        <member name="M:TouchSocket.Rpc.CodeGenerator.GetRpcMethods``1">
+            <summary>
+            从类型获取函数实例
+            </summary>
+            <typeparam name="TServer"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:TouchSocket.Rpc.CodeGenerator.GetRpcMethods(System.Type,System.Type)">
+            <summary>
+            从类型获取函数实例
+            </summary>
+            <param name="serverFromType"></param>
+            <param name="serverToType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TouchSocket.Rpc.CodeGenerator.GetProxyCodes(System.String,System.Type[],System.Type[])">
+            <summary>
+            生成代理代码
+            </summary>
+            <param name="namespace"></param>
+            <param name="serverTypes"></param>
+            <param name="attributeTypes"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TouchSocket.Rpc.CodeGenerator.TryGetProxyTypeName(System.Type,System.String@)">
+            <summary>
+            获取类型代理名称
+            </summary>
+            <param name="type"></param>
+            <param name="className"></param>
+            <returns></returns>
+        </member>
+        <member name="T:TouchSocket.Rpc.MethodCellCode">
+            <summary>
+            生成的代码单元
+            </summary>
+        </member>
+        <member name="P:TouchSocket.Rpc.MethodCellCode.Name">
+            <summary>
+            方法名
+            </summary>
+        </member>
+        <member name="P:TouchSocket.Rpc.MethodCellCode.CodeTemple">
+            <summary>
+            代码本体
+            </summary>
+        </member>
+        <member name="P:TouchSocket.Rpc.MethodCellCode.InterfaceTemple">
+            <summary>
+            接口代码。
+            </summary>
+        </member>
+        <member name="P:TouchSocket.Rpc.MethodCellCode.ExtensionsTemple">
+            <summary>
+            扩展代码
+            </summary>
+        </member>
+        <member name="T:TouchSocket.Rpc.ServerCellCode">
+            <summary>
+            服务单元代码
+            </summary>
+        </member>
+        <member name="M:TouchSocket.Rpc.ServerCellCode.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="P:TouchSocket.Rpc.ServerCellCode.IncludeInterface">
+            <summary>
+            包含接口
+            </summary>
+        </member>
+        <member name="P:TouchSocket.Rpc.ServerCellCode.IncludeInstance">
+            <summary>
+            包含实例
+            </summary>
+        </member>
+        <member name="P:TouchSocket.Rpc.ServerCellCode.IncludeExtension">
+            <summary>
+            包含扩展
+            </summary>
+        </member>
+        <member name="P:TouchSocket.Rpc.ServerCellCode.Name">
+            <summary>
+            服务名
+            </summary>
+        </member>
+        <member name="P:TouchSocket.Rpc.ServerCellCode.Namespaces">
+            <summary>
+            生成代理时，额外的命名空间
+            </summary>
+        </member>
+        <member name="P:TouchSocket.Rpc.ServerCellCode.Methods">
+            <summary>
+            方法集合
+            </summary>
+        </member>
+        <member name="P:TouchSocket.Rpc.ServerCellCode.ClassCellCodes">
+            <summary>
+            类参数集合。
+            </summary>
+        </member>
+        <member name="T:TouchSocket.Rpc.ActionMap">
+            <summary>
+            服务映射图
+            </summary>
+        </member>
+        <member name="M:TouchSocket.Rpc.ActionMap.#ctor(System.Boolean)">
+            <summary>
+            服务映射图
+            </summary>
+            <param name="ignoreCase"></param>
+        </member>
+        <member name="M:TouchSocket.Rpc.ActionMap.GetRpcMethod(System.String)">
+            <summary>
+            通过actionKey获取函数实例
+            </summary>
+            <param name="actionKey"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TouchSocket.Rpc.ActionMap.TryGetRpcMethod(System.String,TouchSocket.Rpc.RpcMethod@)">
+            <summary>
+            通过actionKey获取函数实例
+            </summary>
+            <param name="actionKey"></param>
+            <param name="rpcMethod"></param>
+            <returns></returns>
+        </member>
+        <member name="T:TouchSocket.Rpc.CallContext">
+            <summary>
+            Rpc调用上下文的基本实现
+            </summary>
+        </member>
+        <member name="M:TouchSocket.Rpc.CallContext.#ctor(System.Object,TouchSocket.Rpc.RpcMethod,TouchSocket.Core.IResolver)">
+            <summary>
+            初始化CallContext对象。
+            </summary>
+            <param name="caller">调用者对象，表示触发RPC方法的实例。</param>
+            <param name="rpcMethod">RpcMethod对象，表示将要调用的RPC方法。</param>
+            <param name="resolver">IResolver接口的实现，用于解析依赖注入。</param>
+        </member>
+        <member name="M:TouchSocket.Rpc.CallContext.#ctor">
+            <summary>
+            初始化CallContext对象。
+            </summary>
+        </member>
+        <member name="P:TouchSocket.Rpc.CallContext.Caller">
+            <inheritdoc/>
+        </member>
+        <member name="P:TouchSocket.Rpc.CallContext.Parameters">
+            <inheritdoc/>
+        </member>
+        <member name="P:TouchSocket.Rpc.CallContext.Resolver">
+            <inheritdoc/>
+        </member>
+        <member name="P:TouchSocket.Rpc.CallContext.RpcMethod">
+            <inheritdoc/>
+        </member>
+        <member name="P:TouchSocket.Rpc.CallContext.Token">
+            <inheritdoc/>
+        </member>
+        <member name="M:TouchSocket.Rpc.CallContext.Cancel">
+            <inheritdoc/>
+        </member>
+        <member name="T:TouchSocket.Rpc.FeedbackType">
+            <summary>
+            反馈类型
+            </summary>
+        </member>
+        <member name="F:TouchSocket.Rpc.FeedbackType.OnlySend">
+            <summary>
+            仅发送
+            </summary>
+        </member>
+        <member name="F:TouchSocket.Rpc.FeedbackType.WaitSend">
+            <summary>
+            等待，直到发送抵达
+            </summary>
+        </member>
+        <member name="F:TouchSocket.Rpc.FeedbackType.WaitInvoke">
+            <summary>
+            等待，直到调用完成
+            </summary>
+        </member>
+        <member name="T:TouchSocket.Rpc.InvokeOption">
+            <summary>
+            Rpc调用设置
+            </summary>
+        </member>
+        <member name="M:TouchSocket.Rpc.InvokeOption.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:TouchSocket.Rpc.InvokeOption.#ctor(System.Int32)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="millisecondsTimeout"></param>
+        </member>
+        <member name="P:TouchSocket.Rpc.InvokeOption.OnlySend">
+            <summary>
+            默认设置。
+            Timeout=5000ms
+            </summary>
+        </member>
+        <member name="P:TouchSocket.Rpc.InvokeOption.WaitInvoke">
+            <summary>
+            默认设置。
+            Timeout=5000ms
+            </summary>
+        </member>
+        <member name="P:TouchSocket.Rpc.InvokeOption.WaitSend">
+            <summary>
+            默认设置。
+            Timeout=5000 ms
+            </summary>
+        </member>
+        <member name="P:TouchSocket.Rpc.InvokeOption.FeedbackType">
+            <summary>
+            调用反馈
+            </summary>
+        </member>
+        <member name="P:TouchSocket.Rpc.InvokeOption.Timeout">
+            <summary>
+            调用超时，
+            </summary>
+        </member>
+        <member name="P:TouchSocket.Rpc.InvokeOption.Token">
+            <summary>
+            可以取消的调用令箭
+            </summary>
+        </member>
+        <member name="T:TouchSocket.Rpc.InvokeResult">
+            <summary>
+            调用结果
+            </summary>
+        </member>
+        <member name="M:TouchSocket.Rpc.InvokeResult.#ctor(TouchSocket.Rpc.InvokeStatus)">
+            <summary>
+            初始化 <see cref="T:TouchSocket.Rpc.InvokeResult"/> 结构的新实例。
+            </summary>
+            <param name="status">调用状态。</param>
+        </member>
+        <member name="M:TouchSocket.Rpc.InvokeResult.#ctor(System.Exception)">
+            <summary>
+            初始化 <see cref="T:TouchSocket.Rpc.InvokeResult"/> 结构的新实例。
+            </summary>
+            <param name="ex">异常实例。</param>
+        </member>
+        <member name="M:TouchSocket.Rpc.InvokeResult.#ctor">
+            <summary>
+            初始化 <see cref="T:TouchSocket.Rpc.InvokeResult"/> 结构的新实例。
+            </summary>
+        </member>
+        <member name="P:TouchSocket.Rpc.InvokeResult.Exception">
+            <summary>
+            异常
+            </summary>
+        </member>
+        <member name="P:TouchSocket.Rpc.InvokeResult.Message">
+            <summary>
+            信息
+            </summary>
+        </member>
+        <member name="P:TouchSocket.Rpc.InvokeResult.Result">
+            <summary>
+            执行返回值结果
+            </summary>
+        </member>
+        <member name="P:TouchSocket.Rpc.InvokeResult.Status">
+            <summary>
+            状态
+            </summary>
+        </member>
+        <member name="T:TouchSocket.Rpc.RpcMethod">
+            <summary>
+            Rpc函数实例
+            </summary>
+        </member>
+        <member name="M:TouchSocket.Rpc.RpcMethod.#ctor(System.Reflection.MethodInfo)">
+            <summary>
+            实例化一个Rpc调用函数，并在方法声明的类上操作
+            </summary>
+            <param name="methodInfo"></param>
+        </member>
+        <member name="M:TouchSocket.Rpc.RpcMethod.#ctor(System.Reflection.MethodInfo,System.Type,System.Type)">
+            <summary>
+            实例化一个Rpc调用函数，并在指定类上操作
+            </summary>
+            <param name="method"></param>
+            <param name="serverFromType"></param>
+            <param name="serverToType"></param>
+        </member>
+        <member name="P:TouchSocket.Rpc.RpcMethod.IsEnable">
+            <summary>
+            是否可用
+            </summary>
+        </member>
+        <member name="P:TouchSocket.Rpc.RpcMethod.ParameterNames">
+            <summary>
+            参数名集合
+            </summary>
+        </member>
+        <member name="P:TouchSocket.Rpc.RpcMethod.Parameters">
+            <summary>
+            参数集合
+            </summary>
+        </member>
+        <member name="P:TouchSocket.Rpc.RpcMethod.ParameterTypes">
+            <summary>
+            参数类型集合，已处理out及ref，无参数时为空集合，
+            </summary>
+        </member>
+        <member name="P:TouchSocket.Rpc.RpcMethod.HasCallContext">
+            <summary>
+            是否包含调用上下文
+            </summary>
+        </member>
+        <member name="M:TouchSocket.Rpc.RpcMethod.GetNormalParameters">
+            <summary>
+            获取常规Rpc参数。
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:TouchSocket.Rpc.RpcMethod.RpcAttributes">
+            <summary>
+            Rpc属性集合
+            </summary>
+        </member>
+        <member name="P:TouchSocket.Rpc.RpcMethod.ServerFromType">
+            <summary>
+            注册类型
+            </summary>
+        </member>
+        <member name="P:TouchSocket.Rpc.RpcMethod.Reenterable">
+            <summary>
+            获取是否允许重新进入的标志。
+            </summary>
+            <value>
+            如果允许重新进入，则为 true；如果不允许重新进入，则为 false；如果未定义，则为 null。
+            </value>
+        </member>
+        <member name="P:TouchSocket.Rpc.RpcMethod.ServerRpcAttributes">
+            <summary>
+            Rpc服务属性集合
+            </summary>
+        </member>
+        <member name="P:TouchSocket.Rpc.RpcMethod.ServerToType">
+            <summary>
+            实例类型
+            </summary>
+        </member>
+        <member name="P:TouchSocket.Rpc.RpcMethod.ToMethodInfo">
+            <summary>
+            实现方法。
+            </summary>
+        </member>
+        <member name="M:TouchSocket.Rpc.RpcMethod.GetAttribute``1">
+            <summary>
+            获取指定类型属性标签
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:TouchSocket.Rpc.RpcMethod.GetAttribute(System.Type)">
+            <summary>
+            获取指定类型属性标签
+            </summary>
+            <param name="attributeType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TouchSocket.Rpc.RpcMethod.GetDescription">
+            <summary>
+            描述属性
+            </summary>
+        </member>
+        <member name="M:TouchSocket.Rpc.RpcMethod.GetFilters">
+            <summary>
+            筛选器
+            </summary>
+        </member>
+        <member name="T:TouchSocket.Rpc.RpcParameter">
+            <summary>
+            Rpc参数
+            </summary>
+        </member>
+        <member name="M:TouchSocket.Rpc.RpcParameter.#ctor(System.Reflection.ParameterInfo)">
+            <summary>
+            Rpc参数
+            </summary>
+        </member>
+        <member name="P:TouchSocket.Rpc.RpcParameter.ParameterInfo">
+            <summary>
+            参数信息
+            </summary>
+        </member>
+        <member name="P:TouchSocket.Rpc.RpcParameter.Name">
+            <summary>
+            参数名称
+            </summary>
+        </member>
+        <member name="P:TouchSocket.Rpc.RpcParameter.Type">
+            <summary>
+            参数类型，已处理out或者ref
+            </summary>
+        </member>
+        <member name="P:TouchSocket.Rpc.RpcParameter.IsCallContext">
+            <summary>
+            是否为调用上下文
+            </summary>
+        </member>
+        <member name="P:TouchSocket.Rpc.RpcParameter.IsFromServices">
+            <summary>
+            标识参数是否应该来自于服务
+            </summary>
+        </member>
+        <member name="P:TouchSocket.Rpc.RpcParameter.IsByRef">
+            <summary>
+            包含Out或者Ref
+            </summary>
+        </member>
+        <member name="T:TouchSocket.Rpc.RpcStore">
+            <summary>
+            Rpc仓库
+            </summary>
+        </member>
+        <member name="M:TouchSocket.Rpc.RpcStore.#ctor(TouchSocket.Core.IRegistrator)">
+            <summary>
+            实例化一个Rpc仓库。
+            </summary>
+        </member>
+        <member name="P:TouchSocket.Rpc.RpcStore.ServerTypes">
+            <summary>
+            服务类型
+            </summary>
+        </member>
+        <member name="M:TouchSocket.Rpc.RpcStore.GetAllMethods">
+            <summary>
+            获取所有已注册的函数。
+            </summary>
+        </member>
+        <member name="M:TouchSocket.Rpc.RpcStore.GetProxyCodes(System.String,System.Type[])">
+            <summary>
+            本地获取代理
+            </summary>
+            <param name="namespace"></param>
+            <param name="attributeTypes"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TouchSocket.Rpc.RpcStore.GetProxyCodes``1(System.String)">
+            <summary>
+            获取生成的代理
+            </summary>
+            <typeparam name="TAttribute"></typeparam>
+            <param name="namespace"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TouchSocket.Rpc.RpcStore.GetProxyInfo(System.Type[])">
+            <summary>
+            从本地获取代理
+            </summary>
+            <param name="attributeType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TouchSocket.Rpc.RpcStore.GetServerRpcMethods(System.Type)">
+            <summary>
+            获取服务类型对应的服务方法。
+            </summary>
+            <param name="serverType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TouchSocket.Rpc.RpcStore.RegisterServer(System.Type,TouchSocket.Rpc.IRpcServer)">
+            <summary>
+            注册为单例服务
+            </summary>
+            <param name="serverFromType"></param>
+            <param name="rpcServer"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TouchSocket.Rpc.RpcStore.RegisterServer(System.Type,System.Type)">
+            <summary>
+            注册服务
+            </summary>
+            <param name="serverFromType"></param>
+            <param name="serverToType"></param>
+            <returns></returns>
+        </member>
+        <member name="T:TouchSocket.Rpc.ConcurrencyRpcDispatcher`2">
+            <summary>
+            并发RPC调度器，用于管理RPC方法的并发调用。
+            </summary>
+            <typeparam name="TRpcActor">RPC行为的类型，必须是IDependencyObject的子类。</typeparam>
+            <typeparam name="TCallContext">调用上下文的类型，必须是ICallContext的子类。</typeparam>
+        </member>
+        <member name="P:TouchSocket.Rpc.ConcurrencyRpcDispatcher`2.Reenterable">
+            <inheritdoc/>
+        </member>
+        <member name="M:TouchSocket.Rpc.ConcurrencyRpcDispatcher`2.Dispatcher(`0,`1,System.Func{System.Object,System.Threading.Tasks.Task})">
+            <inheritdoc/>
+        </member>
+        <member name="T:TouchSocket.Rpc.ImmediateRpcDispatcher`2">
+            <summary>
+            立即执行RPC调度器类，用于同步执行RPC调用。
+            </summary>
+            <typeparam name="TRpcActor">RPC行为者类型。</typeparam>
+            <typeparam name="TCallContext">调用上下文类型，必须是ICallContext的子类。</typeparam>
+        </member>
+        <member name="P:TouchSocket.Rpc.ImmediateRpcDispatcher`2.Reenterable">
+            <inheritdoc/>
+        </member>
+        <member name="M:TouchSocket.Rpc.ImmediateRpcDispatcher`2.Dispatcher(`0,`1,System.Func{System.Object,System.Threading.Tasks.Task})">
+            <inheritdoc/>
+        </member>
+        <member name="T:TouchSocket.Rpc.IRpcDispatcher`2">
+            <summary>
+            定义了一个接口，用于在RPC（远程过程调用）环境中分发调用请求。
+            </summary>
+            <typeparam name="TRpcActor">RPC行为的类型，必须是类类型。</typeparam>
+            <typeparam name="TCallContext">调用上下文的类型，必须是类类型并且实现ICallContext接口。</typeparam>
+        </member>
+        <member name="M:TouchSocket.Rpc.IRpcDispatcher`2.Dispatcher(`0,`1,System.Func{System.Object,System.Threading.Tasks.Task})">
+            <summary>
+            分发并处理RPC调用请求。
+            </summary>
+            <param name="actor">具体的RPC行为实例。</param>
+            <param name="callContext">调用的上下文信息，包含调用相关的元数据。</param>
+            <param name="func">一个函数委托，表示实际执行的异步操作。</param>
+            <returns>一个任务，表示异步操作的完成。</returns>
+        </member>
+        <member name="P:TouchSocket.Rpc.IRpcDispatcher`2.Reenterable">
+            <summary>
+            获取一个值，指示是否可重新进入。
+            </summary>
+        </member>
+        <member name="T:TouchSocket.Rpc.QueueRpcDispatcher`2">
+            <summary>
+            队列RPC调度器类，用于管理和调度RPC调用请求。
+            </summary>
+            <typeparam name="TRpcActor">RPC行为者的类型，必须是类类型。</typeparam>
+            <typeparam name="TCallContext">调用上下文的类型，必须是类类型并且实现ICallContext接口。</typeparam>
+        </member>
+        <member name="M:TouchSocket.Rpc.QueueRpcDispatcher`2.#ctor">
+            <summary>
+            初始化<see cref="T:TouchSocket.Rpc.QueueRpcDispatcher`2"/>类的新实例。
+            </summary>
+        </member>
+        <member name="P:TouchSocket.Rpc.QueueRpcDispatcher`2.Reenterable">
+            <inheritdoc/>
+        </member>
+        <member name="M:TouchSocket.Rpc.QueueRpcDispatcher`2.Dispatcher(`0,`1,System.Func{System.Object,System.Threading.Tasks.Task})">
+            <inheritdoc/>
+        </member>
+        <member name="M:TouchSocket.Rpc.QueueRpcDispatcher`2.Dispose(System.Boolean)">
+            <inheritdoc/>
+        </member>
+        <member name="T:TouchSocket.Rpc.CodeGeneratorFlag">
+            <summary>
+            代码生成标识
+            </summary>
+        </member>
+        <member name="F:TouchSocket.Rpc.CodeGeneratorFlag.ExtensionSync">
+            <summary>
+            生成扩展同步代码
+            </summary>
+        </member>
+        <member name="F:TouchSocket.Rpc.CodeGeneratorFlag.ExtensionAsync">
+            <summary>
+            生成扩展异步代码
+            </summary>
+        </member>
+        <member name="F:TouchSocket.Rpc.CodeGeneratorFlag.InstanceSync">
+            <summary>
+            生成实例类同步代码（源代码生成无效）
+            </summary>
+        </member>
+        <member name="F:TouchSocket.Rpc.CodeGeneratorFlag.InstanceAsync">
+            <summary>
+            生成实例类异步代码（源代码生成无效）
+            </summary>
+        </member>
+        <member name="F:TouchSocket.Rpc.CodeGeneratorFlag.InterfaceSync">
+            <summary>
+            生成接口同步代码
+            </summary>
+        </member>
+        <member name="F:TouchSocket.Rpc.CodeGeneratorFlag.InterfaceAsync">
+            <summary>
+            生成接口异步代码
+            </summary>
+        </member>
+        <member name="T:TouchSocket.Rpc.InvokeStatus">
+            <summary>
+            调用状态
+            </summary>
+        </member>
+        <member name="F:TouchSocket.Rpc.InvokeStatus.Ready">
+            <summary>
+            就绪
+            </summary>
+        </member>
+        <member name="F:TouchSocket.Rpc.InvokeStatus.UnFound">
+            <summary>
+            未找到服务
+            </summary>
+        </member>
+        <member name="F:TouchSocket.Rpc.InvokeStatus.UnEnable">
+            <summary>
+            不可用
+            </summary>
+        </member>
+        <member name="F:TouchSocket.Rpc.InvokeStatus.Success">
+            <summary>
+            成功调用
+            </summary>
+        </member>
+        <member name="F:TouchSocket.Rpc.InvokeStatus.InvocationException">
+            <summary>
+            调用内部异常
+            </summary>
+        </member>
+        <member name="F:TouchSocket.Rpc.InvokeStatus.Exception">
+            <summary>
+            其他异常
+            </summary>
+        </member>
+        <member name="T:TouchSocket.Rpc.RpcException">
+            <summary>
+            Rpc异常
+            </summary>
+        </member>
+        <member name="M:TouchSocket.Rpc.RpcException.#ctor">
+            <summary>
+            默认构造函数，初始化RpcException对象，不带特定错误信息和内部异常
+            </summary>
+        </member>
+        <member name="M:TouchSocket.Rpc.RpcException.#ctor(System.String)">
+            <summary>
+            构造函数重载，初始化RpcException对象，并携带指定的错误信息
+            </summary>
+            <param name="message">解释异常原因的错误消息</param>
+        </member>
+        <member name="M:TouchSocket.Rpc.RpcException.#ctor(System.String,System.Exception)">
+            <summary>
+            构造函数重载，初始化RpcException对象，并携带指定的错误信息和内部异常
+            </summary>
+            <param name="message">解释异常原因的错误消息</param>
+            <param name="inner">导致当前异常发生的内部异常</param>
+        </member>
+        <member name="T:TouchSocket.Rpc.RpcInvokeException">
+            <summary>
+            Rpc调用异常
+            </summary>
+        </member>
+        <member name="M:TouchSocket.Rpc.RpcInvokeException.#ctor">
+            <summary>
+            默认构造函数，初始化RpcInvokeException类的实例。
+            </summary>
+        </member>
+        <member name="M:TouchSocket.Rpc.RpcInvokeException.#ctor(System.String)">
+            <summary>
+            初始化RpcInvokeException类的实例，并指定异常消息。
+            </summary>
+            <param name="message">解释异常原因的错误消息。</param>
+        </member>
+        <member name="M:TouchSocket.Rpc.RpcInvokeException.#ctor(System.String,System.Exception)">
+            <summary>
+            使用指定的错误消息和内部异常初始化RpcInvokeException类的实例。
+            </summary>
+            <param name="message">解释异常原因的错误消息。</param>
+            <param name="inner">导致当前异常的异常。</param>
+        </member>
+        <member name="T:TouchSocket.Rpc.RpcClientExtension">
+            <summary>
+            RPC 客户端扩展类
+            </summary>
+        </member>
+        <member name="M:TouchSocket.Rpc.RpcClientExtension.Invoke(TouchSocket.Rpc.IRpcClient,System.String,System.Type,TouchSocket.Rpc.IInvokeOption,System.Object[])">
+            <inheritdoc cref="M:TouchSocket.Rpc.IRpcClient.InvokeAsync(System.String,System.Type,TouchSocket.Rpc.IInvokeOption,System.Object[])"/>
+        </member>
+        <member name="M:TouchSocket.Rpc.RpcClientExtension.InvokeT``1(TouchSocket.Rpc.IRpcClient,System.String,TouchSocket.Rpc.IInvokeOption,System.Object[])">
+            <inheritdoc cref="M:TouchSocket.Rpc.IRpcClient.InvokeAsync(System.String,System.Type,TouchSocket.Rpc.IInvokeOption,System.Object[])"/>
+        </member>
+        <member name="M:TouchSocket.Rpc.RpcClientExtension.InvokeTAsync``1(TouchSocket.Rpc.IRpcClient,System.String,TouchSocket.Rpc.IInvokeOption,System.Object[])">
+            <inheritdoc cref="M:TouchSocket.Rpc.IRpcClient.InvokeAsync(System.String,System.Type,TouchSocket.Rpc.IInvokeOption,System.Object[])"/>
+        </member>
+        <member name="M:TouchSocket.Rpc.RpcClientExtension.Invoke(TouchSocket.Rpc.ITargetRpcClient,System.String,System.String,System.Type,TouchSocket.Rpc.IInvokeOption,System.Object[])">
+            <inheritdoc cref="M:TouchSocket.Rpc.IRpcClient.InvokeAsync(System.String,System.Type,TouchSocket.Rpc.IInvokeOption,System.Object[])"/>
+        </member>
+        <member name="M:TouchSocket.Rpc.RpcClientExtension.InvokeT``1(TouchSocket.Rpc.ITargetRpcClient,System.String,System.String,TouchSocket.Rpc.IInvokeOption,System.Object[])">
+            <inheritdoc cref="M:TouchSocket.Rpc.ITargetRpcClient.InvokeAsync(System.String,System.String,System.Type,TouchSocket.Rpc.IInvokeOption,System.Object[])"/>
+        </member>
+        <member name="M:TouchSocket.Rpc.RpcClientExtension.InvokeTAsync``1(TouchSocket.Rpc.ITargetRpcClient,System.String,System.String,TouchSocket.Rpc.IInvokeOption,System.Object[])">
+            <inheritdoc cref="M:TouchSocket.Rpc.ITargetRpcClient.InvokeAsync(System.String,System.String,System.Type,TouchSocket.Rpc.IInvokeOption,System.Object[])"/>
+        </member>
+        <member name="T:TouchSocket.Rpc.RpcContainerExtension">
+            <summary>
+            ContainerExtension
+            </summary>
+            <summary>
+            提供扩展方法以注册和管理RPC调用上下文访问器。
+            </summary>
+        </member>
+        <member name="M:TouchSocket.Rpc.RpcContainerExtension.AddRpcStore(TouchSocket.Core.IRegistrator,System.Action{TouchSocket.Rpc.RpcStore})">
+            <summary>
+            向容器中添加<see cref="T:TouchSocket.Rpc.RpcStore"/>。
+            </summary>
+            <param name="registrator"></param>
+            <param name="action"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TouchSocket.Rpc.RpcContainerExtension.AddRpcServerProvider``1(TouchSocket.Core.IRegistrator)">
+            <summary>
+            添加Rpc服务器提供者
+            </summary>
+            <typeparam name="TRpcServerProvider"></typeparam>
+            <param name="registrator"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TouchSocket.Rpc.RpcContainerExtension.AddRpcServerProvider(TouchSocket.Core.IRegistrator)">
+            <summary>
+            添加默认Rpc服务器提供者
+            </summary>
+            <param name="registrator"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TouchSocket.Rpc.RpcContainerExtension.AddRpcCallContextAccessor``1(TouchSocket.Core.IRegistrator)">
+            <summary>
+            将指定类型的RPC调用上下文访问器注册为单例。
+            </summary>
+            <typeparam name="TRpcCallContextAccessor">实现 <see cref="T:TouchSocket.Rpc.IRpcCallContextAccessor"/> 的类型。</typeparam>
+            <param name="registrator">用于注册依赖项的 <see cref="T:TouchSocket.Core.IRegistrator"/> 实例。</param>
+            <returns>返回 <see cref="T:TouchSocket.Core.IRegistrator"/> 实例以支持链式调用。</returns>
+        </member>
+        <member name="M:TouchSocket.Rpc.RpcContainerExtension.AddRpcCallContextAccessor(TouchSocket.Core.IRegistrator)">
+            <summary>
+            将默认的RPC调用上下文访问器注册为单例。
+            </summary>
+            <param name="registrator">用于注册依赖项的 <see cref="T:TouchSocket.Core.IRegistrator"/> 实例。</param>
+            <returns>返回 <see cref="T:TouchSocket.Core.IRegistrator"/> 实例以支持链式调用。</returns>
+        </member>
+        <member name="T:TouchSocket.Rpc.RpcParserExtension">
+            <summary>
+            RpcParserExtension
+            </summary>
+        </member>
+        <member name="T:TouchSocket.Rpc.RpcStoreExtension">
+            <summary>
+            RpcStoreExtensions
+            </summary>
+        </member>
+        <member name="F:TouchSocket.Rpc.RpcStoreExtension.DynamicallyAccessed">
+            <summary>
+            DynamicallyAccessed
+            </summary>
+        </member>
+        <member name="M:TouchSocket.Rpc.RpcStoreExtension.RegisterAllServer(TouchSocket.Rpc.RpcStore)">
+            <summary>
+            注册<see cref="T:System.AppDomain"/>已加载程序集的所有Rpc服务
+            </summary>
+            <returns>返回搜索到的服务数</returns>
+        </member>
+        <member name="M:TouchSocket.Rpc.RpcStoreExtension.RegisterAllServer(TouchSocket.Rpc.RpcStore,System.Reflection.Assembly)">
+            <summary>
+            注册指定程序集的Rpc服务。
+            </summary>
+            <param name="rpcStore"></param>
+            <param name="assembly"></param>
+        </member>
+        <member name="M:TouchSocket.Rpc.RpcStoreExtension.RegisterServer``1(TouchSocket.Rpc.RpcStore)">
+            <summary>
+            注册服务
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:TouchSocket.Rpc.RpcStoreExtension.RegisterServer(TouchSocket.Rpc.RpcStore,System.Type)">
+            <summary>
+            注册服务
+            </summary>
+            <param name="rpcStore"></param>
+            <param name="providerType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TouchSocket.Rpc.RpcStoreExtension.RegisterServer``2(TouchSocket.Rpc.RpcStore)">
+            <summary>
+            注册服务
+            </summary>
+            <typeparam name="TFrom"></typeparam>
+            <typeparam name="TTo"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:TouchSocket.Rpc.RpcStoreExtension.RegisterServer``1(TouchSocket.Rpc.RpcStore,``0)">
+            <summary>
+            注册为单例服务
+            </summary>
+            <typeparam name="TFrom"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="T:TouchSocket.Rpc.ICallContext">
+            <summary>
+            Rpc调用上下文
+            </summary>
+        </member>
+        <member name="P:TouchSocket.Rpc.ICallContext.Caller">
+            <summary>
+            调用此服务的主体。
+            <para>
+            <list type="bullet">
+            <item>当该服务在ITcpService及派生中调用时，该值一般为ISessionClient对象。</item>
+            <item>当该服务在ITcpClient及派生中调用时，该值一般为ITcpClient对象。</item>
+            </list>
+            </para>
+            </summary>
+        </member>
+        <member name="P:TouchSocket.Rpc.ICallContext.RpcMethod">
+            <summary>
+            本次调用的<see cref="P:TouchSocket.Rpc.ICallContext.RpcMethod"/>
+            </summary>
+        </member>
+        <member name="P:TouchSocket.Rpc.ICallContext.Token">
+            <summary>
+            可取消的调用令箭
+            </summary>
+        </member>
+        <member name="M:TouchSocket.Rpc.ICallContext.Cancel">
+            <summary>
+            执行取消<see cref="P:TouchSocket.Rpc.ICallContext.Token"/>。
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:TouchSocket.Rpc.ICallContext.Parameters">
+            <summary>
+            调用参数
+            </summary>
+        </member>
+        <member name="T:TouchSocket.Rpc.IInvokeOption">
+            <summary>
+            调用配置接口
+            </summary>
+        </member>
+        <member name="P:TouchSocket.Rpc.IInvokeOption.Token">
+            <summary>
+            可以取消的调用令箭
+            </summary>
+        </member>
+        <member name="P:TouchSocket.Rpc.IInvokeOption.FeedbackType">
+            <summary>
+            调用反馈
+            </summary>
+        </member>
+        <member name="P:TouchSocket.Rpc.IInvokeOption.Timeout">
+            <summary>
+            调用超时
+            </summary>
+        </member>
+        <member name="T:TouchSocket.Rpc.IRemoteServer">
+            <summary>
+            远程服务接口
+            </summary>
+        </member>
+        <member name="P:TouchSocket.Rpc.IRemoteServer.Client">
+            <summary>
+            客户端
+            </summary>
+        </member>
+        <member name="T:TouchSocket.Rpc.IRpcClient">
+            <summary>
+            定义了远程过程调用(RPC)客户端的基本操作。
+            该接口提供了发起RPC请求的方法。
+            </summary>
+        </member>
+        <member name="M:TouchSocket.Rpc.IRpcClient.InvokeAsync(System.String,System.Type,TouchSocket.Rpc.IInvokeOption,System.Object[])">
+            <summary>
+            异步调用一个操作。
+            </summary>
+            <param name="invokeKey">操作的标识键。</param>
+            <param name="returnType">返回值的类型。</param>
+            <param name="invokeOption">调用选项，用于指定调用的特定选项。</param>
+            <param name="parameters">传递给操作的参数。</param>
+            <returns>一个任务，其结果是操作的返回值。</returns>
+        </member>
+        <member name="T:TouchSocket.Rpc.IRpcServer">
+            <summary>
+            Rpc服务接口
+            </summary>
+        </member>
+        <member name="T:TouchSocket.Rpc.ITargetRpcClient">
+            <summary>
+            定义了远程过程调用(RPC)客户端的行为。
+            该接口用于在不同的进程或机器之间调用方法，提供了一种统一的方式来执行远程操作并返回结果。
+            </summary>
+        </member>
+        <member name="M:TouchSocket.Rpc.ITargetRpcClient.InvokeAsync(System.String,System.String,System.Type,TouchSocket.Rpc.IInvokeOption,System.Object[])">
+            <summary>
+            异步调用远程目标方法。
+            </summary>
+            <param name="targetId">目标标识符，用于标识要调用的目标服务或实例。</param>
+            <param name="invokeKey">调用方法的键，用于确定要执行的具体方法。</param>
+            <param name="returnType">返回值的类型，用于反序列化调用结果。</param>
+            <param name="invokeOption">调用选项，可能包含超时、重试等调用策略。</param>
+            <param name="parameters">调用方法的参数，按顺序传递给远程方法。</param>
+            <returns>返回一个异步任务，包含调用结果对象。返回类型由returnType参数指定。</returns>
+        </member>
+        <member name="T:TouchSocket.Rpc.RpcServer">
+            <summary>
+            RpcServer
+            </summary>
+        </member>
+        <member name="M:TouchSocket.Rpc.InternalRpcServerProvider.GetMethods">
+            <inheritdoc/>
+        </member>
+        <member name="T:TouchSocket.Rpc.IRpcServerProvider">
+            <summary>
+            IRpcServerProvider
+            </summary>
+        </member>
+        <member name="M:TouchSocket.Rpc.IRpcServerProvider.ExecuteAsync(TouchSocket.Rpc.ICallContext,TouchSocket.Rpc.InvokeResult)">
+            <summary>
+            异步执行Rpc
+            </summary>
+            <param name="callContext">调用上下文，包含本次调用的相关上下文信息</param>
+            <param name="invokeResult"></param>
+            <returns>返回一个任务，结果是InvokeResult类型，包含Rpc调用的结果信息</returns>
+        </member>
+        <member name="M:TouchSocket.Rpc.IRpcServerProvider.GetMethods">
+            <summary>
+            获取所有Method
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:TouchSocket.Rpc.IScopedRpcServer">
+            <summary>
+            定义了一个接口，用于在特定范围内管理RPC（远程过程调用）服务器的调用上下文
+            </summary>
+        </member>
+        <member name="P:TouchSocket.Rpc.IScopedRpcServer.CallContext">
+            <summary>
+            调用上下文
+            </summary>
+        </member>
+        <member name="T:TouchSocket.Rpc.ISingletonRpcServer">
+            <summary>
+            表示一个单例模式的RPC服务器接口。
+            </summary>
+        </member>
+        <member name="T:TouchSocket.Rpc.ITransientRpcServer">
+            <summary>
+            Rpc服务接口
+            </summary>
+        </member>
+        <member name="P:TouchSocket.Rpc.ITransientRpcServer.CallContext">
+            <summary>
+            调用上下文
+            </summary>
+        </member>
+        <member name="T:TouchSocket.Rpc.ScopedRpcServer`1">
+            <summary>
+            ScopedRpcServer
+            </summary>
+        </member>
+        <member name="P:TouchSocket.Rpc.ScopedRpcServer`1.CallContext">
+            <summary>
+            调用上下文。
+            </summary>
+        </member>
+        <member name="T:TouchSocket.Rpc.ScopedRpcServer">
+            <summary>
+            ScopedRpcServer
+            </summary>
+        </member>
+        <member name="P:TouchSocket.Rpc.ScopedRpcServer.CallContext">
+            <summary>
+            调用上下文。
+            </summary>
+        </member>
+        <member name="T:TouchSocket.Rpc.SingletonRpcServer">
+            <summary>
+            Rpc范围类
+            </summary>
+        </member>
+        <member name="T:TouchSocket.Rpc.TransientRpcServer`1">
+            <summary>
+            TransientRpcServer
+            </summary>
+        </member>
+        <member name="P:TouchSocket.Rpc.TransientRpcServer`1.CallContext">
+            <summary>
+            调用上下文。
+            </summary>
+        </member>
+        <member name="T:TouchSocket.Rpc.TransientRpcServer">
+            <summary>
+            TransientRpcServer
+            </summary>
+        </member>
+        <member name="P:TouchSocket.Rpc.TransientRpcServer.CallContext">
+            <summary>
+            调用上下文。
+            </summary>
+        </member>
+        <member name="T:TouchSocket.Core.RpcPluginManagerExtension">
+            <summary>
+            RpcPluginManagerExtension
+            </summary>
+        </member>
+        <member name="T:TouchSocket.Core.FastSerializableAttribute">
+            <summary>
+            标识源生成Fast序列化相关的实现。
+            </summary>
+        </member>
+        <member name="T:TouchSocket.Core.GeneratorPackageAttribute">
+            <summary>
+            标识源生成<see cref="T:TouchSocket.Core.IPackage"/>的实现。
+            </summary>
+        </member>
+        <member name="T:TouchSocket.Core.PackageMemberAttribute">
+            <summary>
+            标识源生成<see cref="T:TouchSocket.Core.IPackage"/>成员的特性。
+            </summary>
+        </member>
+        <member name="P:TouchSocket.Core.PackageMemberAttribute.Behavior">
+            <summary>
+            生成行为。一般来说，对于非只读、非重写、且同时拥有get，set（可以私有）访问器的属性，会自动生成。
+            对于字段，均不会自动生成。所以可以使用该设置，来指示生成器的生成行为。
+            </summary>
+        </member>
+        <member name="T:TouchSocket.Resources.TouchSocketRpcResource">
+            <summary>
+            TouchSocketRpc资源枚举
+            </summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.ConstantExpectedAttribute">
+            <summary>
+            Indicates that the specified method parameter expects a constant.
+            </summary>
+            <remarks>
+            This can be used to inform tooling that a constant should be used as an argument for the annotated parameter.
+            </remarks>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.ConstantExpectedAttribute.Min">
+            <summary>
+            Indicates the minimum bound of the expected constant, inclusive.
+            </summary>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.ConstantExpectedAttribute.Max">
+            <summary>
+            Indicates the maximum bound of the expected constant, inclusive.
+            </summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.ExperimentalAttribute">
+            <summary>
+            Indicates that an API is experimental and it may change in the future.
+            </summary>
+            <remarks>
+            This attribute allows call sites to be flagged with a diagnostic that indicates that an experimental
+            feature is used. Authors can use this attribute to ship preview features in their assemblies.
+            </remarks>
+        </member>
+        <member name="M:System.Diagnostics.CodeAnalysis.ExperimentalAttribute.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:System.Diagnostics.CodeAnalysis.ExperimentalAttribute"/> class,
+            specifying the ID that the compiler will use when reporting a use of the API the attribute applies to.
+            </summary>
+            <param name="diagnosticId">The ID that the compiler will use when reporting a use of the API the attribute applies to.</param>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.ExperimentalAttribute.DiagnosticId">
+            <summary>
+            Gets the ID that the compiler will use when reporting a use of the API the attribute applies to.
+            </summary>
+            <value>The unique diagnostic ID.</value>
+            <remarks>
+            The diagnostic ID is shown in build output for warnings and errors.
+            <para>This property represents the unique ID that can be used to suppress the warnings or errors, if needed.</para>
+            </remarks>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.ExperimentalAttribute.UrlFormat">
+            <summary>
+            Gets or sets the URL for corresponding documentation.
+            The API accepts a format string instead of an actual URL, creating a generic URL that includes the diagnostic ID.
+            </summary>
+            <value>The format string that represents a URL to corresponding documentation.</value>
+            <remarks>An example format string is <c>https://contoso.com/obsoletion-warnings/{0}</c>.</remarks>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.MemberNotNullAttribute">
+            <summary>
+            Specifies that the method or property will ensure that the listed field and property members have not-null values.
+            </summary>
+        </member>
+        <member name="M:System.Diagnostics.CodeAnalysis.MemberNotNullAttribute.#ctor(System.String)">
+            <summary>
+            Initializes the attribute with a field or property member.
+            </summary>
+            <param name="member">The field or property member that is promised to be not-null.</param>
+        </member>
+        <member name="M:System.Diagnostics.CodeAnalysis.MemberNotNullAttribute.#ctor(System.String[])">
+            <summary>
+            Initializes the attribute with the list of field and property members.
+            </summary>
+            <param name="members">The list of field and property members that are promised to be not-null.</param>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.MemberNotNullAttribute.Members">
+            <summary>
+            Gets field or property member names.
+            </summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute">
+            <summary>
+            Specifies that the method or property will ensure that the listed field and property
+            members have not-null values when returning with the specified return value condition.
+            </summary>
+        </member>
+        <member name="M:System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute.#ctor(System.Boolean,System.String)">
+            <summary>
+            Initializes the attribute with the specified return value condition and a field or property member.
+            </summary>
+            <param name="returnValue">The return value condition. If the method returns this value, the associated parameter will not be null.</param>
+            <param name="member">The field or property member that is promised to be not-null.</param>
+        </member>
+        <member name="M:System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute.#ctor(System.Boolean,System.String[])">
+            <summary>
+            Initializes the attribute with the specified return value condition and list of field and property members.
+            </summary>
+            <param name="returnValue">The return value condition. If the method returns this value, the associated parameter will not be null.</param>
+            <param name="members">The list of field and property members that are promised to be not-null.</param>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute.ReturnValue">
+            <summary>
+            Gets the return value condition.
+            </summary>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute.Members">
+            <summary>
+            Gets field or property member names.
+            </summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.SetsRequiredMembersAttribute">
+            <summary>
+            Specifies that this constructor sets all required members for the current type,
+            and callers do not need to set any required members themselves.
+            </summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute">
+            <summary>
+            Specifies the syntax used in a string.
+            </summary>
+        </member>
+        <member name="M:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.#ctor(System.String)">
+            <summary>
+            Initializes the <see cref="T:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute"/> with the identifier of the syntax used.
+            </summary>
+            <param name="syntax">The syntax identifier.</param>
+        </member>
+        <member name="M:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.#ctor(System.String,System.Object[])">
+            <summary>Initializes the <see cref="T:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute"/> with the identifier of the syntax used.</summary>
+            <param name="syntax">The syntax identifier.</param>
+            <param name="arguments">Optional arguments associated with the specific syntax employed.</param>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.Syntax">
+            <summary>Gets the identifier of the syntax used.</summary>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.Arguments">
+            <summary>Optional arguments associated with the specific syntax employed.</summary>
+        </member>
+        <member name="F:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.CompositeFormat">
+            <summary>The syntax identifier for strings containing composite formats for string formatting.</summary>
+        </member>
+        <member name="F:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.DateOnlyFormat">
+            <summary>The syntax identifier for strings containing date format specifiers.</summary>
+        </member>
+        <member name="F:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.DateTimeFormat">
+            <summary>The syntax identifier for strings containing date and time format specifiers.</summary>
+        </member>
+        <member name="F:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.EnumFormat">
+            <summary>The syntax identifier for strings containing <see cref="T:System.Enum"/> format specifiers.</summary>
+        </member>
+        <member name="F:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.GuidFormat">
+            <summary>The syntax identifier for strings containing <see cref="T:System.Guid"/> format specifiers.</summary>
+        </member>
+        <member name="F:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.Json">
+            <summary>The syntax identifier for strings containing JavaScript Object Notation (JSON).</summary>
+        </member>
+        <member name="F:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.NumericFormat">
+            <summary>The syntax identifier for strings containing numeric format specifiers.</summary>
+        </member>
+        <member name="F:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.Regex">
+            <summary>The syntax identifier for strings containing regular expressions.</summary>
+        </member>
+        <member name="F:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.TimeOnlyFormat">
+            <summary>The syntax identifier for strings containing time format specifiers.</summary>
+        </member>
+        <member name="F:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.TimeSpanFormat">
+            <summary>The syntax identifier for strings containing <see cref="T:System.TimeSpan"/> format specifiers.</summary>
+        </member>
+        <member name="F:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.Uri">
+            <summary>The syntax identifier for strings containing URIs.</summary>
+        </member>
+        <member name="F:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.Xml">
+            <summary>The syntax identifier for strings containing XML.</summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.UnscopedRefAttribute">
+            <summary>
+            Used to indicate a byref escapes and is not scoped.
+            </summary>
+            <remarks>
+            <para>
+            There are several cases where the C# compiler treats a <see langword="ref"/> as implicitly
+            <see langword="scoped"/> - where the compiler does not allow the <see langword="ref"/> to escape the method.
+            </para>
+            <para>
+            For example:
+            <list type="number">
+                <item><see langword="this"/> for <see langword="struct"/> instance methods.</item>
+                <item><see langword="ref"/> parameters that refer to <see langword="ref"/> <see langword="struct"/> types.</item>
+                <item><see langword="out"/> parameters.</item>
+            </list>
+            </para>
+            <para>
+            This attribute is used in those instances where the <see langword="ref"/> should be allowed to escape.
+            </para>
+            <para>
+            Applying this attribute, in any form, has impact on consumers of the applicable API. It is necessary for
+            API authors to understand the lifetime implications of applying this attribute and how it may impact their users.
+            </para>
+            </remarks>
+        </member>
+        <member name="T:System.Runtime.CompilerServices.CallerArgumentExpressionAttribute">
+            <summary>
+            An attribute that allows parameters to receive the expression of other parameters.
+            </summary>
+        </member>
+        <member name="M:System.Runtime.CompilerServices.CallerArgumentExpressionAttribute.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:System.Runtime.CompilerServices.CallerArgumentExpressionAttribute"/> class.
+            </summary>
+            <param name="parameterName">The condition parameter value.</param>
+        </member>
+        <member name="P:System.Runtime.CompilerServices.CallerArgumentExpressionAttribute.ParameterName">
+            <summary>
+            Gets the parameter name the expression is retrieved from.
+            </summary>
+        </member>
+        <member name="M:System.Runtime.CompilerServices.CollectionBuilderAttribute.#ctor(System.Type,System.String)">
+            <summary>
+            Initialize the attribute to refer to the <paramref name="methodName"/> method on the <paramref name="builderType"/> type.
+            </summary>
+            <param name="builderType">The type of the builder to use to construct the collection.</param>
+            <param name="methodName">The name of the method on the builder to use to construct the collection.</param>
+            <remarks>
+            <paramref name="methodName"/> must refer to a static method that accepts a single parameter of
+            type <see cref="T:System.ReadOnlySpan`1"/> and returns an instance of the collection being built containing
+            a copy of the data from that span.  In future releases of .NET, additional patterns may be supported.
+            </remarks>
+        </member>
+        <member name="P:System.Runtime.CompilerServices.CollectionBuilderAttribute.BuilderType">
+            <summary>
+            Gets the type of the builder to use to construct the collection.
+            </summary>
+        </member>
+        <member name="P:System.Runtime.CompilerServices.CollectionBuilderAttribute.MethodName">
+            <summary>
+            Gets the name of the method on the builder to use to construct the collection.
+            </summary>
+            <remarks>
+            This should match the metadata name of the target method.
+            For example, this might be ".ctor" if targeting the type's constructor.
+            </remarks>
+        </member>
+        <member name="T:System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute">
+            <summary>
+            Indicates that compiler support for a particular feature is required for the location where this attribute is applied.
+            </summary>
+        </member>
+        <member name="M:System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute.#ctor(System.String)">
+            <summary>
+            Creates a new instance of the <see cref="T:System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute"/> type.
+            </summary>
+            <param name="featureName">The name of the feature to indicate.</param>
+        </member>
+        <member name="P:System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute.FeatureName">
+            <summary>
+            The name of the compiler feature.
+            </summary>
+        </member>
+        <member name="P:System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute.IsOptional">
+            <summary>
+            If true, the compiler can choose to allow access to the location where this attribute is applied if it does not understand <see cref="P:System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute.FeatureName"/>.
+            </summary>
+        </member>
+        <member name="F:System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute.RefStructs">
+            <summary>
+            The <see cref="P:System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute.FeatureName"/> used for the ref structs C# feature.
+            </summary>
+        </member>
+        <member name="F:System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute.RequiredMembers">
+            <summary>
+            The <see cref="P:System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute.FeatureName"/> used for the required members C# feature.
+            </summary>
+        </member>
+        <member name="T:System.Runtime.CompilerServices.InterpolatedStringHandlerArgumentAttribute">
+            <summary>
+            Indicates which arguments to a method involving an interpolated string handler should be passed to that handler.
+            </summary>
+        </member>
+        <member name="M:System.Runtime.CompilerServices.InterpolatedStringHandlerArgumentAttribute.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:System.Runtime.CompilerServices.InterpolatedStringHandlerArgumentAttribute"/> class.
+            </summary>
+            <param name="argument">The name of the argument that should be passed to the handler.</param>
+            <remarks><see langword="null"/> may be used as the name of the receiver in an instance method.</remarks>
+        </member>
+        <member name="M:System.Runtime.CompilerServices.InterpolatedStringHandlerArgumentAttribute.#ctor(System.String[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:System.Runtime.CompilerServices.InterpolatedStringHandlerArgumentAttribute"/> class.
+            </summary>
+            <param name="arguments">The names of the arguments that should be passed to the handler.</param>
+            <remarks><see langword="null"/> may be used as the name of the receiver in an instance method.</remarks>
+        </member>
+        <member name="P:System.Runtime.CompilerServices.InterpolatedStringHandlerArgumentAttribute.Arguments">
+            <summary>
+            Gets the names of the arguments that should be passed to the handler.
+            </summary>
+            <remarks><see langword="null"/> may be used as the name of the receiver in an instance method.</remarks>
+        </member>
+        <member name="T:System.Runtime.CompilerServices.InterpolatedStringHandlerAttribute">
+            <summary>
+            Indicates the attributed type is to be used as an interpolated string handler.
+            </summary>
+        </member>
+        <member name="T:System.Runtime.CompilerServices.IsExternalInit">
+            <summary>
+            Reserved to be used by the compiler for tracking metadata.
+            This class should not be used by developers in source code.
+            </summary>
+        </member>
+        <member name="T:System.Runtime.CompilerServices.ModuleInitializerAttribute">
+             <summary>
+             Used to indicate to the compiler that a method should be called
+             in its containing module's initializer.
+             </summary>
+             <remarks>
+             When one or more valid methods
+             with this attribute are found in a compilation, the compiler will
+             emit a module initializer which calls each of the attributed methods.
+            
+             Certain requirements are imposed on any method targeted with this attribute:
+             - The method must be `static`.
+             - The method must be an ordinary member method, as opposed to a property accessor, constructor, local function, etc.
+             - The method must be parameterless.
+             - The method must return `void`.
+             - The method must not be generic or be contained in a generic type.
+             - The method's effective accessibility must be `internal` or `public`.
+            
+             The specification for module initializers in the .NET runtime can be found here:
+             https://github.com/dotnet/runtime/blob/main/docs/design/specs/Ecma-335-Augments.md#module-initializer
+             </remarks>
+        </member>
+        <member name="T:System.Runtime.CompilerServices.OverloadResolutionPriorityAttribute">
+            <summary>
+            Specifies the priority of a member in overload resolution. When unspecified, the default priority is 0.
+            </summary>
+        </member>
+        <member name="M:System.Runtime.CompilerServices.OverloadResolutionPriorityAttribute.#ctor(System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:System.Runtime.CompilerServices.OverloadResolutionPriorityAttribute"/> class.
+            </summary>
+            <param name="priority">The priority of the attributed member. Higher numbers are prioritized, lower numbers are deprioritized. 0 is the default if no attribute is present.</param>
+        </member>
+        <member name="P:System.Runtime.CompilerServices.OverloadResolutionPriorityAttribute.Priority">
+            <summary>
+            The priority of the member.
+            </summary>
+        </member>
+        <member name="T:System.Runtime.CompilerServices.ParamCollectionAttribute">
+            <summary>
+            Indicates that a method will allow a variable number of arguments in its invocation.
+            </summary>
+        </member>
+        <member name="T:System.Runtime.CompilerServices.RequiredMemberAttribute">
+            <summary>
+            Specifies that a type has required members or that a member is required.
+            </summary>
+        </member>
+        <member name="T:System.Runtime.CompilerServices.RequiresLocationAttribute">
+            <summary>
+            Reserved for use by a compiler for tracking metadata.
+            This attribute should not be used by developers in source code.
+            </summary>
+        </member>
+        <member name="T:System.Runtime.CompilerServices.SkipLocalsInitAttribute">
+            <summary>
+            Used to indicate to the compiler that the <c>.locals init</c> flag should not be set in method headers.
+            </summary>
+        </member>
+        <member name="M:System.Runtime.Versioning.RequiresPreviewFeaturesAttribute.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:System.Runtime.Versioning.RequiresPreviewFeaturesAttribute"/> class.
+            </summary>
+        </member>
+        <member name="M:System.Runtime.Versioning.RequiresPreviewFeaturesAttribute.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:System.Runtime.Versioning.RequiresPreviewFeaturesAttribute"/> class with the specified message.
+            </summary>
+            <param name="message">An optional message associated with this attribute instance.</param>
+        </member>
+        <member name="P:System.Runtime.Versioning.RequiresPreviewFeaturesAttribute.Message">
+            <summary>
+            Returns the optional message associated with this attribute instance.
+            </summary>
+        </member>
+        <member name="P:System.Runtime.Versioning.RequiresPreviewFeaturesAttribute.Url">
+            <summary>
+            Returns the optional URL associated with this attribute instance.
+            </summary>
+        </member>
+    </members>
+</doc>

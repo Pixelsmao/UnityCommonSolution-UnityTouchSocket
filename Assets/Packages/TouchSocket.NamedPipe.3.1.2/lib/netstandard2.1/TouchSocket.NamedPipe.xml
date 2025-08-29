@@ -1,0 +1,1639 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TouchSocket.NamedPipe</name>
+    </assembly>
+    <members>
+        <member name="T:TouchSocket.NamedPipe.NamedPipeListenOption">
+            <summary>
+            命名管道监听配置
+            </summary>
+        </member>
+        <member name="P:TouchSocket.NamedPipe.NamedPipeListenOption.Name">
+            <summary>
+            名称
+            </summary>
+        </member>
+        <member name="P:TouchSocket.NamedPipe.NamedPipeListenOption.SendTimeout">
+            <summary>
+            发送超时时间
+            </summary>
+        </member>
+        <member name="P:TouchSocket.NamedPipe.NamedPipeListenOption.Adapter">
+            <summary>
+            配置适配器
+            </summary>
+        </member>
+        <member name="T:TouchSocket.NamedPipe.NamedPipeMonitor">
+            <summary>
+            命名管道监听器
+            </summary>
+        </member>
+        <member name="M:TouchSocket.NamedPipe.NamedPipeMonitor.#ctor(TouchSocket.NamedPipe.NamedPipeListenOption)">
+            <summary>
+            命名管道监听器
+            </summary>
+            <param name="option"></param>
+        </member>
+        <member name="P:TouchSocket.NamedPipe.NamedPipeMonitor.Option">
+            <summary>
+            命名管道监听配置
+            </summary>
+        </member>
+        <member name="T:TouchSocket.NamedPipe.NamedPipeClient">
+            <summary>
+            命名管道客户端
+            </summary>
+        </member>
+        <member name="P:TouchSocket.NamedPipe.NamedPipeClient.Closed">
+            <inheritdoc/>
+        </member>
+        <member name="P:TouchSocket.NamedPipe.NamedPipeClient.Closing">
+            <inheritdoc/>
+        </member>
+        <member name="P:TouchSocket.NamedPipe.NamedPipeClient.Connected">
+            <inheritdoc/>
+        </member>
+        <member name="P:TouchSocket.NamedPipe.NamedPipeClient.Connecting">
+            <inheritdoc/>
+        </member>
+        <member name="P:TouchSocket.NamedPipe.NamedPipeClient.Received">
+            <summary>
+            接收到数据
+            </summary>
+        </member>
+        <member name="M:TouchSocket.NamedPipe.NamedPipeClient.OnNamedPipeClosed(TouchSocket.Sockets.ClosedEventArgs)">
+            <summary>
+            断开连接。在客户端未设置连接状态时，不会触发
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="M:TouchSocket.NamedPipe.NamedPipeClient.OnNamedPipeClosing(TouchSocket.Sockets.ClosingEventArgs)">
+            <summary>
+            即将断开连接(仅主动断开时有效)。
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="M:TouchSocket.NamedPipe.NamedPipeClient.OnNamedPipeConnected(TouchSocket.Sockets.ConnectedEventArgs)">
+            <summary>
+            已经建立管道连接
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="M:TouchSocket.NamedPipe.NamedPipeClient.OnNamedPipeConnecting(TouchSocket.Sockets.ConnectingEventArgs)">
+            <summary>
+            准备连接的时候，此时已初始化Socket，但是并未建立Tcp连接
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="M:TouchSocket.NamedPipe.NamedPipeClient.OnNamedPipeReceived(TouchSocket.Sockets.ReceivedDataEventArgs)">
+            <inheritdoc/>
+        </member>
+        <member name="M:TouchSocket.NamedPipe.NamedPipeClient.ConnectAsync(System.Int32,System.Threading.CancellationToken)">
+            <inheritdoc/>
+        </member>
+        <member name="M:TouchSocket.NamedPipe.NamedPipeClient.ClearReceiver">
+            <inheritdoc/>
+        </member>
+        <member name="M:TouchSocket.NamedPipe.NamedPipeClient.CreateReceiver">
+            <inheritdoc/>
+        </member>
+        <member name="M:TouchSocket.NamedPipe.NamedPipeClient.SendAsync(System.ReadOnlyMemory{System.Byte})">
+            <inheritdoc/>
+        </member>
+        <member name="M:TouchSocket.NamedPipe.NamedPipeClient.SendAsync(TouchSocket.Core.IRequestInfo)">
+            <inheritdoc/>
+        </member>
+        <member name="M:TouchSocket.NamedPipe.NamedPipeClient.SendAsync(System.Collections.Generic.IList{System.ArraySegment{System.Byte}})">
+            <inheritdoc/>
+        </member>
+        <member name="T:TouchSocket.NamedPipe.NamedPipeClientBase">
+            <summary>
+            命名管道客户端客户端基类
+            </summary>
+        </member>
+        <member name="M:TouchSocket.NamedPipe.NamedPipeClientBase.#ctor">
+            <summary>
+            命名管道客户端客户端基类
+            </summary>
+        </member>
+        <member name="M:TouchSocket.NamedPipe.NamedPipeClientBase.OnNamedPipeConnected(TouchSocket.Sockets.ConnectedEventArgs)">
+            <summary>
+            已经建立管道连接
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="M:TouchSocket.NamedPipe.NamedPipeClientBase.OnNamedPipeConnecting(TouchSocket.Sockets.ConnectingEventArgs)">
+            <summary>
+            准备连接的时候
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="M:TouchSocket.NamedPipe.NamedPipeClientBase.OnNamedPipeClosed(TouchSocket.Sockets.ClosedEventArgs)">
+            <summary>
+            断开连接。在客户端未设置连接状态时，不会触发
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="M:TouchSocket.NamedPipe.NamedPipeClientBase.OnNamedPipeClosing(TouchSocket.Sockets.ClosingEventArgs)">
+            <summary>
+            即将断开连接(仅主动断开时有效)。
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="P:TouchSocket.NamedPipe.NamedPipeClientBase.IsClient">
+            <inheritdoc/>
+        </member>
+        <member name="P:TouchSocket.NamedPipe.NamedPipeClientBase.LastReceivedTime">
+            <inheritdoc/>
+        </member>
+        <member name="P:TouchSocket.NamedPipe.NamedPipeClientBase.LastSentTime">
+            <inheritdoc/>
+        </member>
+        <member name="P:TouchSocket.NamedPipe.NamedPipeClientBase.PipeStream">
+            <inheritdoc/>
+        </member>
+        <member name="P:TouchSocket.NamedPipe.NamedPipeClientBase.Protocol">
+            <inheritdoc/>
+        </member>
+        <member name="P:TouchSocket.NamedPipe.NamedPipeClientBase.DataHandlingAdapter">
+            <inheritdoc/>
+        </member>
+        <member name="P:TouchSocket.NamedPipe.NamedPipeClientBase.Online">
+            <inheritdoc/>
+        </member>
+        <member name="M:TouchSocket.NamedPipe.NamedPipeClientBase.Abort(System.Boolean,System.String)">
+            <summary>
+            中断链接
+            </summary>
+            <param name="manual"></param>
+            <param name="msg"></param>
+        </member>
+        <member name="M:TouchSocket.NamedPipe.NamedPipeClientBase.Dispose(System.Boolean)">
+            <inheritdoc/>
+        </member>
+        <member name="M:TouchSocket.NamedPipe.NamedPipeClientBase.CloseAsync(System.String,System.Threading.CancellationToken)">
+            <inheritdoc/>
+        </member>
+        <member name="M:TouchSocket.NamedPipe.NamedPipeClientBase.PipeConnectAsync(System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            建立管道的连接。
+            </summary>
+            <param name="millisecondsTimeout"></param>
+            <param name="token"></param>
+            <exception cref="T:System.ObjectDisposedException"></exception>
+            <exception cref="T:System.ArgumentNullException"></exception>
+            <exception cref="T:System.Exception"></exception>
+            <exception cref="T:System.TimeoutException"></exception>
+        </member>
+        <member name="M:TouchSocket.NamedPipe.NamedPipeClientBase.ProtectedClearReceiver">
+            <inheritdoc/>
+        </member>
+        <member name="M:TouchSocket.NamedPipe.NamedPipeClientBase.ProtectedCreateReceiver(TouchSocket.Sockets.IReceiverClient{TouchSocket.Sockets.IReceiverResult})">
+            <inheritdoc/>
+        </member>
+        <member name="M:TouchSocket.NamedPipe.NamedPipeClientBase.OnNamedPipeReceived(TouchSocket.Sockets.ReceivedDataEventArgs)">
+            <summary>
+            处理已接收到的数据。
+            <para>根据不同的数据处理适配器，会传递不同的数据</para>
+            </summary>
+            <param name="e"></param>
+            <returns>如果返回<see langword="true"/>则表示数据已被处理，且不会再向下传递。</returns>
+        </member>
+        <member name="M:TouchSocket.NamedPipe.NamedPipeClientBase.OnNamedPipeReceiving(TouchSocket.Core.ByteBlock)">
+            <summary>
+            当收到原始数据
+            </summary>
+            <param name="byteBlock"></param>
+            <returns>如果返回<see langword="true"/>则表示数据已被处理，且不会再向下传递。</returns>
+        </member>
+        <member name="M:TouchSocket.NamedPipe.NamedPipeClientBase.OnNamedPipeSending(System.ReadOnlyMemory{System.Byte})">
+            <summary>
+            触发命名管道发送事件的异步方法。
+            </summary>
+            <param name="memory">待发送的字节内存。</param>
+            <returns>一个等待任务，结果指示发送操作是否成功。</returns>
+        </member>
+        <member name="M:TouchSocket.NamedPipe.NamedPipeClientBase.SetAdapter(TouchSocket.Core.SingleStreamDataHandlingAdapter)">
+            <summary>
+            设置适配器
+            </summary>
+            <param name="adapter">要设置的适配器实例</param>
+        </member>
+        <member name="M:TouchSocket.NamedPipe.NamedPipeClientBase.ProtectedDefaultSendAsync(System.ReadOnlyMemory{System.Byte})">
+            <inheritdoc/>
+        </member>
+        <member name="M:TouchSocket.NamedPipe.NamedPipeClientBase.ProtectedSendAsync(System.ReadOnlyMemory{System.Byte}@)">
+            <summary>
+            异步发送数据，根据是否配置了数据处理适配器来决定数据的发送方式。
+            </summary>
+            <param name="memory">待发送的字节内存。</param>
+            <returns>一个异步任务，表示发送操作。</returns>
+        </member>
+        <member name="M:TouchSocket.NamedPipe.NamedPipeClientBase.ProtectedSendAsync(TouchSocket.Core.IRequestInfo)">
+            <summary>
+            异步安全发送请求信息。
+            </summary>
+            <param name="requestInfo">请求信息对象，包含要发送的数据。</param>
+            <returns>返回一个任务，表示异步操作的结果。</returns>
+            <remarks>
+            此方法用于在发送请求之前验证是否可以发送请求信息，
+            并通过<see cref="P:TouchSocket.NamedPipe.NamedPipeClientBase.DataHandlingAdapter"/>适配器安全处理发送过程。
+            </remarks>
+        </member>
+        <member name="M:TouchSocket.NamedPipe.NamedPipeClientBase.ProtectedSendAsync(System.Collections.Generic.IList{System.ArraySegment{System.Byte}})">
+            <summary>
+            异步发送经过处理的数据。
+            如果ProtectedDataHandlingAdapter未设置或者不支持拼接发送，则将transferBytes合并到一个连续的内存块中再发送。
+            如果ProtectedDataHandlingAdapter已设置且支持拼接发送，则直接发送transferBytes。
+            </summary>
+            <param name="transferBytes">待发送的字节数据列表，每个元素包含要传输的字节片段。</param>
+            <returns>发送任务。</returns>
+        </member>
+        <member name="T:TouchSocket.NamedPipe.NamedPipeService">
+            <summary>
+            命名管道服务器
+            </summary>
+        </member>
+        <member name="M:TouchSocket.NamedPipe.NamedPipeService.NewClient">
+            <inheritdoc/>
+        </member>
+        <member name="T:TouchSocket.NamedPipe.NamedPipeServiceBase`1">
+            <summary>
+            命名管道服务基类
+            </summary>
+            <typeparam name="TClient">客户端类型，必须继承自NamedPipeSessionClientBase</typeparam>
+        </member>
+        <member name="P:TouchSocket.NamedPipe.NamedPipeServiceBase`1.Count">
+            <inheritdoc/>
+        </member>
+        <member name="P:TouchSocket.NamedPipe.NamedPipeServiceBase`1.Monitors">
+            <inheritdoc/>
+        </member>
+        <member name="P:TouchSocket.NamedPipe.NamedPipeServiceBase`1.ServerState">
+            <inheritdoc/>
+        </member>
+        <member name="P:TouchSocket.NamedPipe.NamedPipeServiceBase`1.Clients">
+            <inheritdoc/>
+        </member>
+        <member name="M:TouchSocket.NamedPipe.NamedPipeServiceBase`1.AddListen(TouchSocket.NamedPipe.NamedPipeListenOption)">
+            <inheritdoc/>
+        </member>
+        <member name="M:TouchSocket.NamedPipe.NamedPipeServiceBase`1.ClearAsync">
+            <inheritdoc/>
+        </member>
+        <member name="M:TouchSocket.NamedPipe.NamedPipeServiceBase`1.GetIds">
+            <inheritdoc/>
+        </member>
+        <member name="M:TouchSocket.NamedPipe.NamedPipeServiceBase`1.RemoveListen(TouchSocket.NamedPipe.NamedPipeMonitor)">
+            <inheritdoc/>
+        </member>
+        <member name="M:TouchSocket.NamedPipe.NamedPipeServiceBase`1.ResetIdAsync(System.String,System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:TouchSocket.NamedPipe.NamedPipeServiceBase`1.ClientExists(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:TouchSocket.NamedPipe.NamedPipeServiceBase`1.StartAsync">
+            <inheritdoc/>
+        </member>
+        <member name="M:TouchSocket.NamedPipe.NamedPipeServiceBase`1.StopAsync(System.Threading.CancellationToken)">
+            <inheritdoc/>
+        </member>
+        <member name="T:TouchSocket.NamedPipe.NamedPipeService`1">
+            <summary>
+            泛型命名管道服务器。
+            </summary>
+            <typeparam name="TClient"></typeparam>
+        </member>
+        <member name="M:TouchSocket.NamedPipe.NamedPipeService`1.ClientInitialized(`0)">
+            <inheritdoc/>
+        </member>
+        <member name="P:TouchSocket.NamedPipe.NamedPipeService`1.Connected">
+            <inheritdoc/>
+        </member>
+        <member name="P:TouchSocket.NamedPipe.NamedPipeService`1.Connecting">
+            <inheritdoc/>
+        </member>
+        <member name="P:TouchSocket.NamedPipe.NamedPipeService`1.Closed">
+            <inheritdoc/>
+        </member>
+        <member name="P:TouchSocket.NamedPipe.NamedPipeService`1.Closing">
+            <inheritdoc/>
+        </member>
+        <member name="P:TouchSocket.NamedPipe.NamedPipeService`1.Received">
+            <inheritdoc/>
+        </member>
+        <member name="M:TouchSocket.NamedPipe.NamedPipeService`1.OnNamedPipeConnected(`0,TouchSocket.Sockets.ConnectedEventArgs)">
+            <summary>
+            客户端连接完成，覆盖父类方法将不会触发事件。
+            </summary>
+            <param name="sessionClient"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:TouchSocket.NamedPipe.NamedPipeService`1.OnNamedPipeConnecting(`0,TouchSocket.Sockets.ConnectingEventArgs)">
+            <summary>
+            客户端请求连接，覆盖父类方法将不会触发事件。
+            </summary>
+            <param name="sessionClient"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:TouchSocket.NamedPipe.NamedPipeService`1.OnNamedPipeClosed(`0,TouchSocket.Sockets.ClosedEventArgs)">
+            <summary>
+            客户端断开连接，覆盖父类方法将不会触发事件。
+            </summary>
+            <param name="sessionClient"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:TouchSocket.NamedPipe.NamedPipeService`1.OnNamedPipeClosing(`0,TouchSocket.Sockets.ClosingEventArgs)">
+            <summary>
+            即将断开连接(仅主动断开时有效)。
+            </summary>
+            <param name="sessionClient"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:TouchSocket.NamedPipe.NamedPipeService`1.OnNamedPipeReceived(`0,TouchSocket.Sockets.ReceivedDataEventArgs)">
+            <summary>
+            当收到适配器数据。
+            </summary>
+            <param name="sessionClient"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:TouchSocket.NamedPipe.NamedPipeService`1.SendAsync(System.String,System.ReadOnlyMemory{System.Byte})">
+            <inheritdoc/>
+        </member>
+        <member name="M:TouchSocket.NamedPipe.NamedPipeService`1.SendAsync(System.String,TouchSocket.Core.IRequestInfo)">
+            <inheritdoc/>
+        </member>
+        <member name="T:TouchSocket.NamedPipe.NamedPipeSessionClient">
+            <summary>
+            命名管道服务器辅助客户端类
+            </summary>
+        </member>
+        <member name="P:TouchSocket.NamedPipe.NamedPipeSessionClient.Closed">
+            <inheritdoc/>
+        </member>
+        <member name="P:TouchSocket.NamedPipe.NamedPipeSessionClient.Closing">
+            <inheritdoc/>
+        </member>
+        <member name="M:TouchSocket.NamedPipe.NamedPipeSessionClient.OnNamedPipeConnected(TouchSocket.Sockets.ConnectedEventArgs)">
+            <summary>
+            当客户端完整建立Tcp连接。
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="M:TouchSocket.NamedPipe.NamedPipeSessionClient.OnNamedPipeConnecting(TouchSocket.Sockets.ConnectingEventArgs)">
+            <summary>
+            客户端正在连接。
+            </summary>
+        </member>
+        <member name="M:TouchSocket.NamedPipe.NamedPipeSessionClient.OnNamedPipeClosed(TouchSocket.Sockets.ClosedEventArgs)">
+            <summary>
+            客户端已断开连接。
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="M:TouchSocket.NamedPipe.NamedPipeSessionClient.OnNamedPipeClosing(TouchSocket.Sockets.ClosingEventArgs)">
+            <summary>
+            即将断开连接(仅主动断开时有效)。
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="M:TouchSocket.NamedPipe.NamedPipeSessionClient.ClearReceiver">
+            <inheritdoc/>
+        </member>
+        <member name="M:TouchSocket.NamedPipe.NamedPipeSessionClient.CreateReceiver">
+            <inheritdoc/>
+        </member>
+        <member name="M:TouchSocket.NamedPipe.NamedPipeSessionClient.OnNamedPipeReceived(TouchSocket.Sockets.ReceivedDataEventArgs)">
+            <summary>
+            处理已接收到的数据。
+            <para>根据不同的数据处理适配器，会传递不同的数据</para>
+            </summary>
+        </member>
+        <member name="M:TouchSocket.NamedPipe.NamedPipeSessionClient.SendAsync(System.ReadOnlyMemory{System.Byte})">
+            <inheritdoc/>
+        </member>
+        <member name="M:TouchSocket.NamedPipe.NamedPipeSessionClient.SendAsync(TouchSocket.Core.IRequestInfo)">
+            <inheritdoc/>
+        </member>
+        <member name="M:TouchSocket.NamedPipe.NamedPipeSessionClient.SendAsync(System.Collections.Generic.IList{System.ArraySegment{System.Byte}})">
+            <inheritdoc/>
+        </member>
+        <member name="M:TouchSocket.NamedPipe.NamedPipeSessionClient.SendAsync(System.String,System.ReadOnlyMemory{System.Byte})">
+            <inheritdoc/>
+        </member>
+        <member name="M:TouchSocket.NamedPipe.NamedPipeSessionClient.SendAsync(System.String,TouchSocket.Core.IRequestInfo)">
+            <inheritdoc/>
+        </member>
+        <member name="T:TouchSocket.NamedPipe.NamedPipeSessionClientBase">
+            <summary>
+            命名管道服务器辅助客户端类
+            </summary>
+        </member>
+        <member name="M:TouchSocket.NamedPipe.NamedPipeSessionClientBase.#ctor">
+            <summary>
+            命名管道服务器辅助客户端类
+            </summary>
+        </member>
+        <member name="P:TouchSocket.NamedPipe.NamedPipeSessionClientBase.Config">
+            <inheritdoc/>
+        </member>
+        <member name="P:TouchSocket.NamedPipe.NamedPipeSessionClientBase.Id">
+            <inheritdoc/>
+        </member>
+        <member name="P:TouchSocket.NamedPipe.NamedPipeSessionClientBase.IsClient">
+            <inheritdoc/>
+        </member>
+        <member name="P:TouchSocket.NamedPipe.NamedPipeSessionClientBase.LastReceivedTime">
+            <inheritdoc/>
+        </member>
+        <member name="P:TouchSocket.NamedPipe.NamedPipeSessionClientBase.LastSentTime">
+            <inheritdoc/>
+        </member>
+        <member name="P:TouchSocket.NamedPipe.NamedPipeSessionClientBase.ListenOption">
+            <inheritdoc/>
+        </member>
+        <member name="P:TouchSocket.NamedPipe.NamedPipeSessionClientBase.Online">
+            <inheritdoc/>
+        </member>
+        <member name="P:TouchSocket.NamedPipe.NamedPipeSessionClientBase.PipeStream">
+            <inheritdoc/>
+        </member>
+        <member name="P:TouchSocket.NamedPipe.NamedPipeSessionClientBase.PluginManager">
+            <inheritdoc/>
+        </member>
+        <member name="P:TouchSocket.NamedPipe.NamedPipeSessionClientBase.Protocol">
+            <inheritdoc/>
+        </member>
+        <member name="P:TouchSocket.NamedPipe.NamedPipeSessionClientBase.Resolver">
+            <inheritdoc/>
+        </member>
+        <member name="P:TouchSocket.NamedPipe.NamedPipeSessionClientBase.Service">
+            <inheritdoc/>
+        </member>
+        <member name="P:TouchSocket.NamedPipe.NamedPipeSessionClientBase.DataHandlingAdapter">
+            <inheritdoc/>
+        </member>
+        <member name="M:TouchSocket.NamedPipe.NamedPipeSessionClientBase.CloseAsync(System.String,System.Threading.CancellationToken)">
+            <inheritdoc/>
+        </member>
+        <member name="M:TouchSocket.NamedPipe.NamedPipeSessionClientBase.ResetIdAsync(System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:TouchSocket.NamedPipe.NamedPipeSessionClientBase.Abort(System.Boolean,System.String)">
+            <summary>
+            中止当前操作，并安全地关闭相关资源。
+            </summary>
+            <param name="manual">指示中止操作是否是手动触发的。</param>
+            <param name="msg">中止操作的消息说明。</param>
+        </member>
+        <member name="M:TouchSocket.NamedPipe.NamedPipeSessionClientBase.Dispose(System.Boolean)">
+            <inheritdoc/>
+        </member>
+        <member name="M:TouchSocket.NamedPipe.NamedPipeSessionClientBase.OnNamedPipeReceived(TouchSocket.Sockets.ReceivedDataEventArgs)">
+            <summary>
+            处理已接收到的数据。
+            <para>根据不同的数据处理适配器，会传递不同的数据</para>
+            </summary>
+        </member>
+        <member name="M:TouchSocket.NamedPipe.NamedPipeSessionClientBase.OnNamedPipeReceiving(TouchSocket.Core.ByteBlock)">
+            <summary>
+            当收到原始数据
+            </summary>
+            <param name="byteBlock"></param>
+            <returns>如果返回<see langword="true"/>则表示数据已被处理，且不会再向下传递。</returns>
+        </member>
+        <member name="M:TouchSocket.NamedPipe.NamedPipeSessionClientBase.OnNamedPipeSending(System.ReadOnlyMemory{System.Byte})">
+            <summary>
+            触发命名管道发送事件的异步方法。
+            </summary>
+            <param name="memory">待发送的字节内存。</param>
+            <returns>一个等待任务，结果指示发送操作是否成功。</returns>
+        </member>
+        <member name="M:TouchSocket.NamedPipe.NamedPipeSessionClientBase.ProtectedResetIdAsync(System.String)">
+            <summary>
+            直接重置内部Id。
+            </summary>
+            <param name="newId">新的Id值。</param>
+        </member>
+        <member name="M:TouchSocket.NamedPipe.NamedPipeSessionClientBase.ProtectedTryGetClient(System.String,TouchSocket.NamedPipe.NamedPipeSessionClientBase@)">
+            <summary>
+            尝试通过Id获得对应的客户端
+            </summary>
+            <param name="id">客户端的唯一标识符</param>
+            <param name="sessionClient">输出参数，用于返回找到的客户端实例</param>
+            <returns>如果找到对应的客户端，则返回true；否则返回false</returns>
+        </member>
+        <member name="M:TouchSocket.NamedPipe.NamedPipeSessionClientBase.SetAdapter(TouchSocket.Core.SingleStreamDataHandlingAdapter)">
+            <summary>
+            设置适配器
+            </summary>
+            <param name="adapter">要设置的适配器实例</param>
+        </member>
+        <member name="M:TouchSocket.NamedPipe.NamedPipeSessionClientBase.OnInitialized">
+            <summary>
+            当初始化完成时，执行在<see cref="M:TouchSocket.NamedPipe.NamedPipeSessionClientBase.OnNamedPipeConnecting(TouchSocket.Sockets.ConnectingEventArgs)"/>之前。
+            </summary>
+        </member>
+        <member name="M:TouchSocket.NamedPipe.NamedPipeSessionClientBase.OnNamedPipeClosed(TouchSocket.Sockets.ClosedEventArgs)">
+            <summary>
+            客户端已断开连接。
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="M:TouchSocket.NamedPipe.NamedPipeSessionClientBase.OnNamedPipeClosing(TouchSocket.Sockets.ClosingEventArgs)">
+            <summary>
+            即将断开连接(仅主动断开时有效)。
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="M:TouchSocket.NamedPipe.NamedPipeSessionClientBase.OnNamedPipeConnected(TouchSocket.Sockets.ConnectedEventArgs)">
+            <summary>
+            当客户端完整建立连接。
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="M:TouchSocket.NamedPipe.NamedPipeSessionClientBase.OnNamedPipeConnecting(TouchSocket.Sockets.ConnectingEventArgs)">
+            <summary>
+            客户端正在连接。
+            </summary>
+        </member>
+        <member name="M:TouchSocket.NamedPipe.NamedPipeSessionClientBase.ProtectedClearReceiver">
+            <inheritdoc/>
+        </member>
+        <member name="M:TouchSocket.NamedPipe.NamedPipeSessionClientBase.ProtectedCreateReceiver(TouchSocket.Sockets.IReceiverClient{TouchSocket.Sockets.IReceiverResult})">
+            <inheritdoc/>
+        </member>
+        <member name="M:TouchSocket.NamedPipe.NamedPipeSessionClientBase.ProtectedDefaultSendAsync(System.ReadOnlyMemory{System.Byte})">
+            <inheritdoc/>
+        </member>
+        <member name="M:TouchSocket.NamedPipe.NamedPipeSessionClientBase.ProtectedSendAsync(System.ReadOnlyMemory{System.Byte}@)">
+            <summary>
+            异步发送数据，通过适配器模式灵活处理数据发送。
+            </summary>
+            <param name="memory">待发送的只读字节内存块。</param>
+            <returns>一个异步任务，表示发送操作。</returns>
+        </member>
+        <member name="M:TouchSocket.NamedPipe.NamedPipeSessionClientBase.ProtectedSendAsync(TouchSocket.Core.IRequestInfo@)">
+            <summary>
+            异步安全发送请求信息。
+            </summary>
+            <param name="requestInfo">请求信息，用于发送。</param>
+            <returns>返回一个任务，该任务表示发送操作的异步结果。</returns>
+            <remarks>
+            此方法用于在执行实际的数据处理之前，确保当前状态允许发送请求信息。
+            它使用了数据处理适配器来异步发送输入请求。
+            </remarks>
+        </member>
+        <member name="M:TouchSocket.NamedPipe.NamedPipeSessionClientBase.ProtectedSendAsync(System.Collections.Generic.IList{System.ArraySegment{System.Byte}})">
+            <summary>
+            异步发送数据。
+            如果数据处理适配器不存在或无法拼接发送，则将所有传输字节合并到一个连续的内存块中发送。
+            如果数据处理适配器存在且支持拼接发送，则直接发送传输字节列表。
+            </summary>
+            <param name="transferBytes">要发送的字节数据列表，每个项代表一个字节片段。</param>
+            <returns>发送任务。</returns>
+        </member>
+        <member name="T:TouchSocket.NamedPipe.NamedPipeConnectingEventArgs">
+            <summary>
+            命名管道在即将连接时事件
+            </summary>
+        </member>
+        <member name="P:TouchSocket.NamedPipe.NamedPipeConnectingEventArgs.Id">
+            <summary>
+            客户端Id。该Id的赋值，仅在服务器适用。
+            </summary>
+        </member>
+        <member name="T:TouchSocket.NamedPipe.NamedPipeClientExtension">
+            <summary>
+            NamedPipeClientExtension
+            </summary>
+        </member>
+        <member name="M:TouchSocket.NamedPipe.NamedPipeClientExtension.ConnectAsync``1(``0,System.String,System.Int32)">
+            <summary>
+            异步连接到指定的命名管道
+            </summary>
+            <typeparam name="TClient"></typeparam>
+            <param name="client"></param>
+            <param name="pipeName">管道名称</param>
+            <param name="millisecondsTimeout">超时设定</param>
+            <returns></returns>
+        </member>
+        <member name="T:TouchSocket.NamedPipe.NamedPipeConfigExtension">
+            <summary>
+            NamedPipeConfigExtension
+            </summary>
+        </member>
+        <member name="F:TouchSocket.NamedPipe.NamedPipeConfigExtension.NamedPipeDataHandlingAdapterProperty">
+            <summary>
+            数据处理适配器，默认为获取<see cref="T:TouchSocket.Core.NormalDataHandlingAdapter"/>
+            所需类型<see cref="T:System.Func`1"/>
+            </summary>
+        </member>
+        <member name="F:TouchSocket.NamedPipe.NamedPipeConfigExtension.NamedPipeListenOptionProperty">
+            <summary>
+            直接单个配置命名管道监听的地址组。所需类型<see cref="T:System.Action"/>
+            </summary>
+        </member>
+        <member name="F:TouchSocket.NamedPipe.NamedPipeConfigExtension.PipeNameProperty">
+            <summary>
+            命名管道名称
+            </summary>
+        </member>
+        <member name="F:TouchSocket.NamedPipe.NamedPipeConfigExtension.PipeServerNameProperty">
+            <summary>
+            命名管道的服务主机名称。
+            </summary>
+        </member>
+        <member name="M:TouchSocket.NamedPipe.NamedPipeConfigExtension.SetNamedPipeDataHandlingAdapter(TouchSocket.Core.TouchSocketConfig,System.Func{TouchSocket.Core.SingleStreamDataHandlingAdapter})">
+            <summary>
+            设置(命名管道系)数据处理适配器。
+            </summary>
+            <param name="config"></param>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TouchSocket.NamedPipe.NamedPipeConfigExtension.SetNamedPipeListenOptions(TouchSocket.Core.TouchSocketConfig,System.Action{System.Collections.Generic.List{TouchSocket.NamedPipe.NamedPipeListenOption}})">
+            <summary>
+            直接单个配置命名管道监听的地址组。
+            </summary>
+            <param name="config"></param>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TouchSocket.NamedPipe.NamedPipeConfigExtension.SetPipeName(TouchSocket.Core.TouchSocketConfig,System.String)">
+            <summary>
+            当管道在本机时，仅设置管道名称即可。
+            </summary>
+            <param name="config"></param>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TouchSocket.NamedPipe.NamedPipeConfigExtension.SetPipeServer(TouchSocket.Core.TouchSocketConfig,System.String)">
+            <summary>
+            设置命名管道的主机名称。
+            </summary>
+            <param name="config"></param>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TouchSocket.NamedPipe.NamedPipeConfigExtension.UseNamedPipeReconnection``1(TouchSocket.Core.IPluginManager)">
+            <summary>
+            使用命名管道断线重连。
+            </summary>
+            <typeparam name="TClient"></typeparam>
+            <param name="pluginManager"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TouchSocket.NamedPipe.NamedPipeConfigExtension.UseNamedPipeReconnection(TouchSocket.Core.IPluginManager)">
+            <summary>
+            使用命名管道断线重连。
+            </summary>
+            <param name="pluginManager"></param>
+            <returns></returns>
+        </member>
+        <member name="T:TouchSocket.NamedPipe.NamedPipePluginManagerExtension">
+            <summary>
+            提供命名管道插件管理器的扩展方法。
+            </summary>
+        </member>
+        <member name="M:TouchSocket.NamedPipe.NamedPipePluginManagerExtension.UseNamedPipeSessionCheckClear(TouchSocket.Core.IPluginManager)">
+            <summary>
+            使用<see cref="T:TouchSocket.NamedPipe.INamedPipeSession"/>检查连接客户端活性插件。
+            <para>当在设置的周期内，没有接收/发送任何数据，则判定该客户端掉线。执行清理。默认配置：60秒为一个周期，同时检测发送和接收。</para>
+            服务器、客户端均适用。
+            </summary>
+            <param name="pluginManager">插件管理器对象，用于管理插件。</param>
+            <returns>返回一个<see cref="T:TouchSocket.Sockets.CheckClearPlugin`1"/>类型的插件实例，用于执行客户端活性检查及清理操作。</returns>
+        </member>
+        <member name="T:TouchSocket.NamedPipe.NamedPipeServiceExtension">
+            <summary>
+            NamedPipeServiceExtension
+            </summary>
+        </member>
+        <member name="M:TouchSocket.NamedPipe.NamedPipeServiceExtension.Start``1(``0,System.String)">
+            <inheritdoc cref="M:TouchSocket.Sockets.IServiceBase.StartAsync"/>
+        </member>
+        <member name="M:TouchSocket.NamedPipe.NamedPipeServiceExtension.StartAsync``1(``0,System.String)">
+            <inheritdoc cref="M:TouchSocket.Sockets.IServiceBase.StartAsync"/>
+        </member>
+        <member name="T:TouchSocket.NamedPipe.WaitingClientExtension">
+            <summary>
+            提供扩展方法以创建等待客户端实例。
+            </summary>
+        </member>
+        <member name="M:TouchSocket.NamedPipe.WaitingClientExtension.CreateWaitingClient(TouchSocket.NamedPipe.INamedPipeClient,TouchSocket.Sockets.WaitingOptions)">
+            <summary>
+            为 INamedPipeClient 类型的客户端创建一个等待客户端实例。
+            </summary>
+            <param name="client">要为其创建等待客户端的 INamedPipeClient 实例。</param>
+            <param name="waitingOptions">等待选项，用于配置等待行为。</param>
+            <returns>返回一个配置好的等待客户端实例。</returns>
+        </member>
+        <member name="M:TouchSocket.NamedPipe.WaitingClientExtension.CreateWaitingClient(TouchSocket.NamedPipe.INamedPipeSessionClient,TouchSocket.Sockets.WaitingOptions)">
+            <summary>
+            为 INamedPipeSessionClient 类型的客户端创建一个等待客户端实例。
+            </summary>
+            <param name="client">要为其创建等待客户端的 INamedPipeSessionClient 实例。</param>
+            <param name="waitingOptions">等待选项，用于配置等待行为。</param>
+            <returns>返回一个配置好的等待客户端实例。</returns>
+        </member>
+        <member name="T:TouchSocket.NamedPipe.INamedPipeClient">
+            <summary>
+            命名管道客户端接口
+            </summary>
+        </member>
+        <member name="P:TouchSocket.NamedPipe.INamedPipeClient.Connected">
+            <summary>
+            成功连接到服务器
+            </summary>
+        </member>
+        <member name="P:TouchSocket.NamedPipe.INamedPipeClient.Connecting">
+            <summary>
+            准备连接的时候
+            </summary>
+        </member>
+        <member name="P:TouchSocket.NamedPipe.INamedPipeClient.Closed">
+            <summary>
+            获取或设置管道客户端关闭时的事件处理程序。
+            </summary>
+            <remarks>
+            此事件用于在管道客户端连接关闭后执行清理操作或其他响应措施。
+            </remarks>
+        </member>
+        <member name="P:TouchSocket.NamedPipe.INamedPipeClient.Closing">
+            <summary>
+            获取或设置管道客户端即将关闭时的事件处理程序。
+            </summary>
+            <remarks>
+            此事件用于在管道客户端连接关闭之前执行必要的资源释放或其他预关闭操作。
+            </remarks>
+        </member>
+        <member name="P:TouchSocket.NamedPipe.INamedPipeClient.Received">
+            <summary>
+            获取或设置接收到数据时的事件处理程序。
+            </summary>
+            <remarks>
+            此事件用于在管道客户端从服务器接收到数据时进行处理，以实现数据的及时处理或存储。
+            </remarks>
+        </member>
+        <member name="T:TouchSocket.NamedPipe.INamedPipeListenableClient">
+            <summary>
+            定义了一个接口，用于指定命名管道客户端的监听功能。
+            </summary>
+        </member>
+        <member name="P:TouchSocket.NamedPipe.INamedPipeListenableClient.Service">
+            <summary>
+            获取包含此辅助类的主服务器类。
+            </summary>
+            <value>主服务器类的实例。</value>
+        </member>
+        <member name="P:TouchSocket.NamedPipe.INamedPipeListenableClient.ListenOption">
+            <summary>
+            获取监听配置。
+            <para>
+            注意：一般情况下不要随意修改该值。
+            </para>
+            </summary>
+            <value>命名管道的监听选项。</value>
+        </member>
+        <member name="T:TouchSocket.NamedPipe.INamedPipeService`1">
+            <summary>
+            INamedPipeService
+            </summary>
+            <typeparam name="TClient"></typeparam>
+        </member>
+        <member name="P:TouchSocket.NamedPipe.INamedPipeService`1.Connected">
+            <summary>
+            用户连接完成
+            </summary>
+        </member>
+        <member name="P:TouchSocket.NamedPipe.INamedPipeService`1.Connecting">
+            <summary>
+            有用户连接的时候
+            </summary>
+        </member>
+        <member name="P:TouchSocket.NamedPipe.INamedPipeService`1.Closed">
+            <summary>
+            有用户断开连接
+            </summary>
+        </member>
+        <member name="P:TouchSocket.NamedPipe.INamedPipeService`1.Closing">
+            <summary>
+            即将断开连接(仅主动断开时有效)。
+            </summary>
+        </member>
+        <member name="P:TouchSocket.NamedPipe.INamedPipeService`1.Received">
+            <summary>
+            收到数据时
+            </summary>
+        </member>
+        <member name="T:TouchSocket.NamedPipe.INamedPipeService">
+            <summary>
+            INamedPipeService
+            </summary>
+        </member>
+        <member name="T:TouchSocket.NamedPipe.INamedPipeServiceBase">
+            <summary>
+            命名管道服务器接口
+            </summary>
+        </member>
+        <member name="P:TouchSocket.NamedPipe.INamedPipeServiceBase.Monitors">
+            <summary>
+            管道监听集合
+            </summary>
+        </member>
+        <member name="M:TouchSocket.NamedPipe.INamedPipeServiceBase.AddListen(TouchSocket.NamedPipe.NamedPipeListenOption)">
+            <summary>
+            添加一个地址监听。支持在服务器运行过程中动态添加。
+            </summary>
+            <param name="option"></param>
+        </member>
+        <member name="M:TouchSocket.NamedPipe.INamedPipeServiceBase.RemoveListen(TouchSocket.NamedPipe.NamedPipeMonitor)">
+            <summary>
+            移除一个地址监听。支持在服务器运行过程中动态移除。
+            </summary>
+            <param name="monitor">监听器</param>
+            <returns>返回是否已成功移除</returns>
+        </member>
+        <member name="T:TouchSocket.NamedPipe.INamedPipeServiceBase`1">
+            <summary>
+            定义了命名管道服务的基本接口，专门用于处理基于特定类型客户端的连接和服务逻辑。
+            </summary>
+            <typeparam name="TClient">表示客户端类型，必须实现IClient, IIdClient, 和INamedPipeStreamClient接口。</typeparam>
+        </member>
+        <member name="T:TouchSocket.NamedPipe.INamedPipeSession">
+            <summary>
+            命名管道终端接口
+            </summary>
+        </member>
+        <member name="P:TouchSocket.NamedPipe.INamedPipeSession.DataHandlingAdapter">
+            <summary>
+            数据处理适配器
+            </summary>
+        </member>
+        <member name="T:TouchSocket.NamedPipe.INamedPipeSessionClient">
+            <summary>
+            命名管道服务器客户端接口
+            </summary>
+        </member>
+        <member name="P:TouchSocket.NamedPipe.INamedPipeSessionClient.Closed">
+            <summary>
+            断开连接
+            </summary>
+        </member>
+        <member name="P:TouchSocket.NamedPipe.INamedPipeSessionClient.Closing">
+            <summary>
+            即将断开连接(仅主动断开时有效)。
+            <para>
+            </para>
+            </summary>
+        </member>
+        <member name="T:TouchSocket.NamedPipe.INamedPipeStreamClient">
+            <summary>
+            定义了一个接口，用于通过命名管道进行流式通信。
+            </summary>
+        </member>
+        <member name="P:TouchSocket.NamedPipe.INamedPipeStreamClient.PipeStream">
+            <summary>
+            用于通讯的管道流。
+            </summary>
+        </member>
+        <member name="T:TouchSocket.NamedPipe.INamedPipeClientBase">
+            <inheritdoc/>
+        </member>
+        <member name="T:TouchSocket.NamedPipe.INamedPipeSocketClient">
+            <inheritdoc/>
+        </member>
+        <member name="T:TouchSocket.NamedPipe.INamedPipeClosedPlugin">
+            <summary>
+            具有断开连接的插件接口
+            </summary>
+        </member>
+        <member name="M:TouchSocket.NamedPipe.INamedPipeClosedPlugin.OnNamedPipeClosed(TouchSocket.NamedPipe.INamedPipeSession,TouchSocket.Sockets.ClosedEventArgs)">
+            <summary>
+            会话断开后触发
+            </summary>
+            <param name="client">断开连接的命名管道客户端会话</param>
+            <param name="e">包含断开连接事件的数据</param>
+            <returns>一个异步任务，表示操作的结果</returns>
+        </member>
+        <member name="T:TouchSocket.NamedPipe.INamedPipeClosingPlugin">
+            <summary>
+            即将断开连接(仅主动断开时有效)。
+            </summary>
+        </member>
+        <member name="M:TouchSocket.NamedPipe.INamedPipeClosingPlugin.OnNamedPipeClosing(TouchSocket.NamedPipe.INamedPipeSession,TouchSocket.Sockets.ClosingEventArgs)">
+            <summary>
+            即将断开连接(仅主动断开时有效)。
+            </summary>
+            <param name="client">命名管道的会话客户端。</param>
+            <param name="e">断开连接事件参数。</param>
+            <returns>一个表示异步操作的任务。</returns>
+        </member>
+        <member name="T:TouchSocket.NamedPipe.INamedPipeConnectedPlugin">
+            <summary>
+            具有完成连接动作的插件接口
+            </summary>
+        </member>
+        <member name="M:TouchSocket.NamedPipe.INamedPipeConnectedPlugin.OnNamedPipeConnected(TouchSocket.NamedPipe.INamedPipeSession,TouchSocket.Sockets.ConnectedEventArgs)">
+            <summary>
+            客户端连接成功后触发
+            </summary>
+            <param name="client">表示当前会话的接口，可用于发送和接收数据</param>
+            <param name="e">包含连接事件的信息</param>
+            <returns>返回一个任务对象，表示异步操作的结果</returns>
+        </member>
+        <member name="T:TouchSocket.NamedPipe.INamedPipeConnectingPlugin">
+            <summary>
+            具有预备连接的插件接口
+            </summary>
+        </member>
+        <member name="M:TouchSocket.NamedPipe.INamedPipeConnectingPlugin.OnNamedPipeConnecting(TouchSocket.NamedPipe.INamedPipeSession,TouchSocket.Sockets.ConnectingEventArgs)">
+            <summary>
+            在即将完成连接时触发。
+            该方法用于处理命名管道在连接建立前的事件。
+            </summary>
+            <param name="client">表示命名管道会话的接口。</param>
+            <param name="e">包含连接信息的事件参数。</param>
+            <returns>一个表示异步操作的任务。</returns>
+        </member>
+        <member name="T:TouchSocket.NamedPipe.INamedPipeReceivedPlugin">
+            <summary>
+            定义了一个接口，用于处理命名管道接收到的数据
+            </summary>
+        </member>
+        <member name="M:TouchSocket.NamedPipe.INamedPipeReceivedPlugin.OnNamedPipeReceived(TouchSocket.NamedPipe.INamedPipeSession,TouchSocket.Sockets.ReceivedDataEventArgs)">
+            <summary>
+            在收到数据时触发
+            </summary>
+            <param name="client">发送数据的命名管道会话</param>
+            <param name="e">包含接收到的数据的事件参数</param>
+            <returns>一个任务，表示异步操作</returns>
+        </member>
+        <member name="T:TouchSocket.NamedPipe.INamedPipeReceivingPlugin">
+            <summary>
+            定义了一个命名管道接收插件接口，用于在收到数据时执行特定操作。
+            </summary>
+        </member>
+        <member name="M:TouchSocket.NamedPipe.INamedPipeReceivingPlugin.OnNamedPipeReceiving(TouchSocket.NamedPipe.INamedPipeSession,TouchSocket.Sockets.ByteBlockEventArgs)">
+            <summary>
+            在刚收到数据时触发，即在适配器之前。
+            </summary>
+            <param name="client">触发事件的命名管道会话客户端。</param>
+            <param name="e">包含收到的数据及其他相关信息的事件参数。</param>
+            <returns>一个任务对象，表示异步操作。</returns>
+        </member>
+        <member name="T:TouchSocket.NamedPipe.INamedPipeSendingPlugin">
+            <summary>
+            定义了一个接口，用于在命名管道中发送数据的插件。
+            继承自IPlugin接口。
+            </summary>
+        </member>
+        <member name="M:TouchSocket.NamedPipe.INamedPipeSendingPlugin.OnNamedPipeSending(TouchSocket.NamedPipe.INamedPipeSession,TouchSocket.Sockets.SendingEventArgs)">
+            <summary>
+            当即将发送数据时，调用该方法在适配器之后，接下来即会发送数据。
+            该方法允许插件在数据发送前执行自定义逻辑。
+            </summary>
+            <param name="client">表示命名管道会话的接口对象。</param>
+            <param name="e">包含发送数据事件相关信息的事件参数对象。</param>
+            <returns>一个Task对象，表示异步操作的结果。</returns>
+        </member>
+        <member name="T:TouchSocket.NamedPipe.NamedPipeReconnectionPlugin`1">
+            <summary>
+            命名管道重连插件
+            </summary>
+        </member>
+        <member name="P:TouchSocket.NamedPipe.NamedPipeReconnectionPlugin`1.ActionForCheck">
+            <inheritdoc/>
+        </member>
+        <member name="M:TouchSocket.NamedPipe.NamedPipeReconnectionPlugin`1.#ctor">
+            <summary>
+            构造函数，用于初始化NamedPipeReconnectionPlugin实例。
+            </summary>
+            <remarks>
+            该构造函数通过设置ActionForCheck属性来定义检查管道连接状态的操作。
+            </remarks>
+        </member>
+        <member name="M:TouchSocket.NamedPipe.NamedPipeReconnectionPlugin`1.OnNamedPipeClosed(TouchSocket.NamedPipe.INamedPipeSession,TouchSocket.Sockets.ClosedEventArgs)">
+            <inheritdoc/>
+        </member>
+        <member name="T:TouchSocket.NamedPipe._NamedPipeClosedPluginExtensions">
+            <inheritdoc cref = "T:TouchSocket.NamedPipe.INamedPipeClosedPlugin"/>
+        </member>
+        <member name="M:TouchSocket.NamedPipe._NamedPipeClosedPluginExtensions.AddNamedPipeClosedPlugin(TouchSocket.Core.IPluginManager,System.Func{TouchSocket.NamedPipe.INamedPipeSession,TouchSocket.Sockets.ClosedEventArgs,System.Threading.Tasks.Task})">
+            <inheritdoc cref = "M:TouchSocket.NamedPipe.INamedPipeClosedPlugin.OnNamedPipeClosed(TouchSocket.NamedPipe.INamedPipeSession,TouchSocket.Sockets.ClosedEventArgs)"/>
+        </member>
+        <member name="M:TouchSocket.NamedPipe._NamedPipeClosedPluginExtensions.AddNamedPipeClosedPlugin(TouchSocket.Core.IPluginManager,System.Action{TouchSocket.NamedPipe.INamedPipeSession})">
+            <inheritdoc cref = "M:TouchSocket.NamedPipe.INamedPipeClosedPlugin.OnNamedPipeClosed(TouchSocket.NamedPipe.INamedPipeSession,TouchSocket.Sockets.ClosedEventArgs)"/>
+        </member>
+        <member name="M:TouchSocket.NamedPipe._NamedPipeClosedPluginExtensions.AddNamedPipeClosedPlugin(TouchSocket.Core.IPluginManager,System.Action)">
+            <inheritdoc cref = "M:TouchSocket.NamedPipe.INamedPipeClosedPlugin.OnNamedPipeClosed(TouchSocket.NamedPipe.INamedPipeSession,TouchSocket.Sockets.ClosedEventArgs)"/>
+        </member>
+        <member name="M:TouchSocket.NamedPipe._NamedPipeClosedPluginExtensions.AddNamedPipeClosedPlugin(TouchSocket.Core.IPluginManager,System.Func{TouchSocket.Sockets.ClosedEventArgs,System.Threading.Tasks.Task})">
+            <inheritdoc cref = "M:TouchSocket.NamedPipe.INamedPipeClosedPlugin.OnNamedPipeClosed(TouchSocket.NamedPipe.INamedPipeSession,TouchSocket.Sockets.ClosedEventArgs)"/>
+        </member>
+        <member name="M:TouchSocket.NamedPipe._NamedPipeClosedPluginExtensions.AddNamedPipeClosedPlugin(TouchSocket.Core.IPluginManager,System.Func{TouchSocket.NamedPipe.INamedPipeSession,System.Threading.Tasks.Task})">
+            <inheritdoc cref = "M:TouchSocket.NamedPipe.INamedPipeClosedPlugin.OnNamedPipeClosed(TouchSocket.NamedPipe.INamedPipeSession,TouchSocket.Sockets.ClosedEventArgs)"/>
+        </member>
+        <member name="M:TouchSocket.NamedPipe._NamedPipeClosedPluginExtensions.AddNamedPipeClosedPlugin(TouchSocket.Core.IPluginManager,System.Func{System.Threading.Tasks.Task})">
+            <inheritdoc cref = "M:TouchSocket.NamedPipe.INamedPipeClosedPlugin.OnNamedPipeClosed(TouchSocket.NamedPipe.INamedPipeSession,TouchSocket.Sockets.ClosedEventArgs)"/>
+        </member>
+        <member name="T:TouchSocket.NamedPipe._NamedPipeClosingPluginExtensions">
+            <inheritdoc cref = "T:TouchSocket.NamedPipe.INamedPipeClosingPlugin"/>
+        </member>
+        <member name="M:TouchSocket.NamedPipe._NamedPipeClosingPluginExtensions.AddNamedPipeClosingPlugin(TouchSocket.Core.IPluginManager,System.Func{TouchSocket.NamedPipe.INamedPipeSession,TouchSocket.Sockets.ClosingEventArgs,System.Threading.Tasks.Task})">
+            <inheritdoc cref = "M:TouchSocket.NamedPipe.INamedPipeClosingPlugin.OnNamedPipeClosing(TouchSocket.NamedPipe.INamedPipeSession,TouchSocket.Sockets.ClosingEventArgs)"/>
+        </member>
+        <member name="M:TouchSocket.NamedPipe._NamedPipeClosingPluginExtensions.AddNamedPipeClosingPlugin(TouchSocket.Core.IPluginManager,System.Action{TouchSocket.NamedPipe.INamedPipeSession})">
+            <inheritdoc cref = "M:TouchSocket.NamedPipe.INamedPipeClosingPlugin.OnNamedPipeClosing(TouchSocket.NamedPipe.INamedPipeSession,TouchSocket.Sockets.ClosingEventArgs)"/>
+        </member>
+        <member name="M:TouchSocket.NamedPipe._NamedPipeClosingPluginExtensions.AddNamedPipeClosingPlugin(TouchSocket.Core.IPluginManager,System.Action)">
+            <inheritdoc cref = "M:TouchSocket.NamedPipe.INamedPipeClosingPlugin.OnNamedPipeClosing(TouchSocket.NamedPipe.INamedPipeSession,TouchSocket.Sockets.ClosingEventArgs)"/>
+        </member>
+        <member name="M:TouchSocket.NamedPipe._NamedPipeClosingPluginExtensions.AddNamedPipeClosingPlugin(TouchSocket.Core.IPluginManager,System.Func{TouchSocket.Sockets.ClosingEventArgs,System.Threading.Tasks.Task})">
+            <inheritdoc cref = "M:TouchSocket.NamedPipe.INamedPipeClosingPlugin.OnNamedPipeClosing(TouchSocket.NamedPipe.INamedPipeSession,TouchSocket.Sockets.ClosingEventArgs)"/>
+        </member>
+        <member name="M:TouchSocket.NamedPipe._NamedPipeClosingPluginExtensions.AddNamedPipeClosingPlugin(TouchSocket.Core.IPluginManager,System.Func{TouchSocket.NamedPipe.INamedPipeSession,System.Threading.Tasks.Task})">
+            <inheritdoc cref = "M:TouchSocket.NamedPipe.INamedPipeClosingPlugin.OnNamedPipeClosing(TouchSocket.NamedPipe.INamedPipeSession,TouchSocket.Sockets.ClosingEventArgs)"/>
+        </member>
+        <member name="M:TouchSocket.NamedPipe._NamedPipeClosingPluginExtensions.AddNamedPipeClosingPlugin(TouchSocket.Core.IPluginManager,System.Func{System.Threading.Tasks.Task})">
+            <inheritdoc cref = "M:TouchSocket.NamedPipe.INamedPipeClosingPlugin.OnNamedPipeClosing(TouchSocket.NamedPipe.INamedPipeSession,TouchSocket.Sockets.ClosingEventArgs)"/>
+        </member>
+        <member name="T:TouchSocket.NamedPipe._NamedPipeConnectedPluginExtensions">
+            <inheritdoc cref = "T:TouchSocket.NamedPipe.INamedPipeConnectedPlugin"/>
+        </member>
+        <member name="M:TouchSocket.NamedPipe._NamedPipeConnectedPluginExtensions.AddNamedPipeConnectedPlugin(TouchSocket.Core.IPluginManager,System.Func{TouchSocket.NamedPipe.INamedPipeSession,TouchSocket.Sockets.ConnectedEventArgs,System.Threading.Tasks.Task})">
+            <inheritdoc cref = "M:TouchSocket.NamedPipe.INamedPipeConnectedPlugin.OnNamedPipeConnected(TouchSocket.NamedPipe.INamedPipeSession,TouchSocket.Sockets.ConnectedEventArgs)"/>
+        </member>
+        <member name="M:TouchSocket.NamedPipe._NamedPipeConnectedPluginExtensions.AddNamedPipeConnectedPlugin(TouchSocket.Core.IPluginManager,System.Action{TouchSocket.NamedPipe.INamedPipeSession})">
+            <inheritdoc cref = "M:TouchSocket.NamedPipe.INamedPipeConnectedPlugin.OnNamedPipeConnected(TouchSocket.NamedPipe.INamedPipeSession,TouchSocket.Sockets.ConnectedEventArgs)"/>
+        </member>
+        <member name="M:TouchSocket.NamedPipe._NamedPipeConnectedPluginExtensions.AddNamedPipeConnectedPlugin(TouchSocket.Core.IPluginManager,System.Action)">
+            <inheritdoc cref = "M:TouchSocket.NamedPipe.INamedPipeConnectedPlugin.OnNamedPipeConnected(TouchSocket.NamedPipe.INamedPipeSession,TouchSocket.Sockets.ConnectedEventArgs)"/>
+        </member>
+        <member name="M:TouchSocket.NamedPipe._NamedPipeConnectedPluginExtensions.AddNamedPipeConnectedPlugin(TouchSocket.Core.IPluginManager,System.Func{TouchSocket.Sockets.ConnectedEventArgs,System.Threading.Tasks.Task})">
+            <inheritdoc cref = "M:TouchSocket.NamedPipe.INamedPipeConnectedPlugin.OnNamedPipeConnected(TouchSocket.NamedPipe.INamedPipeSession,TouchSocket.Sockets.ConnectedEventArgs)"/>
+        </member>
+        <member name="M:TouchSocket.NamedPipe._NamedPipeConnectedPluginExtensions.AddNamedPipeConnectedPlugin(TouchSocket.Core.IPluginManager,System.Func{TouchSocket.NamedPipe.INamedPipeSession,System.Threading.Tasks.Task})">
+            <inheritdoc cref = "M:TouchSocket.NamedPipe.INamedPipeConnectedPlugin.OnNamedPipeConnected(TouchSocket.NamedPipe.INamedPipeSession,TouchSocket.Sockets.ConnectedEventArgs)"/>
+        </member>
+        <member name="M:TouchSocket.NamedPipe._NamedPipeConnectedPluginExtensions.AddNamedPipeConnectedPlugin(TouchSocket.Core.IPluginManager,System.Func{System.Threading.Tasks.Task})">
+            <inheritdoc cref = "M:TouchSocket.NamedPipe.INamedPipeConnectedPlugin.OnNamedPipeConnected(TouchSocket.NamedPipe.INamedPipeSession,TouchSocket.Sockets.ConnectedEventArgs)"/>
+        </member>
+        <member name="T:TouchSocket.NamedPipe._NamedPipeConnectingPluginExtensions">
+            <inheritdoc cref = "T:TouchSocket.NamedPipe.INamedPipeConnectingPlugin"/>
+        </member>
+        <member name="M:TouchSocket.NamedPipe._NamedPipeConnectingPluginExtensions.AddNamedPipeConnectingPlugin(TouchSocket.Core.IPluginManager,System.Func{TouchSocket.NamedPipe.INamedPipeSession,TouchSocket.Sockets.ConnectingEventArgs,System.Threading.Tasks.Task})">
+            <inheritdoc cref = "M:TouchSocket.NamedPipe.INamedPipeConnectingPlugin.OnNamedPipeConnecting(TouchSocket.NamedPipe.INamedPipeSession,TouchSocket.Sockets.ConnectingEventArgs)"/>
+        </member>
+        <member name="M:TouchSocket.NamedPipe._NamedPipeConnectingPluginExtensions.AddNamedPipeConnectingPlugin(TouchSocket.Core.IPluginManager,System.Action{TouchSocket.NamedPipe.INamedPipeSession})">
+            <inheritdoc cref = "M:TouchSocket.NamedPipe.INamedPipeConnectingPlugin.OnNamedPipeConnecting(TouchSocket.NamedPipe.INamedPipeSession,TouchSocket.Sockets.ConnectingEventArgs)"/>
+        </member>
+        <member name="M:TouchSocket.NamedPipe._NamedPipeConnectingPluginExtensions.AddNamedPipeConnectingPlugin(TouchSocket.Core.IPluginManager,System.Action)">
+            <inheritdoc cref = "M:TouchSocket.NamedPipe.INamedPipeConnectingPlugin.OnNamedPipeConnecting(TouchSocket.NamedPipe.INamedPipeSession,TouchSocket.Sockets.ConnectingEventArgs)"/>
+        </member>
+        <member name="M:TouchSocket.NamedPipe._NamedPipeConnectingPluginExtensions.AddNamedPipeConnectingPlugin(TouchSocket.Core.IPluginManager,System.Func{TouchSocket.Sockets.ConnectingEventArgs,System.Threading.Tasks.Task})">
+            <inheritdoc cref = "M:TouchSocket.NamedPipe.INamedPipeConnectingPlugin.OnNamedPipeConnecting(TouchSocket.NamedPipe.INamedPipeSession,TouchSocket.Sockets.ConnectingEventArgs)"/>
+        </member>
+        <member name="M:TouchSocket.NamedPipe._NamedPipeConnectingPluginExtensions.AddNamedPipeConnectingPlugin(TouchSocket.Core.IPluginManager,System.Func{TouchSocket.NamedPipe.INamedPipeSession,System.Threading.Tasks.Task})">
+            <inheritdoc cref = "M:TouchSocket.NamedPipe.INamedPipeConnectingPlugin.OnNamedPipeConnecting(TouchSocket.NamedPipe.INamedPipeSession,TouchSocket.Sockets.ConnectingEventArgs)"/>
+        </member>
+        <member name="M:TouchSocket.NamedPipe._NamedPipeConnectingPluginExtensions.AddNamedPipeConnectingPlugin(TouchSocket.Core.IPluginManager,System.Func{System.Threading.Tasks.Task})">
+            <inheritdoc cref = "M:TouchSocket.NamedPipe.INamedPipeConnectingPlugin.OnNamedPipeConnecting(TouchSocket.NamedPipe.INamedPipeSession,TouchSocket.Sockets.ConnectingEventArgs)"/>
+        </member>
+        <member name="T:TouchSocket.NamedPipe._NamedPipeReceivedPluginExtensions">
+            <inheritdoc cref = "T:TouchSocket.NamedPipe.INamedPipeReceivedPlugin"/>
+        </member>
+        <member name="M:TouchSocket.NamedPipe._NamedPipeReceivedPluginExtensions.AddNamedPipeReceivedPlugin(TouchSocket.Core.IPluginManager,System.Func{TouchSocket.NamedPipe.INamedPipeSession,TouchSocket.Sockets.ReceivedDataEventArgs,System.Threading.Tasks.Task})">
+            <inheritdoc cref = "M:TouchSocket.NamedPipe.INamedPipeReceivedPlugin.OnNamedPipeReceived(TouchSocket.NamedPipe.INamedPipeSession,TouchSocket.Sockets.ReceivedDataEventArgs)"/>
+        </member>
+        <member name="M:TouchSocket.NamedPipe._NamedPipeReceivedPluginExtensions.AddNamedPipeReceivedPlugin(TouchSocket.Core.IPluginManager,System.Action{TouchSocket.NamedPipe.INamedPipeSession})">
+            <inheritdoc cref = "M:TouchSocket.NamedPipe.INamedPipeReceivedPlugin.OnNamedPipeReceived(TouchSocket.NamedPipe.INamedPipeSession,TouchSocket.Sockets.ReceivedDataEventArgs)"/>
+        </member>
+        <member name="M:TouchSocket.NamedPipe._NamedPipeReceivedPluginExtensions.AddNamedPipeReceivedPlugin(TouchSocket.Core.IPluginManager,System.Action)">
+            <inheritdoc cref = "M:TouchSocket.NamedPipe.INamedPipeReceivedPlugin.OnNamedPipeReceived(TouchSocket.NamedPipe.INamedPipeSession,TouchSocket.Sockets.ReceivedDataEventArgs)"/>
+        </member>
+        <member name="M:TouchSocket.NamedPipe._NamedPipeReceivedPluginExtensions.AddNamedPipeReceivedPlugin(TouchSocket.Core.IPluginManager,System.Func{TouchSocket.Sockets.ReceivedDataEventArgs,System.Threading.Tasks.Task})">
+            <inheritdoc cref = "M:TouchSocket.NamedPipe.INamedPipeReceivedPlugin.OnNamedPipeReceived(TouchSocket.NamedPipe.INamedPipeSession,TouchSocket.Sockets.ReceivedDataEventArgs)"/>
+        </member>
+        <member name="M:TouchSocket.NamedPipe._NamedPipeReceivedPluginExtensions.AddNamedPipeReceivedPlugin(TouchSocket.Core.IPluginManager,System.Func{TouchSocket.NamedPipe.INamedPipeSession,System.Threading.Tasks.Task})">
+            <inheritdoc cref = "M:TouchSocket.NamedPipe.INamedPipeReceivedPlugin.OnNamedPipeReceived(TouchSocket.NamedPipe.INamedPipeSession,TouchSocket.Sockets.ReceivedDataEventArgs)"/>
+        </member>
+        <member name="M:TouchSocket.NamedPipe._NamedPipeReceivedPluginExtensions.AddNamedPipeReceivedPlugin(TouchSocket.Core.IPluginManager,System.Func{System.Threading.Tasks.Task})">
+            <inheritdoc cref = "M:TouchSocket.NamedPipe.INamedPipeReceivedPlugin.OnNamedPipeReceived(TouchSocket.NamedPipe.INamedPipeSession,TouchSocket.Sockets.ReceivedDataEventArgs)"/>
+        </member>
+        <member name="T:TouchSocket.NamedPipe._NamedPipeReceivingPluginExtensions">
+            <inheritdoc cref = "T:TouchSocket.NamedPipe.INamedPipeReceivingPlugin"/>
+        </member>
+        <member name="M:TouchSocket.NamedPipe._NamedPipeReceivingPluginExtensions.AddNamedPipeReceivingPlugin(TouchSocket.Core.IPluginManager,System.Func{TouchSocket.NamedPipe.INamedPipeSession,TouchSocket.Sockets.ByteBlockEventArgs,System.Threading.Tasks.Task})">
+            <inheritdoc cref = "M:TouchSocket.NamedPipe.INamedPipeReceivingPlugin.OnNamedPipeReceiving(TouchSocket.NamedPipe.INamedPipeSession,TouchSocket.Sockets.ByteBlockEventArgs)"/>
+        </member>
+        <member name="M:TouchSocket.NamedPipe._NamedPipeReceivingPluginExtensions.AddNamedPipeReceivingPlugin(TouchSocket.Core.IPluginManager,System.Action{TouchSocket.NamedPipe.INamedPipeSession})">
+            <inheritdoc cref = "M:TouchSocket.NamedPipe.INamedPipeReceivingPlugin.OnNamedPipeReceiving(TouchSocket.NamedPipe.INamedPipeSession,TouchSocket.Sockets.ByteBlockEventArgs)"/>
+        </member>
+        <member name="M:TouchSocket.NamedPipe._NamedPipeReceivingPluginExtensions.AddNamedPipeReceivingPlugin(TouchSocket.Core.IPluginManager,System.Action)">
+            <inheritdoc cref = "M:TouchSocket.NamedPipe.INamedPipeReceivingPlugin.OnNamedPipeReceiving(TouchSocket.NamedPipe.INamedPipeSession,TouchSocket.Sockets.ByteBlockEventArgs)"/>
+        </member>
+        <member name="M:TouchSocket.NamedPipe._NamedPipeReceivingPluginExtensions.AddNamedPipeReceivingPlugin(TouchSocket.Core.IPluginManager,System.Func{TouchSocket.Sockets.ByteBlockEventArgs,System.Threading.Tasks.Task})">
+            <inheritdoc cref = "M:TouchSocket.NamedPipe.INamedPipeReceivingPlugin.OnNamedPipeReceiving(TouchSocket.NamedPipe.INamedPipeSession,TouchSocket.Sockets.ByteBlockEventArgs)"/>
+        </member>
+        <member name="M:TouchSocket.NamedPipe._NamedPipeReceivingPluginExtensions.AddNamedPipeReceivingPlugin(TouchSocket.Core.IPluginManager,System.Func{TouchSocket.NamedPipe.INamedPipeSession,System.Threading.Tasks.Task})">
+            <inheritdoc cref = "M:TouchSocket.NamedPipe.INamedPipeReceivingPlugin.OnNamedPipeReceiving(TouchSocket.NamedPipe.INamedPipeSession,TouchSocket.Sockets.ByteBlockEventArgs)"/>
+        </member>
+        <member name="M:TouchSocket.NamedPipe._NamedPipeReceivingPluginExtensions.AddNamedPipeReceivingPlugin(TouchSocket.Core.IPluginManager,System.Func{System.Threading.Tasks.Task})">
+            <inheritdoc cref = "M:TouchSocket.NamedPipe.INamedPipeReceivingPlugin.OnNamedPipeReceiving(TouchSocket.NamedPipe.INamedPipeSession,TouchSocket.Sockets.ByteBlockEventArgs)"/>
+        </member>
+        <member name="T:TouchSocket.NamedPipe._NamedPipeSendingPluginExtensions">
+            <inheritdoc cref = "T:TouchSocket.NamedPipe.INamedPipeSendingPlugin"/>
+        </member>
+        <member name="M:TouchSocket.NamedPipe._NamedPipeSendingPluginExtensions.AddNamedPipeSendingPlugin(TouchSocket.Core.IPluginManager,System.Func{TouchSocket.NamedPipe.INamedPipeSession,TouchSocket.Sockets.SendingEventArgs,System.Threading.Tasks.Task})">
+            <inheritdoc cref = "M:TouchSocket.NamedPipe.INamedPipeSendingPlugin.OnNamedPipeSending(TouchSocket.NamedPipe.INamedPipeSession,TouchSocket.Sockets.SendingEventArgs)"/>
+        </member>
+        <member name="M:TouchSocket.NamedPipe._NamedPipeSendingPluginExtensions.AddNamedPipeSendingPlugin(TouchSocket.Core.IPluginManager,System.Action{TouchSocket.NamedPipe.INamedPipeSession})">
+            <inheritdoc cref = "M:TouchSocket.NamedPipe.INamedPipeSendingPlugin.OnNamedPipeSending(TouchSocket.NamedPipe.INamedPipeSession,TouchSocket.Sockets.SendingEventArgs)"/>
+        </member>
+        <member name="M:TouchSocket.NamedPipe._NamedPipeSendingPluginExtensions.AddNamedPipeSendingPlugin(TouchSocket.Core.IPluginManager,System.Action)">
+            <inheritdoc cref = "M:TouchSocket.NamedPipe.INamedPipeSendingPlugin.OnNamedPipeSending(TouchSocket.NamedPipe.INamedPipeSession,TouchSocket.Sockets.SendingEventArgs)"/>
+        </member>
+        <member name="M:TouchSocket.NamedPipe._NamedPipeSendingPluginExtensions.AddNamedPipeSendingPlugin(TouchSocket.Core.IPluginManager,System.Func{TouchSocket.Sockets.SendingEventArgs,System.Threading.Tasks.Task})">
+            <inheritdoc cref = "M:TouchSocket.NamedPipe.INamedPipeSendingPlugin.OnNamedPipeSending(TouchSocket.NamedPipe.INamedPipeSession,TouchSocket.Sockets.SendingEventArgs)"/>
+        </member>
+        <member name="M:TouchSocket.NamedPipe._NamedPipeSendingPluginExtensions.AddNamedPipeSendingPlugin(TouchSocket.Core.IPluginManager,System.Func{TouchSocket.NamedPipe.INamedPipeSession,System.Threading.Tasks.Task})">
+            <inheritdoc cref = "M:TouchSocket.NamedPipe.INamedPipeSendingPlugin.OnNamedPipeSending(TouchSocket.NamedPipe.INamedPipeSession,TouchSocket.Sockets.SendingEventArgs)"/>
+        </member>
+        <member name="M:TouchSocket.NamedPipe._NamedPipeSendingPluginExtensions.AddNamedPipeSendingPlugin(TouchSocket.Core.IPluginManager,System.Func{System.Threading.Tasks.Task})">
+            <inheritdoc cref = "M:TouchSocket.NamedPipe.INamedPipeSendingPlugin.OnNamedPipeSending(TouchSocket.NamedPipe.INamedPipeSession,TouchSocket.Sockets.SendingEventArgs)"/>
+        </member>
+        <member name="T:TouchSocket.Core.FastSerializableAttribute">
+            <summary>
+            标识源生成Fast序列化相关的实现。
+            </summary>
+        </member>
+        <member name="T:TouchSocket.Core.GeneratorPackageAttribute">
+            <summary>
+            标识源生成<see cref="T:TouchSocket.Core.IPackage"/>的实现。
+            </summary>
+        </member>
+        <member name="T:TouchSocket.Core.PackageMemberAttribute">
+            <summary>
+            标识源生成<see cref="T:TouchSocket.Core.IPackage"/>成员的特性。
+            </summary>
+        </member>
+        <member name="P:TouchSocket.Core.PackageMemberAttribute.Behavior">
+            <summary>
+            生成行为。一般来说，对于非只读、非重写、且同时拥有get，set（可以私有）访问器的属性，会自动生成。
+            对于字段，均不会自动生成。所以可以使用该设置，来指示生成器的生成行为。
+            </summary>
+        </member>
+        <member name="M:TouchSocket.Sockets.InternalClientCollection`1.GetIds">
+            <inheritdoc/>
+        </member>
+        <member name="M:TouchSocket.Sockets.InternalClientCollection`1.TryAdd(`0)">
+            <summary>
+            添加客户端
+            </summary>
+            <param name="client"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TouchSocket.Sockets.InternalClientCollection`1.TryGetClient(System.String,`0@)">
+            <inheritdoc/>
+        </member>
+        <member name="M:TouchSocket.Sockets.InternalClientCollection`1.TryRemoveClient(System.String,`0@)">
+            <summary>
+            移除对应客户端
+            </summary>
+            <param name="id"></param>
+            <param name="client"></param>
+            <returns></returns>
+        </member>
+        <member name="T:TouchSocket.Sockets.InternalReceiver">
+            <summary>
+            Receiver
+            </summary>
+        </member>
+        <member name="M:TouchSocket.Sockets.InternalReceiver.#ctor(TouchSocket.Sockets.IReceiverClient{TouchSocket.Sockets.IReceiverResult})">
+            <summary>
+            Receiver
+            </summary>
+            <param name="client"></param>
+        </member>
+        <member name="M:TouchSocket.Sockets.InternalReceiver.ReadAsync(System.Threading.CancellationToken)">
+            <inheritdoc/>
+        </member>
+        <member name="M:TouchSocket.Sockets.InternalReceiver.InputReceiveAsync(TouchSocket.Core.ByteBlock,TouchSocket.Core.IRequestInfo)">
+            <inheritdoc/>
+        </member>
+        <member name="M:TouchSocket.Sockets.InternalReceiver.Dispose(System.Boolean)">
+            <inheritdoc/>
+        </member>
+        <member name="T:TouchSocket.Sockets.InternalReceiverResult">
+            <summary>
+            ReceiverResult
+            </summary>
+        </member>
+        <member name="M:TouchSocket.Sockets.InternalReceiverResult.#ctor(System.Action)">
+            <summary>
+            ReceiverResult
+            </summary>
+            <param name="disAction"></param>
+        </member>
+        <member name="P:TouchSocket.Sockets.InternalReceiverResult.ByteBlock">
+            <summary>
+            字节块
+            </summary>
+        </member>
+        <member name="P:TouchSocket.Sockets.InternalReceiverResult.RequestInfo">
+            <summary>
+            数据对象
+            </summary>
+        </member>
+        <member name="M:TouchSocket.Sockets.InternalReceiverResult.Dispose">
+            <inheritdoc/>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.ConstantExpectedAttribute">
+            <summary>
+            Indicates that the specified method parameter expects a constant.
+            </summary>
+            <remarks>
+            This can be used to inform tooling that a constant should be used as an argument for the annotated parameter.
+            </remarks>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.ConstantExpectedAttribute.Min">
+            <summary>
+            Indicates the minimum bound of the expected constant, inclusive.
+            </summary>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.ConstantExpectedAttribute.Max">
+            <summary>
+            Indicates the maximum bound of the expected constant, inclusive.
+            </summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.ExperimentalAttribute">
+            <summary>
+            Indicates that an API is experimental and it may change in the future.
+            </summary>
+            <remarks>
+            This attribute allows call sites to be flagged with a diagnostic that indicates that an experimental
+            feature is used. Authors can use this attribute to ship preview features in their assemblies.
+            </remarks>
+        </member>
+        <member name="M:System.Diagnostics.CodeAnalysis.ExperimentalAttribute.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:System.Diagnostics.CodeAnalysis.ExperimentalAttribute"/> class,
+            specifying the ID that the compiler will use when reporting a use of the API the attribute applies to.
+            </summary>
+            <param name="diagnosticId">The ID that the compiler will use when reporting a use of the API the attribute applies to.</param>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.ExperimentalAttribute.DiagnosticId">
+            <summary>
+            Gets the ID that the compiler will use when reporting a use of the API the attribute applies to.
+            </summary>
+            <value>The unique diagnostic ID.</value>
+            <remarks>
+            The diagnostic ID is shown in build output for warnings and errors.
+            <para>This property represents the unique ID that can be used to suppress the warnings or errors, if needed.</para>
+            </remarks>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.ExperimentalAttribute.UrlFormat">
+            <summary>
+            Gets or sets the URL for corresponding documentation.
+            The API accepts a format string instead of an actual URL, creating a generic URL that includes the diagnostic ID.
+            </summary>
+            <value>The format string that represents a URL to corresponding documentation.</value>
+            <remarks>An example format string is <c>https://contoso.com/obsoletion-warnings/{0}</c>.</remarks>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.MemberNotNullAttribute">
+            <summary>
+            Specifies that the method or property will ensure that the listed field and property members have not-null values.
+            </summary>
+        </member>
+        <member name="M:System.Diagnostics.CodeAnalysis.MemberNotNullAttribute.#ctor(System.String)">
+            <summary>
+            Initializes the attribute with a field or property member.
+            </summary>
+            <param name="member">The field or property member that is promised to be not-null.</param>
+        </member>
+        <member name="M:System.Diagnostics.CodeAnalysis.MemberNotNullAttribute.#ctor(System.String[])">
+            <summary>
+            Initializes the attribute with the list of field and property members.
+            </summary>
+            <param name="members">The list of field and property members that are promised to be not-null.</param>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.MemberNotNullAttribute.Members">
+            <summary>
+            Gets field or property member names.
+            </summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute">
+            <summary>
+            Specifies that the method or property will ensure that the listed field and property
+            members have not-null values when returning with the specified return value condition.
+            </summary>
+        </member>
+        <member name="M:System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute.#ctor(System.Boolean,System.String)">
+            <summary>
+            Initializes the attribute with the specified return value condition and a field or property member.
+            </summary>
+            <param name="returnValue">The return value condition. If the method returns this value, the associated parameter will not be null.</param>
+            <param name="member">The field or property member that is promised to be not-null.</param>
+        </member>
+        <member name="M:System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute.#ctor(System.Boolean,System.String[])">
+            <summary>
+            Initializes the attribute with the specified return value condition and list of field and property members.
+            </summary>
+            <param name="returnValue">The return value condition. If the method returns this value, the associated parameter will not be null.</param>
+            <param name="members">The list of field and property members that are promised to be not-null.</param>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute.ReturnValue">
+            <summary>
+            Gets the return value condition.
+            </summary>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute.Members">
+            <summary>
+            Gets field or property member names.
+            </summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.SetsRequiredMembersAttribute">
+            <summary>
+            Specifies that this constructor sets all required members for the current type,
+            and callers do not need to set any required members themselves.
+            </summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute">
+            <summary>
+            Specifies the syntax used in a string.
+            </summary>
+        </member>
+        <member name="M:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.#ctor(System.String)">
+            <summary>
+            Initializes the <see cref="T:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute"/> with the identifier of the syntax used.
+            </summary>
+            <param name="syntax">The syntax identifier.</param>
+        </member>
+        <member name="M:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.#ctor(System.String,System.Object[])">
+            <summary>Initializes the <see cref="T:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute"/> with the identifier of the syntax used.</summary>
+            <param name="syntax">The syntax identifier.</param>
+            <param name="arguments">Optional arguments associated with the specific syntax employed.</param>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.Syntax">
+            <summary>Gets the identifier of the syntax used.</summary>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.Arguments">
+            <summary>Optional arguments associated with the specific syntax employed.</summary>
+        </member>
+        <member name="F:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.CompositeFormat">
+            <summary>The syntax identifier for strings containing composite formats for string formatting.</summary>
+        </member>
+        <member name="F:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.DateOnlyFormat">
+            <summary>The syntax identifier for strings containing date format specifiers.</summary>
+        </member>
+        <member name="F:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.DateTimeFormat">
+            <summary>The syntax identifier for strings containing date and time format specifiers.</summary>
+        </member>
+        <member name="F:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.EnumFormat">
+            <summary>The syntax identifier for strings containing <see cref="T:System.Enum"/> format specifiers.</summary>
+        </member>
+        <member name="F:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.GuidFormat">
+            <summary>The syntax identifier for strings containing <see cref="T:System.Guid"/> format specifiers.</summary>
+        </member>
+        <member name="F:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.Json">
+            <summary>The syntax identifier for strings containing JavaScript Object Notation (JSON).</summary>
+        </member>
+        <member name="F:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.NumericFormat">
+            <summary>The syntax identifier for strings containing numeric format specifiers.</summary>
+        </member>
+        <member name="F:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.Regex">
+            <summary>The syntax identifier for strings containing regular expressions.</summary>
+        </member>
+        <member name="F:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.TimeOnlyFormat">
+            <summary>The syntax identifier for strings containing time format specifiers.</summary>
+        </member>
+        <member name="F:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.TimeSpanFormat">
+            <summary>The syntax identifier for strings containing <see cref="T:System.TimeSpan"/> format specifiers.</summary>
+        </member>
+        <member name="F:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.Uri">
+            <summary>The syntax identifier for strings containing URIs.</summary>
+        </member>
+        <member name="F:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.Xml">
+            <summary>The syntax identifier for strings containing XML.</summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.UnscopedRefAttribute">
+            <summary>
+            Used to indicate a byref escapes and is not scoped.
+            </summary>
+            <remarks>
+            <para>
+            There are several cases where the C# compiler treats a <see langword="ref"/> as implicitly
+            <see langword="scoped"/> - where the compiler does not allow the <see langword="ref"/> to escape the method.
+            </para>
+            <para>
+            For example:
+            <list type="number">
+                <item><see langword="this"/> for <see langword="struct"/> instance methods.</item>
+                <item><see langword="ref"/> parameters that refer to <see langword="ref"/> <see langword="struct"/> types.</item>
+                <item><see langword="out"/> parameters.</item>
+            </list>
+            </para>
+            <para>
+            This attribute is used in those instances where the <see langword="ref"/> should be allowed to escape.
+            </para>
+            <para>
+            Applying this attribute, in any form, has impact on consumers of the applicable API. It is necessary for
+            API authors to understand the lifetime implications of applying this attribute and how it may impact their users.
+            </para>
+            </remarks>
+        </member>
+        <member name="T:System.Runtime.CompilerServices.CallerArgumentExpressionAttribute">
+            <summary>
+            An attribute that allows parameters to receive the expression of other parameters.
+            </summary>
+        </member>
+        <member name="M:System.Runtime.CompilerServices.CallerArgumentExpressionAttribute.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:System.Runtime.CompilerServices.CallerArgumentExpressionAttribute"/> class.
+            </summary>
+            <param name="parameterName">The condition parameter value.</param>
+        </member>
+        <member name="P:System.Runtime.CompilerServices.CallerArgumentExpressionAttribute.ParameterName">
+            <summary>
+            Gets the parameter name the expression is retrieved from.
+            </summary>
+        </member>
+        <member name="M:System.Runtime.CompilerServices.CollectionBuilderAttribute.#ctor(System.Type,System.String)">
+            <summary>
+            Initialize the attribute to refer to the <paramref name="methodName"/> method on the <paramref name="builderType"/> type.
+            </summary>
+            <param name="builderType">The type of the builder to use to construct the collection.</param>
+            <param name="methodName">The name of the method on the builder to use to construct the collection.</param>
+            <remarks>
+            <paramref name="methodName"/> must refer to a static method that accepts a single parameter of
+            type <see cref="T:System.ReadOnlySpan`1"/> and returns an instance of the collection being built containing
+            a copy of the data from that span.  In future releases of .NET, additional patterns may be supported.
+            </remarks>
+        </member>
+        <member name="P:System.Runtime.CompilerServices.CollectionBuilderAttribute.BuilderType">
+            <summary>
+            Gets the type of the builder to use to construct the collection.
+            </summary>
+        </member>
+        <member name="P:System.Runtime.CompilerServices.CollectionBuilderAttribute.MethodName">
+            <summary>
+            Gets the name of the method on the builder to use to construct the collection.
+            </summary>
+            <remarks>
+            This should match the metadata name of the target method.
+            For example, this might be ".ctor" if targeting the type's constructor.
+            </remarks>
+        </member>
+        <member name="T:System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute">
+            <summary>
+            Indicates that compiler support for a particular feature is required for the location where this attribute is applied.
+            </summary>
+        </member>
+        <member name="M:System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute.#ctor(System.String)">
+            <summary>
+            Creates a new instance of the <see cref="T:System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute"/> type.
+            </summary>
+            <param name="featureName">The name of the feature to indicate.</param>
+        </member>
+        <member name="P:System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute.FeatureName">
+            <summary>
+            The name of the compiler feature.
+            </summary>
+        </member>
+        <member name="P:System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute.IsOptional">
+            <summary>
+            If true, the compiler can choose to allow access to the location where this attribute is applied if it does not understand <see cref="P:System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute.FeatureName"/>.
+            </summary>
+        </member>
+        <member name="F:System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute.RefStructs">
+            <summary>
+            The <see cref="P:System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute.FeatureName"/> used for the ref structs C# feature.
+            </summary>
+        </member>
+        <member name="F:System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute.RequiredMembers">
+            <summary>
+            The <see cref="P:System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute.FeatureName"/> used for the required members C# feature.
+            </summary>
+        </member>
+        <member name="T:System.Runtime.CompilerServices.InterpolatedStringHandlerArgumentAttribute">
+            <summary>
+            Indicates which arguments to a method involving an interpolated string handler should be passed to that handler.
+            </summary>
+        </member>
+        <member name="M:System.Runtime.CompilerServices.InterpolatedStringHandlerArgumentAttribute.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:System.Runtime.CompilerServices.InterpolatedStringHandlerArgumentAttribute"/> class.
+            </summary>
+            <param name="argument">The name of the argument that should be passed to the handler.</param>
+            <remarks><see langword="null"/> may be used as the name of the receiver in an instance method.</remarks>
+        </member>
+        <member name="M:System.Runtime.CompilerServices.InterpolatedStringHandlerArgumentAttribute.#ctor(System.String[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:System.Runtime.CompilerServices.InterpolatedStringHandlerArgumentAttribute"/> class.
+            </summary>
+            <param name="arguments">The names of the arguments that should be passed to the handler.</param>
+            <remarks><see langword="null"/> may be used as the name of the receiver in an instance method.</remarks>
+        </member>
+        <member name="P:System.Runtime.CompilerServices.InterpolatedStringHandlerArgumentAttribute.Arguments">
+            <summary>
+            Gets the names of the arguments that should be passed to the handler.
+            </summary>
+            <remarks><see langword="null"/> may be used as the name of the receiver in an instance method.</remarks>
+        </member>
+        <member name="T:System.Runtime.CompilerServices.InterpolatedStringHandlerAttribute">
+            <summary>
+            Indicates the attributed type is to be used as an interpolated string handler.
+            </summary>
+        </member>
+        <member name="T:System.Runtime.CompilerServices.IsExternalInit">
+            <summary>
+            Reserved to be used by the compiler for tracking metadata.
+            This class should not be used by developers in source code.
+            </summary>
+        </member>
+        <member name="T:System.Runtime.CompilerServices.ModuleInitializerAttribute">
+             <summary>
+             Used to indicate to the compiler that a method should be called
+             in its containing module's initializer.
+             </summary>
+             <remarks>
+             When one or more valid methods
+             with this attribute are found in a compilation, the compiler will
+             emit a module initializer which calls each of the attributed methods.
+            
+             Certain requirements are imposed on any method targeted with this attribute:
+             - The method must be `static`.
+             - The method must be an ordinary member method, as opposed to a property accessor, constructor, local function, etc.
+             - The method must be parameterless.
+             - The method must return `void`.
+             - The method must not be generic or be contained in a generic type.
+             - The method's effective accessibility must be `internal` or `public`.
+            
+             The specification for module initializers in the .NET runtime can be found here:
+             https://github.com/dotnet/runtime/blob/main/docs/design/specs/Ecma-335-Augments.md#module-initializer
+             </remarks>
+        </member>
+        <member name="T:System.Runtime.CompilerServices.OverloadResolutionPriorityAttribute">
+            <summary>
+            Specifies the priority of a member in overload resolution. When unspecified, the default priority is 0.
+            </summary>
+        </member>
+        <member name="M:System.Runtime.CompilerServices.OverloadResolutionPriorityAttribute.#ctor(System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:System.Runtime.CompilerServices.OverloadResolutionPriorityAttribute"/> class.
+            </summary>
+            <param name="priority">The priority of the attributed member. Higher numbers are prioritized, lower numbers are deprioritized. 0 is the default if no attribute is present.</param>
+        </member>
+        <member name="P:System.Runtime.CompilerServices.OverloadResolutionPriorityAttribute.Priority">
+            <summary>
+            The priority of the member.
+            </summary>
+        </member>
+        <member name="T:System.Runtime.CompilerServices.ParamCollectionAttribute">
+            <summary>
+            Indicates that a method will allow a variable number of arguments in its invocation.
+            </summary>
+        </member>
+        <member name="T:System.Runtime.CompilerServices.RequiredMemberAttribute">
+            <summary>
+            Specifies that a type has required members or that a member is required.
+            </summary>
+        </member>
+        <member name="T:System.Runtime.CompilerServices.RequiresLocationAttribute">
+            <summary>
+            Reserved for use by a compiler for tracking metadata.
+            This attribute should not be used by developers in source code.
+            </summary>
+        </member>
+        <member name="T:System.Runtime.CompilerServices.SkipLocalsInitAttribute">
+            <summary>
+            Used to indicate to the compiler that the <c>.locals init</c> flag should not be set in method headers.
+            </summary>
+        </member>
+        <member name="M:System.Runtime.Versioning.RequiresPreviewFeaturesAttribute.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:System.Runtime.Versioning.RequiresPreviewFeaturesAttribute"/> class.
+            </summary>
+        </member>
+        <member name="M:System.Runtime.Versioning.RequiresPreviewFeaturesAttribute.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:System.Runtime.Versioning.RequiresPreviewFeaturesAttribute"/> class with the specified message.
+            </summary>
+            <param name="message">An optional message associated with this attribute instance.</param>
+        </member>
+        <member name="P:System.Runtime.Versioning.RequiresPreviewFeaturesAttribute.Message">
+            <summary>
+            Returns the optional message associated with this attribute instance.
+            </summary>
+        </member>
+        <member name="P:System.Runtime.Versioning.RequiresPreviewFeaturesAttribute.Url">
+            <summary>
+            Returns the optional URL associated with this attribute instance.
+            </summary>
+        </member>
+    </members>
+</doc>

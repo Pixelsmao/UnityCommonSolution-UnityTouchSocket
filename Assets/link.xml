@@ -1,0 +1,13 @@
+<linker>
+    <assembly fullname="TouchSocket" preserve="all"/>
+    <assembly fullname="TouchSocketPro" preserve="all"/>
+    <assembly fullname="TouchSocket.Core" preserve="all"/>
+    <assembly fullname="TouchSocket.Dmtp" preserve="all"/>
+    <assembly fullname="TouchSocket.Http" preserve="all"/>
+    <assembly fullname="TouchSocket.Rpc" preserve="all"/>
+    <assembly fullname="TouchSocket.JsonRpc" preserve="all"/>
+    <assembly fullname="TouchSocket.NamedPipe" preserve="all"/>
+    <assembly fullname="TouchSocket.WebApi" preserve="all"/>
+    <assembly fullname="TouchSocket.XmlRpc" preserve="all"/>
+    <assembly fullname="TouchSocketPro.Dmtp" preserve="all"/>
+</linker>

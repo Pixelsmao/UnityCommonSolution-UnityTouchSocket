@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+  <metadata>
+    <id>TouchSocket.WebApi</id>
+    <version>3.1.2</version>
+    <title>TouchSocket.WebApi</title>
+    <authors>若汝棋茗</authors>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <license type="file">LICENSE.txt</license>
+    <licenseUrl>https://aka.ms/deprecateLicenseUrl</licenseUrl>
+    <icon>logo.png</icon>
+    <readme>Readme.md</readme>
+    <projectUrl>https://touchsocket.net/</projectUrl>
+    <description>这是一个提供WebApi服务器和客户端的组件库。可以通过该组件创建WebApi服务解析器和客户端，让桌面端、Web端、移动端可以跨语言调用Rpc函数。功能支持自定义路由、Get传参、Post传参等。
+
+说明文档：https://touchsocket.net/</description>
+    <copyright>Copyright © 2025 若汝棋茗</copyright>
+    <tags>WebApi TouchSocket</tags>
+    <repository type="git" url="https://github.com/RRQM/TouchSocket" commit="be3f4f8e985bac4e376f507697776473c49d06a7" />
+    <dependencies>
+      <group targetFramework=".NETFramework4.5">
+        <dependency id="TouchSocket.Http" version="3.1.2" exclude="Build,Analyzers" />
+        <dependency id="TouchSocket.Rpc" version="3.1.2" exclude="Build,Analyzers" />
+      </group>
+      <group targetFramework=".NETFramework4.6.2">
+        <dependency id="TouchSocket.Http" version="3.1.2" exclude="Build,Analyzers" />
+        <dependency id="TouchSocket.Rpc" version="3.1.2" exclude="Build,Analyzers" />
+      </group>
+      <group targetFramework=".NETFramework4.7.2">
+        <dependency id="TouchSocket.Http" version="3.1.2" exclude="Build,Analyzers" />
+        <dependency id="TouchSocket.Rpc" version="3.1.2" exclude="Build,Analyzers" />
+      </group>
+      <group targetFramework=".NETFramework4.8.1">
+        <dependency id="TouchSocket.Http" version="3.1.2" exclude="Build,Analyzers" />
+        <dependency id="TouchSocket.Rpc" version="3.1.2" exclude="Build,Analyzers" />
+        <dependency id="System.Reflection.DispatchProxy" version="4.7.1" exclude="Build,Analyzers" />
+      </group>
+      <group targetFramework="net6.0">
+        <dependency id="TouchSocket.Http" version="3.1.2" exclude="Build,Analyzers" />
+        <dependency id="TouchSocket.Rpc" version="3.1.2" exclude="Build,Analyzers" />
+      </group>
+      <group targetFramework="net8.0">
+        <dependency id="TouchSocket.Http" version="3.1.2" exclude="Build,Analyzers" />
+        <dependency id="TouchSocket.Rpc" version="3.1.2" exclude="Build,Analyzers" />
+      </group>
+      <group targetFramework="net9.0">
+        <dependency id="TouchSocket.Http" version="3.1.2" exclude="Build,Analyzers" />
+        <dependency id="TouchSocket.Rpc" version="3.1.2" exclude="Build,Analyzers" />
+      </group>
+      <group targetFramework=".NETStandard2.0">
+        <dependency id="TouchSocket.Http" version="3.1.2" exclude="Build,Analyzers" />
+        <dependency id="TouchSocket.Rpc" version="3.1.2" exclude="Build,Analyzers" />
+      </group>
+      <group targetFramework=".NETStandard2.1">
+        <dependency id="TouchSocket.Http" version="3.1.2" exclude="Build,Analyzers" />
+        <dependency id="TouchSocket.Rpc" version="3.1.2" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+    <frameworkAssemblies>
+      <frameworkAssembly assemblyName="System.IO" targetFramework=".NETFramework4.8.1" />
+      <frameworkAssembly assemblyName="System.Net.Http" targetFramework=".NETFramework4.8.1" />
+      <frameworkAssembly assemblyName="System.Runtime" targetFramework=".NETFramework4.8.1" />
+      <frameworkAssembly assemblyName="System.Security.Cryptography.Algorithms" targetFramework=".NETFramework4.8.1" />
+      <frameworkAssembly assemblyName="System.Security.Cryptography.Encoding" targetFramework=".NETFramework4.8.1" />
+      <frameworkAssembly assemblyName="System.Security.Cryptography.Primitives" targetFramework=".NETFramework4.8.1" />
+      <frameworkAssembly assemblyName="System.Security.Cryptography.X509Certificates" targetFramework=".NETFramework4.8.1" />
+    </frameworkAssemblies>
+  </metadata>
+</package>

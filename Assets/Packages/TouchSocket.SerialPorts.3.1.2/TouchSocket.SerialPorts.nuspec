@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+  <metadata>
+    <id>TouchSocket.SerialPorts</id>
+    <version>3.1.2</version>
+    <title>TouchSocket.SerialPorts</title>
+    <authors>若汝棋茗,Diego</authors>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <license type="file">LICENSE.txt</license>
+    <licenseUrl>https://aka.ms/deprecateLicenseUrl</licenseUrl>
+    <icon>logo.png</icon>
+    <readme>Readme.md</readme>
+    <projectUrl>https://touchsocket.net/</projectUrl>
+    <description>这是.Net(包括 C# 、VB.Net、F#)的一个整合性的串口通信框架。包含了串口连接、断开等一系列的通信事务。同时能一键式解决数据黏分包问题。使用协议模板，可快速实现「固定包头」、「固定长度」、「区间字符」等一系列的数据报文解析。
+
+说明文档：https://touchsocket.net/</description>
+    <copyright>Copyright © 2025 若汝棋茗</copyright>
+    <tags>Serial SerialPort TouchSocket</tags>
+    <repository type="git" url="https://github.com/RRQM/TouchSocket" commit="be3f4f8e985bac4e376f507697776473c49d06a7" />
+    <dependencies>
+      <group targetFramework=".NETFramework4.5">
+        <dependency id="TouchSocket" version="3.1.2" exclude="Build,Analyzers" />
+      </group>
+      <group targetFramework=".NETFramework4.6.2">
+        <dependency id="TouchSocket" version="3.1.2" exclude="Build,Analyzers" />
+        <dependency id="System.IO.Ports" version="8.0.0" exclude="Build,Analyzers" />
+      </group>
+      <group targetFramework=".NETFramework4.7.2">
+        <dependency id="TouchSocket" version="3.1.2" exclude="Build,Analyzers" />
+        <dependency id="System.IO.Ports" version="8.0.0" exclude="Build,Analyzers" />
+      </group>
+      <group targetFramework=".NETFramework4.8.1">
+        <dependency id="TouchSocket" version="3.1.2" exclude="Build,Analyzers" />
+      </group>
+      <group targetFramework="net6.0">
+        <dependency id="TouchSocket" version="3.1.2" exclude="Build,Analyzers" />
+        <dependency id="System.IO.Ports" version="8.0.0" exclude="Build,Analyzers" />
+      </group>
+      <group targetFramework="net8.0">
+        <dependency id="TouchSocket" version="3.1.2" exclude="Build,Analyzers" />
+        <dependency id="System.IO.Ports" version="8.0.0" exclude="Build,Analyzers" />
+      </group>
+      <group targetFramework="net9.0">
+        <dependency id="TouchSocket" version="3.1.2" exclude="Build,Analyzers" />
+        <dependency id="System.IO.Ports" version="8.0.0" exclude="Build,Analyzers" />
+      </group>
+      <group targetFramework=".NETStandard2.0">
+        <dependency id="TouchSocket" version="3.1.2" exclude="Build,Analyzers" />
+        <dependency id="System.IO.Ports" version="8.0.0" exclude="Build,Analyzers" />
+      </group>
+      <group targetFramework=".NETStandard2.1">
+        <dependency id="TouchSocket" version="3.1.2" exclude="Build,Analyzers" />
+        <dependency id="System.IO.Ports" version="8.0.0" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+  </metadata>
+</package>

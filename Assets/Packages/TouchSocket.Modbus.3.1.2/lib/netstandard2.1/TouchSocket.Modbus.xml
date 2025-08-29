@@ -1,0 +1,1596 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TouchSocket.Modbus</name>
+    </assembly>
+    <members>
+        <member name="T:TouchSocket.Modbus.ModbusRtuBase">
+            <summary>
+            ModbusRtuBase
+            </summary>
+        </member>
+        <member name="P:TouchSocket.Modbus.ModbusRtuBase.Crc">
+            <summary>
+            校验码
+            </summary>
+        </member>
+        <member name="P:TouchSocket.Modbus.ModbusRtuRequest.MaxLength">
+            <inheritdoc/>
+        </member>
+        <member name="M:TouchSocket.Modbus.ModbusRtuRequest.Build``1(``0@)">
+            <inheritdoc/>
+        </member>
+        <member name="T:TouchSocket.Modbus.ModbusTcpAdapterForPoll">
+             <summary>
+             |MBAP|功能码|数据|
+            
+             MBAP=|事务处理标识符(2)|协议标识符(2)|长度(2)|单元标识符(1)|
+             长度表示后续所有。
+            
+             此处解析思路是，将数据之前的所有信息，均认为固定包头。则包头长度是8
+             </summary>
+        </member>
+        <member name="T:TouchSocket.Modbus.ModbusTcpBase">
+            <summary>
+            ModbusTcpBase
+            </summary>
+        </member>
+        <member name="P:TouchSocket.Modbus.ModbusTcpBase.TransactionId">
+            <summary>
+            事务处理标识符。即序号
+            </summary>
+        </member>
+        <member name="P:TouchSocket.Modbus.ModbusTcpBase.ProtocolId">
+            <summary>
+            协议标识符
+            </summary>
+        </member>
+        <member name="T:TouchSocket.Modbus.ModbusTcpRequest">
+            <summary>
+            ModbusTcpRequest
+            </summary>
+        </member>
+        <member name="M:TouchSocket.Modbus.ModbusTcpRequest.#ctor(System.UInt16,TouchSocket.Modbus.ModbusRequest)">
+            <summary>
+            从<see cref="T:TouchSocket.Modbus.ModbusRequest"/>创建一个ModbusTcpRequest
+            </summary>
+            <param name="transactionId"></param>
+            <param name="request"></param>
+        </member>
+        <member name="P:TouchSocket.Modbus.ModbusTcpRequest.MaxLength">
+            <inheritdoc/>
+        </member>
+        <member name="M:TouchSocket.Modbus.ModbusTcpRequest.Build``1(``0@)">
+            <inheritdoc/>
+        </member>
+        <member name="T:TouchSocket.Modbus.ModbusRequest">
+            <summary>
+            Modbus请求类
+            </summary>
+        </member>
+        <member name="M:TouchSocket.Modbus.ModbusRequest.#ctor">
+            <summary>
+            Modbus请求类
+            </summary>
+        </member>
+        <member name="M:TouchSocket.Modbus.ModbusRequest.#ctor(TouchSocket.Modbus.FunctionCode)">
+            <summary>
+            使用一个功能码初始化
+            </summary>
+            <param name="functionCode">要执行的功能码</param>
+        </member>
+        <member name="M:TouchSocket.Modbus.ModbusRequest.#ctor(System.Byte,TouchSocket.Modbus.FunctionCode,System.UInt16,System.UInt16)">
+            <summary>
+            初始化一个读取类请求
+            </summary>
+            <param name="slaveId">从机设备地址</param>
+            <param name="functionCode">功能码，用于指定请求的操作类型</param>
+            <param name="startingAddress">起始地址，用于指定从哪个寄存器或线圈开始读取</param>
+            <param name="quantity">数量，需要读取的寄存器或线圈的数量</param>
+        </member>
+        <member name="M:TouchSocket.Modbus.ModbusRequest.#ctor(System.Byte,TouchSocket.Modbus.FunctionCode)">
+            <summary>
+            初始化一个站点与功能码请求。
+            </summary>
+            <param name="slaveId">站点ID，用于标识从设备。</param>
+            <param name="functionCode">功能码，用于指定请求的具体功能。</param>
+        </member>
+        <member name="P:TouchSocket.Modbus.ModbusRequest.Data">
+            <summary>
+            数据
+            </summary>
+        </member>
+        <member name="P:TouchSocket.Modbus.ModbusRequest.FunctionCode">
+            <summary>
+            功能码
+            </summary>
+        </member>
+        <member name="P:TouchSocket.Modbus.ModbusRequest.Quantity">
+            <summary>
+            数量
+            </summary>
+        </member>
+        <member name="P:TouchSocket.Modbus.ModbusRequest.SlaveId">
+            <summary>
+            站点号（单元标识符）
+            </summary>
+        </member>
+        <member name="P:TouchSocket.Modbus.ModbusRequest.StartingAddress">
+            <summary>
+            起始位置
+            </summary>
+        </member>
+        <member name="P:TouchSocket.Modbus.ModbusRequest.ReadStartAddress">
+            <summary>
+            在读起始位置。
+            </summary>
+        </member>
+        <member name="P:TouchSocket.Modbus.ModbusRequest.ReadQuantity">
+            <summary>
+            读取长度
+            </summary>
+        </member>
+        <member name="M:TouchSocket.Modbus.ModbusRequest.SetValue(System.Boolean)">
+            <summary>
+            设置<see cref="P:TouchSocket.Modbus.ModbusRequest.Data"/>的值为一个 bool。
+            </summary>
+            <param name="value">要设置的布尔值。</param>
+        </member>
+        <member name="M:TouchSocket.Modbus.ModbusRequest.SetValue(System.Byte[])">
+            <summary>
+            设置<see cref="P:TouchSocket.Modbus.ModbusRequest.Data"/>的值为数组，同时设置<see cref="P:TouchSocket.Modbus.ModbusRequest.Quantity"/>的数量（即数组长度的1/2）。
+            </summary>
+            <param name="bytes">要设置的字节数组</param>
+        </member>
+        <member name="M:TouchSocket.Modbus.ModbusRequest.SetValue(System.Int16)">
+            <summary>
+            设置<see cref="P:TouchSocket.Modbus.ModbusRequest.Data"/>的值为 short。
+            </summary>
+            <param name="value">要设置的值</param>
+        </member>
+        <member name="M:TouchSocket.Modbus.ModbusRequest.SetValue(System.UInt16)">
+            <summary>
+            设置<see cref="P:TouchSocket.Modbus.ModbusRequest.Data"/>的值为 ushort。
+            </summary>
+            <param name="value">要设置的值</param>
+        </member>
+        <member name="M:TouchSocket.Modbus.ModbusRequest.SetValue(System.Boolean[])">
+            <summary>
+            设置<see cref="P:TouchSocket.Modbus.ModbusRequest.Data"/>的值为 bool数组，同时设置<see cref="P:TouchSocket.Modbus.ModbusRequest.Quantity"/>的数量（即数组长度）。
+            </summary>
+            <param name="values">要设置的 bool数组</param>
+        </member>
+        <member name="T:TouchSocket.Modbus.TouchSocketModbusThrowHelper">
+            <summary>
+            TouchSocketModbusThrowHelper
+            </summary>
+        </member>
+        <member name="M:TouchSocket.Modbus.TouchSocketModbusThrowHelper.ThrowIfNotSuccess(TouchSocket.Modbus.ModbusErrorCode)">
+            <summary>
+            判断Modbus状态，非成功状态将抛出异常。
+            </summary>
+            <param name="errorCode">要判断的Modbus错误代码。</param>
+            <exception cref="T:TouchSocket.Modbus.ModbusResponseException">当errorCode非Success时抛出此异常。</exception>
+        </member>
+        <member name="T:TouchSocket.Modbus.TouchSocketModbusUtility">
+            <summary>
+            TouchSocketModbusUtility
+            </summary>
+        </member>
+        <member name="M:TouchSocket.Modbus.TouchSocketModbusUtility.ToModbusCrc(System.ReadOnlyMemory{System.Byte})">
+            <summary>
+            计算CRC16_Modbus校验值
+            </summary>
+            <param name="memory">待计算校验值的字节序列</param>
+            <returns>包含CRC校验值的字节数组</returns>
+            <remarks>
+            CRC16_Modbus是一种循环冗余校验算法，常用于Modbus协议中数据的完整性校验。
+            该方法接收一个只读字节内存块，计算并返回其CRC校验值。
+            校验值用于确保数据在传输过程中的完整性，接收方会使用同样的算法计算接收到的数据的校验值，
+            并与接收到的校验值进行比较，以检测数据传输过程中是否发生了改变。
+            </remarks>
+        </member>
+        <member name="M:TouchSocket.Modbus.TouchSocketModbusUtility.ToModbusCrcValue(System.ReadOnlySpan{System.Byte})">
+            <summary>
+            CRC16_Modbus效验
+            </summary>
+            <param name="sourceSpan"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TouchSocket.Modbus.TouchSocketModbusUtility.BoolToBytes(System.Boolean)">
+            <summary>
+            将布尔值转为2字节数组
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="F:TouchSocket.Modbus.TouchSocketModbusUtility.ModbusTcp">
+            <summary>
+            ModbusTcp
+            </summary>
+        </member>
+        <member name="F:TouchSocket.Modbus.TouchSocketModbusUtility.ModbusUdp">
+            <summary>
+            ModbusUdp
+            </summary>
+        </member>
+        <member name="F:TouchSocket.Modbus.TouchSocketModbusUtility.ModbusRtu">
+            <summary>
+            ModbusRtu
+            </summary>
+        </member>
+        <member name="F:TouchSocket.Modbus.TouchSocketModbusUtility.ModbusRtuOverTcp">
+            <summary>
+            ModbusRtuOverTcp
+            </summary>
+        </member>
+        <member name="F:TouchSocket.Modbus.TouchSocketModbusUtility.ModbusRtuOverUdp">
+            <summary>
+            ModbusRtuOverUdp
+            </summary>
+        </member>
+        <member name="T:TouchSocket.Modbus.ModbusRtuMaster">
+            <summary>
+            基于串口的Modbus主站接口
+            </summary>
+        </member>
+        <member name="M:TouchSocket.Modbus.ModbusRtuMaster.#ctor">
+            <summary>
+            基于串口的Modbus主站接口
+            </summary>
+        </member>
+        <member name="M:TouchSocket.Modbus.ModbusRtuMaster.SendModbusRequestAsync(TouchSocket.Modbus.ModbusRequest,System.Int32,System.Threading.CancellationToken)">
+            <inheritdoc/>
+        </member>
+        <member name="M:TouchSocket.Modbus.ModbusRtuMaster.OnSerialConnecting(TouchSocket.Sockets.ConnectingEventArgs)">
+            <inheritdoc/>
+        </member>
+        <member name="M:TouchSocket.Modbus.ModbusRtuMaster.OnSerialReceived(TouchSocket.Sockets.ReceivedDataEventArgs)">
+            <inheritdoc/>
+        </member>
+        <member name="M:TouchSocket.Modbus.ModbusRtuMaster.SetRun(TouchSocket.Modbus.IModbusRequest,TouchSocket.Modbus.IModbusResponse)">
+            <summary>
+            验证Modbus请求和响应是否匹配
+            </summary>
+            <param name="modbusRequest">Modbus请求</param>
+            <param name="response">Modbus响应</param>
+            <returns>如果请求和响应匹配则返回true，否则返回false</returns>
+        </member>
+        <member name="T:TouchSocket.Modbus.ModbusRtuOverTcpMaster">
+            <summary>
+            基于Tcp协议，且使用Rtu数据格式的Modbus主站接口
+            </summary>
+        </member>
+        <member name="M:TouchSocket.Modbus.ModbusRtuOverTcpMaster.#ctor">
+            <summary>
+            基于Tcp协议，且使用Rtu数据格式的Modbus主站接口
+            </summary>
+        </member>
+        <member name="M:TouchSocket.Modbus.ModbusRtuOverTcpMaster.SendModbusRequestAsync(TouchSocket.Modbus.ModbusRequest,System.Int32,System.Threading.CancellationToken)">
+            <inheritdoc/>
+        </member>
+        <member name="M:TouchSocket.Modbus.ModbusRtuOverTcpMaster.OnTcpConnecting(TouchSocket.Sockets.ConnectingEventArgs)">
+            <inheritdoc/>
+        </member>
+        <member name="M:TouchSocket.Modbus.ModbusRtuOverTcpMaster.OnTcpReceived(TouchSocket.Sockets.ReceivedDataEventArgs)">
+            <inheritdoc/>
+        </member>
+        <member name="M:TouchSocket.Modbus.ModbusRtuOverTcpMaster.ConnectAsync(System.Int32,System.Threading.CancellationToken)">
+            <inheritdoc/>
+        </member>
+        <member name="T:TouchSocket.Modbus.ModbusRtuOverUdpMaster">
+            <summary>
+            基于Udp协议，且使用Rtu格式的Modbus主站
+            </summary>
+        </member>
+        <member name="M:TouchSocket.Modbus.ModbusRtuOverUdpMaster.#ctor">
+            <summary>
+            基于Udp协议，且使用Rtu格式的Modbus主站
+            </summary>
+        </member>
+        <member name="M:TouchSocket.Modbus.ModbusRtuOverUdpMaster.LoadConfig(TouchSocket.Core.TouchSocketConfig)">
+            <inheritdoc/>
+        </member>
+        <member name="M:TouchSocket.Modbus.ModbusRtuOverUdpMaster.SendModbusRequestAsync(TouchSocket.Modbus.ModbusRequest,System.Int32,System.Threading.CancellationToken)">
+            <inheritdoc/>
+        </member>
+        <member name="M:TouchSocket.Modbus.ModbusRtuOverUdpMaster.OnUdpReceived(TouchSocket.Sockets.UdpReceivedDataEventArgs)">
+            <inheritdoc/>
+        </member>
+        <member name="T:TouchSocket.Modbus.ModbusTcpMaster">
+            <summary>
+            基于Tcp协议的Modbus客户端
+            </summary>
+        </member>
+        <member name="M:TouchSocket.Modbus.ModbusTcpMaster.#ctor">
+            <summary>
+            基于Tcp协议的Modbus客户端
+            </summary>
+        </member>
+        <member name="M:TouchSocket.Modbus.ModbusTcpMaster.SendModbusRequestAsync(TouchSocket.Modbus.ModbusRequest,System.Int32,System.Threading.CancellationToken)">
+            <inheritdoc/>
+        </member>
+        <member name="M:TouchSocket.Modbus.ModbusTcpMaster.OnTcpConnecting(TouchSocket.Sockets.ConnectingEventArgs)">
+            <inheritdoc/>
+        </member>
+        <member name="M:TouchSocket.Modbus.ModbusTcpMaster.OnTcpReceived(TouchSocket.Sockets.ReceivedDataEventArgs)">
+            <inheritdoc/>
+        </member>
+        <member name="M:TouchSocket.Modbus.ModbusTcpMaster.ConnectAsync(System.Int32,System.Threading.CancellationToken)">
+            <inheritdoc/>
+        </member>
+        <member name="T:TouchSocket.Modbus.ModbusUdpMaster">
+            <summary>
+            基于Udp协议的Modbus
+            </summary>
+        </member>
+        <member name="M:TouchSocket.Modbus.ModbusUdpMaster.#ctor">
+            <summary>
+            基于Udp协议的Modbus
+            </summary>
+        </member>
+        <member name="M:TouchSocket.Modbus.ModbusUdpMaster.SendModbusRequestAsync(TouchSocket.Modbus.ModbusRequest,System.Int32,System.Threading.CancellationToken)">
+            <inheritdoc/>
+        </member>
+        <member name="M:TouchSocket.Modbus.ModbusUdpMaster.LoadConfig(TouchSocket.Core.TouchSocketConfig)">
+            <inheritdoc/>
+        </member>
+        <member name="M:TouchSocket.Modbus.ModbusUdpMaster.OnUdpReceived(TouchSocket.Sockets.UdpReceivedDataEventArgs)">
+            <inheritdoc/>
+        </member>
+        <member name="T:TouchSocket.Modbus.FunctionCode">
+            <summary>
+            Modbus功能码
+            </summary>
+        </member>
+        <member name="F:TouchSocket.Modbus.FunctionCode.ReadCoils">
+            <summary>
+            读线圈寄存器	位	取得一组逻辑线圈的当前状态（ON/OFF )
+            </summary>
+        </member>
+        <member name="F:TouchSocket.Modbus.FunctionCode.ReadDiscreteInputs">
+            <summary>
+            读离散输入寄存器	位	取得一组开关输入的当前状态（ON/OFF )
+            </summary>
+        </member>
+        <member name="F:TouchSocket.Modbus.FunctionCode.ReadHoldingRegisters">
+            <summary>
+            读保持寄存器	整型、浮点型、字符型	在一个或多个保持寄存器中取得当前的二进制值
+            </summary>
+        </member>
+        <member name="F:TouchSocket.Modbus.FunctionCode.ReadInputRegisters">
+            <summary>
+            读输入寄存器	整型、浮点型	在一个或多个输入寄存器中取得当前的二进制值
+            </summary>
+        </member>
+        <member name="F:TouchSocket.Modbus.FunctionCode.WriteSingleCoil">
+            <summary>
+            写单个线圈寄存器	位	强置一个逻辑线圈的通断状态
+            </summary>
+        </member>
+        <member name="F:TouchSocket.Modbus.FunctionCode.WriteSingleRegister">
+            <summary>
+            写单个保持寄存器	整型、浮点型、字符型	把具体二进值装入一个保持寄存器
+            </summary>
+        </member>
+        <member name="F:TouchSocket.Modbus.FunctionCode.WriteMultipleCoils">
+            <summary>
+            写多个线圈寄存器	位	强置一串连续逻辑线圈的通断
+            </summary>
+        </member>
+        <member name="F:TouchSocket.Modbus.FunctionCode.WriteMultipleRegisters">
+            <summary>
+            写多个保持寄存器	整型、浮点型、字符型	把具体的二进制值装入一串连续的保持寄存器
+            </summary>
+        </member>
+        <member name="F:TouchSocket.Modbus.FunctionCode.ReadWriteMultipleRegisters">
+            <summary>
+            读写多个保持寄存器	整型、浮点型、字符型	把具体的二进制值装入一串连续的保持寄存器 并读取一系列寄存器
+            </summary>
+        </member>
+        <member name="T:TouchSocket.Modbus.ModbusErrorCode">
+            <summary>
+            Modbus错误码
+            </summary>
+        </member>
+        <member name="F:TouchSocket.Modbus.ModbusErrorCode.Success">
+            <summary>
+            成功
+            </summary>
+        </member>
+        <member name="F:TouchSocket.Modbus.ModbusErrorCode.FunctionCodeNotDefined">
+            <summary>
+            功能码不能被从机识别
+            </summary>
+        </member>
+        <member name="F:TouchSocket.Modbus.ModbusErrorCode.AddressInvalid">
+            <summary>
+            非法数据地址
+            </summary>
+        </member>
+        <member name="F:TouchSocket.Modbus.ModbusErrorCode.ValueInvalid">
+            <summary>
+            值不被从机接受
+            </summary>
+        </member>
+        <member name="F:TouchSocket.Modbus.ModbusErrorCode.TaskError">
+            <summary>
+            当从机试图执行请求的操作时，发生了不可恢复的错误
+            </summary>
+        </member>
+        <member name="F:TouchSocket.Modbus.ModbusErrorCode.HoldOn">
+            <summary>
+            从机已接受请求并正在处理，但需要很长时间。返回此响应是为了防止在主机中发生超时错误。主站可以在下一个轮询程序中发出一个完整的消息，以确定处理是否完成
+            </summary>
+        </member>
+        <member name="F:TouchSocket.Modbus.ModbusErrorCode.Busy">
+            <summary>
+            从站正在处理长时间命令。Master应该稍后重试
+            </summary>
+        </member>
+        <member name="F:TouchSocket.Modbus.ModbusErrorCode.ExecuteError">
+            <summary>
+            从站不能执行程序功能。主站应该向从站请求诊断或错误信息。
+            </summary>
+        </member>
+        <member name="F:TouchSocket.Modbus.ModbusErrorCode.MemoryVerificationError">
+            <summary>
+            从站在内存中检测到奇偶校验错误。主设备可以重试请求，但从设备上可能需要服务。
+            </summary>
+        </member>
+        <member name="F:TouchSocket.Modbus.ModbusErrorCode.GatewayError">
+            <summary>
+            专门用于Modbus网关。表示配置错误的网关。
+            </summary>
+        </member>
+        <member name="F:TouchSocket.Modbus.ModbusErrorCode.GatewayUnavailable">
+            <summary>
+            专用于Modbus网关的响应。当从站无法响应时发送
+            </summary>
+        </member>
+        <member name="F:TouchSocket.Modbus.ModbusErrorCode.ResponseMemoryVerificationError">
+            <summary>
+            在接收数据时，内存中检测到CRC校验错误。
+            <para>
+            TouchSocket自定义规定错误码。
+            https://gitee.com/RRQM_Home/TouchSocket/issues/IBC1J2
+            </para>
+            </summary>
+        </member>
+        <member name="T:TouchSocket.Modbus.ModbusResponseException">
+            <summary>
+            Modbus响应异常。
+            </summary>
+        </member>
+        <member name="M:TouchSocket.Modbus.ModbusResponseException.#ctor(TouchSocket.Modbus.ModbusErrorCode)">
+            <summary>
+            Modbus响应异常
+            </summary>
+            <param name="errorCode">异常错误码，用于标识异常的类型</param>
+        </member>
+        <member name="P:TouchSocket.Modbus.ModbusResponseException.ErrorCode">
+            <summary>
+            异常码
+            </summary>
+        </member>
+        <member name="T:TouchSocket.Modbus.ModbusIgnoreSlaveMasterExtension">
+            <summary>
+            ModbusIgnoreSlaveMasterExtension
+            </summary>
+        </member>
+        <member name="M:TouchSocket.Modbus.ModbusIgnoreSlaveMasterExtension.ReadWriteMultipleRegisters(TouchSocket.Modbus.IIgnoreSlaveIdModbusMaster,System.UInt16,System.UInt16,System.UInt16,System.Byte[])">
+            <summary>
+            读写多个寄存器（FC23），默认超时时间为1000ms。
+            </summary>
+            <param name="master">通讯客户端</param>
+            <param name="startingAddressForRead">读取位置（从0开始）</param>
+            <param name="quantityForRead">读取长度</param>
+            <param name="startingAddress">写入位置（从0开始）</param>
+            <param name="bytes">待写入数据</param>
+            <returns>响应值</returns>
+        </member>
+        <member name="M:TouchSocket.Modbus.ModbusIgnoreSlaveMasterExtension.ReadWriteMultipleRegistersAsync(TouchSocket.Modbus.IIgnoreSlaveIdModbusMaster,System.UInt16,System.UInt16,System.UInt16,System.Byte[])">
+            <summary>
+            读写多个寄存器（FC23），默认超时时间为1000ms。
+            </summary>
+            <param name="master">通讯客户端</param>
+            <param name="startingAddressForRead">读取位置（从0开始）</param>
+            <param name="quantityForRead">读取长度</param>
+            <param name="startingAddress">写入位置（从0开始）</param>
+            <param name="bytes">待写入数据</param>
+            <returns>响应值</returns>
+        </member>
+        <member name="M:TouchSocket.Modbus.ModbusIgnoreSlaveMasterExtension.ReadCoils(TouchSocket.Modbus.IIgnoreSlaveIdModbusMaster,System.UInt16,System.UInt16)">
+            <summary>
+            忽略站点（默认站号为1）读取线圈（FC1），默认超时时间为1000ms。
+            </summary>
+            <param name="master">通讯客户端</param>
+            <param name="startingAddress">起始位置（从0开始）</param>
+            <param name="quantity">读取数量</param>
+            <returns>读取到的值集合</returns>
+        </member>
+        <member name="M:TouchSocket.Modbus.ModbusIgnoreSlaveMasterExtension.ReadDiscreteInputs(TouchSocket.Modbus.IIgnoreSlaveIdModbusMaster,System.UInt16,System.UInt16)">
+            <summary>
+            忽略站点（默认站号为1）读离散输入状态（FC2），默认超时时间为1000ms。
+            </summary>
+            <param name="master">通讯客户端</param>
+            <param name="startingAddress">起始位置（从0开始）</param>
+            <param name="quantity">读取数量</param>
+            <returns>读取到的值集合</returns>
+        </member>
+        <member name="M:TouchSocket.Modbus.ModbusIgnoreSlaveMasterExtension.ReadHoldingRegisters(TouchSocket.Modbus.IIgnoreSlaveIdModbusMaster,System.UInt16,System.UInt16)">
+            <summary>
+            忽略站点（默认站号为1）读保持寄存器（FC3），默认超时时间为1000ms。
+            </summary>
+            <param name="master">通讯客户端</param>
+            <param name="startingAddress">起始位置（从0开始）</param>
+            <param name="quantity">读取数量</param>
+            <returns>响应值</returns>
+        </member>
+        <member name="M:TouchSocket.Modbus.ModbusIgnoreSlaveMasterExtension.ReadInputRegisters(TouchSocket.Modbus.IIgnoreSlaveIdModbusMaster,System.UInt16,System.UInt16)">
+            <summary>
+            忽略站点（默认站号为1）读输入寄存器（FC4），默认超时时间为1000ms。
+            </summary>
+            <param name="master">通讯客户端</param>
+            <param name="startingAddress">起始位置（从0开始）</param>
+            <param name="quantity">读取数量</param>
+            <returns>响应值</returns>
+        </member>
+        <member name="M:TouchSocket.Modbus.ModbusIgnoreSlaveMasterExtension.ReadCoilsAsync(TouchSocket.Modbus.IIgnoreSlaveIdModbusMaster,System.UInt16,System.UInt16)">
+            <summary>
+            异步忽略站点（默认站号为1）读取线圈（FC1），默认超时时间为1000ms。
+            </summary>
+            <param name="master">通讯客户端</param>
+            <param name="startingAddress">起始位置（从0开始）</param>
+            <param name="quantity">读取数量</param>
+            <returns>读取到的值集合</returns>
+        </member>
+        <member name="M:TouchSocket.Modbus.ModbusIgnoreSlaveMasterExtension.ReadDiscreteInputsAsync(TouchSocket.Modbus.IIgnoreSlaveIdModbusMaster,System.UInt16,System.UInt16)">
+            <summary>
+            异步忽略站点（默认站号为1）读离散输入状态（FC2），默认超时时间为1000ms。
+            </summary>
+            <param name="master">通讯客户端</param>
+            <param name="startingAddress">起始位置（从0开始）</param>
+            <param name="quantity">读取数量</param>
+            <returns>读取到的值集合</returns>
+        </member>
+        <member name="M:TouchSocket.Modbus.ModbusIgnoreSlaveMasterExtension.ReadHoldingRegistersAsync(TouchSocket.Modbus.IIgnoreSlaveIdModbusMaster,System.UInt16,System.UInt16)">
+            <summary>
+            异步忽略站点（默认站号为1）读保持寄存器（FC3），默认超时时间为1000ms。
+            </summary>
+            <param name="master">通讯客户端</param>
+            <param name="startingAddress">起始位置（从0开始）</param>
+            <param name="quantity">读取数量</param>
+            <returns>响应值</returns>
+        </member>
+        <member name="M:TouchSocket.Modbus.ModbusIgnoreSlaveMasterExtension.ReadInputRegistersAsync(TouchSocket.Modbus.IIgnoreSlaveIdModbusMaster,System.UInt16,System.UInt16)">
+            <summary>
+            异步忽略站点（默认站号为1）读输入寄存器（FC4），默认超时时间为1000ms。
+            </summary>
+            <param name="master">通讯客户端</param>
+            <param name="startingAddress">起始位置（从0开始）</param>
+            <param name="quantity">读取数量</param>
+            <returns>响应值</returns>
+        </member>
+        <member name="M:TouchSocket.Modbus.ModbusIgnoreSlaveMasterExtension.WriteMultipleCoils(TouchSocket.Modbus.IIgnoreSlaveIdModbusMaster,System.UInt16,System.Boolean[])">
+            <summary>
+            忽略站点（默认站号为1）写入多个线圈（FC15），默认超时时间为1000ms。
+            </summary>
+            <param name="master">通讯客户端</param>
+            <param name="startingAddress">起始位置（从0开始）</param>
+            <param name="values">待写入集合</param>
+        </member>
+        <member name="M:TouchSocket.Modbus.ModbusIgnoreSlaveMasterExtension.WriteMultipleRegisters(TouchSocket.Modbus.IIgnoreSlaveIdModbusMaster,System.UInt16,System.Byte[])">
+            <summary>
+            忽略站点（默认站号为1）写入多个寄存器（FC16），默认超时时间为1000ms。
+            </summary>
+            <param name="master">通讯客户端</param>
+            <param name="startingAddress">起始位置（从0开始）</param>
+            <param name="bytes">待写入集合</param>
+        </member>
+        <member name="M:TouchSocket.Modbus.ModbusIgnoreSlaveMasterExtension.WriteSingleCoil(TouchSocket.Modbus.IIgnoreSlaveIdModbusMaster,System.UInt16,System.Boolean)">
+            <summary>
+            忽略站点（默认站号为1）写入单个线圈（FC5），默认超时时间为1000ms。
+            </summary>
+            <param name="master">通讯客户端</param>
+            <param name="startingAddress">起始位置（从0开始）</param>
+            <param name="value">待写入数值</param>
+        </member>
+        <member name="M:TouchSocket.Modbus.ModbusIgnoreSlaveMasterExtension.WriteSingleRegister(TouchSocket.Modbus.IIgnoreSlaveIdModbusMaster,System.UInt16,System.Int16)">
+            <summary>
+            忽略站点（默认站号为1）写入单个寄存器（FC6），默认超时时间为1000ms。
+            </summary>
+            <param name="master">通讯客户端</param>
+            <param name="startingAddress">起始位置（从0开始）</param>
+            <param name="value">待写入数值</param>
+        </member>
+        <member name="M:TouchSocket.Modbus.ModbusIgnoreSlaveMasterExtension.WriteMultipleCoilsAsync(TouchSocket.Modbus.IIgnoreSlaveIdModbusMaster,System.UInt16,System.Boolean[])">
+            <summary>
+            异步忽略站点（默认站号为1）写入多个线圈（FC15），默认超时时间为1000ms。
+            </summary>
+            <param name="master">通讯客户端</param>
+            <param name="startingAddress">起始位置（从0开始）</param>
+            <param name="values">待写入集合</param>
+        </member>
+        <member name="M:TouchSocket.Modbus.ModbusIgnoreSlaveMasterExtension.WriteMultipleRegistersAsync(TouchSocket.Modbus.IIgnoreSlaveIdModbusMaster,System.UInt16,System.Byte[])">
+            <summary>
+            异步忽略站点（默认站号为1）写入多个寄存器（FC16），默认超时时间为1000ms。
+            </summary>
+            <param name="master">通讯客户端</param>
+            <param name="startingAddress">起始位置（从0开始）</param>
+            <param name="bytes">待写入集合</param>
+        </member>
+        <member name="M:TouchSocket.Modbus.ModbusIgnoreSlaveMasterExtension.WriteSingleCoilAsync(TouchSocket.Modbus.IIgnoreSlaveIdModbusMaster,System.UInt16,System.Boolean)">
+            <summary>
+            异步忽略站点（默认站号为1）写入单个线圈（FC5），默认超时时间为1000ms。
+            </summary>
+            <param name="master">通讯客户端</param>
+            <param name="startingAddress">起始位置（从0开始）</param>
+            <param name="value">待写入数值</param>
+        </member>
+        <member name="M:TouchSocket.Modbus.ModbusIgnoreSlaveMasterExtension.WriteSingleRegisterAsync(TouchSocket.Modbus.IIgnoreSlaveIdModbusMaster,System.UInt16,System.Int16)">
+            <summary>
+            异步忽略站点（默认站号为1）写入单个寄存器（FC6），默认超时时间为1000ms。
+            </summary>
+            <param name="master">通讯客户端</param>
+            <param name="startingAddress">起始位置（从0开始）</param>
+            <param name="value">待写入数值</param>
+        </member>
+        <member name="T:TouchSocket.Modbus.ModbusMasterExtension">
+            <summary>
+            ModbusMaster扩展类
+            该类提供了一些对ModbusMaster实例进行操作的扩展方法
+            </summary>
+        </member>
+        <member name="M:TouchSocket.Modbus.ModbusMasterExtension.SendModbusRequest(TouchSocket.Modbus.IModbusMaster,TouchSocket.Modbus.ModbusRequest,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            向Modbus从机设备发送一个Modbus请求。
+            </summary>
+            <param name="master">Modbus主控接口。</param>
+            <param name="request">要发送的Modbus请求。</param>
+            <param name="millisecondsTimeout">操作超时的时间，以毫秒为单位。</param>
+            <param name="token">用于取消操作的取消令牌。</param>
+            <returns>返回从Modbus从机设备接收到的响应。</returns>
+        </member>
+        <member name="M:TouchSocket.Modbus.ModbusMasterExtension.ReadWriteMultipleRegisters(TouchSocket.Modbus.IModbusMaster,System.Byte,System.UInt16,System.UInt16,System.UInt16,System.Byte[])">
+            <summary>
+            读写多个寄存器（FC23），默认超时时间为1000ms。
+            </summary>
+            <param name="master">通讯客户端</param>
+            <param name="slaveId">站点号</param>
+            <param name="startingAddressForRead">读取位置（从0开始）</param>
+            <param name="quantityForRead">读取长度</param>
+            <param name="startingAddress">写入位置（从0开始）</param>
+            <param name="bytes">待写入数据</param>
+            <returns>响应值</returns>
+        </member>
+        <member name="M:TouchSocket.Modbus.ModbusMasterExtension.ReadWriteMultipleRegistersAsync(TouchSocket.Modbus.IModbusMaster,System.Byte,System.UInt16,System.UInt16,System.UInt16,System.Byte[])">
+            <summary>
+            读写多个寄存器（FC23），默认超时时间为1000ms。
+            </summary>
+            <param name="master">通讯客户端</param>
+            <param name="slaveId">站点号</param>
+            <param name="startingAddressForRead">读取位置（从0开始）</param>
+            <param name="quantityForRead">读取长度</param>
+            <param name="startingAddress">写入位置（从0开始）</param>
+            <param name="bytes">待写入数据</param>
+            <returns>响应值</returns>
+        </member>
+        <member name="M:TouchSocket.Modbus.ModbusMasterExtension.ReadCoils(TouchSocket.Modbus.IModbusMaster,System.Byte,System.UInt16,System.UInt16)">
+            <summary>
+            从指定站点读取线圈（FC1），默认超时时间为1000ms。
+            </summary>
+            <param name="master">通讯客户端</param>
+            <param name="slaveId">站点号</param>
+            <param name="startingAddress">起始位置（从0开始）</param>
+            <param name="quantity">读取数量</param>
+            <returns>读取到的值集合</returns>
+        </member>
+        <member name="M:TouchSocket.Modbus.ModbusMasterExtension.ReadDiscreteInputs(TouchSocket.Modbus.IModbusMaster,System.Byte,System.UInt16,System.UInt16)">
+            <summary>
+            从指定站点读离散输入状态（FC2），默认超时时间为1000ms。
+            </summary>
+            <param name="master">通讯客户端</param>
+            <param name="slaveId">站点号</param>
+            <param name="startingAddress">起始位置（从0开始）</param>
+            <param name="quantity">读取数量</param>
+            <returns>读取到的值集合</returns>
+        </member>
+        <member name="M:TouchSocket.Modbus.ModbusMasterExtension.ReadHoldingRegisters(TouchSocket.Modbus.IModbusMaster,System.Byte,System.UInt16,System.UInt16)">
+            <summary>
+            从指定站点读保持寄存器（FC3），默认超时时间为1000ms。
+            </summary>
+            <param name="master">通讯客户端</param>
+            <param name="slaveId">站点号</param>
+            <param name="startingAddress">起始位置（从0开始）</param>
+            <param name="quantity">读取数量</param>
+            <returns>响应值</returns>
+        </member>
+        <member name="M:TouchSocket.Modbus.ModbusMasterExtension.ReadInputRegisters(TouchSocket.Modbus.IModbusMaster,System.Byte,System.UInt16,System.UInt16)">
+            <summary>
+            从指定站点读输入寄存器（FC4），默认超时时间为1000ms。
+            </summary>
+            <param name="master">通讯客户端</param>
+            <param name="slaveId">站点号</param>
+            <param name="startingAddress">起始位置（从0开始）</param>
+            <param name="quantity">读取数量</param>
+            <returns>响应值</returns>
+        </member>
+        <member name="M:TouchSocket.Modbus.ModbusMasterExtension.ReadCoilsAsync(TouchSocket.Modbus.IModbusMaster,System.Byte,System.UInt16,System.UInt16)">
+            <summary>
+            异步从指定站点读取线圈（FC1），默认超时时间为1000ms。
+            </summary>
+            <param name="master">通讯客户端</param>
+            <param name="slaveId">站点号</param>
+            <param name="startingAddress">起始位置（从0开始）</param>
+            <param name="quantity">读取数量</param>
+            <returns>读取到的值集合</returns>
+        </member>
+        <member name="M:TouchSocket.Modbus.ModbusMasterExtension.ReadDiscreteInputsAsync(TouchSocket.Modbus.IModbusMaster,System.Byte,System.UInt16,System.UInt16)">
+            <summary>
+            异步从指定站点读离散输入状态（FC2），默认超时时间为1000ms。
+            </summary>
+            <param name="master">通讯客户端</param>
+            <param name="slaveId">站点号</param>
+            <param name="startingAddress">起始位置（从0开始）</param>
+            <param name="quantity">读取数量</param>
+            <returns>读取到的值集合</returns>
+        </member>
+        <member name="M:TouchSocket.Modbus.ModbusMasterExtension.ReadHoldingRegistersAsync(TouchSocket.Modbus.IModbusMaster,System.Byte,System.UInt16,System.UInt16)">
+            <summary>
+            异步从指定站点读保持寄存器（FC3），默认超时时间为1000ms。
+            </summary>
+            <param name="master">通讯客户端</param>
+            <param name="slaveId">站点号</param>
+            <param name="startingAddress">起始位置（从0开始）</param>
+            <param name="quantity">读取数量</param>
+            <returns>响应值</returns>
+        </member>
+        <member name="M:TouchSocket.Modbus.ModbusMasterExtension.ReadInputRegistersAsync(TouchSocket.Modbus.IModbusMaster,System.Byte,System.UInt16,System.UInt16)">
+            <summary>
+            异步从指定站点读输入寄存器（FC4），默认超时时间为1000ms。
+            </summary>
+            <param name="master">通讯客户端</param>
+            <param name="slaveId">站点号</param>
+            <param name="startingAddress">起始位置（从0开始）</param>
+            <param name="quantity">读取数量</param>
+            <returns>响应值</returns>
+        </member>
+        <member name="M:TouchSocket.Modbus.ModbusMasterExtension.WriteMultipleCoils(TouchSocket.Modbus.IModbusMaster,System.Byte,System.UInt16,System.Boolean[])">
+            <summary>
+            向指定站点写入多个线圈（FC15），默认超时时间为1000ms。
+            </summary>
+            <param name="master">通讯客户端</param>
+            <param name="slaveId">站点号</param>
+            <param name="startingAddress">起始位置（从0开始）</param>
+            <param name="values">待写入集合</param>
+        </member>
+        <member name="M:TouchSocket.Modbus.ModbusMasterExtension.WriteMultipleRegisters(TouchSocket.Modbus.IModbusMaster,System.Byte,System.UInt16,System.Byte[])">
+            <summary>
+            向指定站点写入多个寄存器（FC16），默认超时时间为1000ms。
+            </summary>
+            <param name="master">通讯客户端</param>
+            <param name="slaveId">站点号</param>
+            <param name="startingAddress">起始位置（从0开始）</param>
+            <param name="bytes">待写入集合</param>
+        </member>
+        <member name="M:TouchSocket.Modbus.ModbusMasterExtension.WriteSingleCoil(TouchSocket.Modbus.IModbusMaster,System.Byte,System.UInt16,System.Boolean)">
+            <summary>
+            向指定站点写入单个线圈（FC5），默认超时时间为1000ms。
+            </summary>
+            <param name="master">通讯客户端</param>
+            <param name="slaveId">站点号</param>
+            <param name="startingAddress">起始位置（从0开始）</param>
+            <param name="value">待写入数值</param>
+        </member>
+        <member name="M:TouchSocket.Modbus.ModbusMasterExtension.WriteSingleRegister(TouchSocket.Modbus.IModbusMaster,System.Byte,System.UInt16,System.Int16)">
+            <summary>
+            向指定站点写入单个寄存器（FC6），默认超时时间为1000ms。
+            </summary>
+            <param name="master">通讯客户端</param>
+            <param name="slaveId">站点号</param>
+            <param name="startingAddress">起始位置（从0开始）</param>
+            <param name="value">待写入数值</param>
+        </member>
+        <member name="M:TouchSocket.Modbus.ModbusMasterExtension.WriteMultipleCoilsAsync(TouchSocket.Modbus.IModbusMaster,System.Byte,System.UInt16,System.Boolean[])">
+            <summary>
+            异步向指定站点写入多个线圈（FC15），默认超时时间为1000ms。
+            </summary>
+            <param name="master">通讯客户端</param>
+            <param name="slaveId">站点号</param>
+            <param name="startingAddress">起始位置（从0开始）</param>
+            <param name="values">待写入集合</param>
+        </member>
+        <member name="M:TouchSocket.Modbus.ModbusMasterExtension.WriteMultipleRegistersAsync(TouchSocket.Modbus.IModbusMaster,System.Byte,System.UInt16,System.Byte[])">
+            <summary>
+            异步向指定站点写入多个寄存器（FC16），默认超时时间为1000ms。
+            </summary>
+            <param name="master">通讯客户端</param>
+            <param name="slaveId">站点号</param>
+            <param name="startingAddress">起始位置（从0开始）</param>
+            <param name="bytes">待写入集合</param>
+        </member>
+        <member name="M:TouchSocket.Modbus.ModbusMasterExtension.WriteSingleCoilAsync(TouchSocket.Modbus.IModbusMaster,System.Byte,System.UInt16,System.Boolean)">
+            <summary>
+            异步向指定站点写入单个线圈（FC5），默认超时时间为1000ms。
+            </summary>
+            <param name="master">通讯客户端</param>
+            <param name="slaveId">站点号</param>
+            <param name="startingAddress">起始位置（从0开始）</param>
+            <param name="value">待写入数值</param>
+        </member>
+        <member name="M:TouchSocket.Modbus.ModbusMasterExtension.WriteSingleRegisterAsync(TouchSocket.Modbus.IModbusMaster,System.Byte,System.UInt16,System.Int16)">
+            <summary>
+            异步向指定站点写入单个寄存器（FC6），默认超时时间为1000ms。
+            </summary>
+            <param name="master">通讯客户端</param>
+            <param name="slaveId">站点号</param>
+            <param name="startingAddress">起始位置（从0开始）</param>
+            <param name="value">待写入数值</param>
+        </member>
+        <member name="M:TouchSocket.Modbus.ModbusMasterExtension.ReadCoils(TouchSocket.Modbus.IModbusMaster,System.Byte,System.UInt16,System.UInt16,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            从指定站点读取线圈（FC1）。
+            </summary>
+            <param name="master">通讯客户端</param>
+            <param name="slaveId">站点号</param>
+            <param name="startingAddress">起始位置（从0开始）</param>
+            <param name="quantity">读取数量</param>
+            <param name="millisecondsTimeout">超时时间，单位（ms）</param>
+            <param name="token">可取消令箭</param>
+            <returns>读取到的值集合</returns>
+        </member>
+        <member name="M:TouchSocket.Modbus.ModbusMasterExtension.ReadDiscreteInputs(TouchSocket.Modbus.IModbusMaster,System.Byte,System.UInt16,System.UInt16,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            从指定站点读离散输入状态（FC2）。
+            </summary>
+            <param name="master">通讯客户端</param>
+            <param name="slaveId">站点号</param>
+            <param name="startingAddress">起始位置（从0开始）</param>
+            <param name="quantity">读取数量</param>
+            <param name="millisecondsTimeout">超时时间，单位（ms）</param>
+            <param name="token">可取消令箭</param>
+            <returns>读取到的值集合</returns>
+        </member>
+        <member name="M:TouchSocket.Modbus.ModbusMasterExtension.ReadHoldingRegisters(TouchSocket.Modbus.IModbusMaster,System.Byte,System.UInt16,System.UInt16,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            从指定站点读保持寄存器（FC3）。
+            </summary>
+            <param name="master">通讯客户端</param>
+            <param name="slaveId">站点号</param>
+            <param name="startingAddress">起始位置（从0开始）</param>
+            <param name="quantity">读取数量</param>
+            <param name="millisecondsTimeout">超时时间，单位（ms）</param>
+            <param name="token">可取消令箭</param>
+            <returns>响应值</returns>
+        </member>
+        <member name="M:TouchSocket.Modbus.ModbusMasterExtension.ReadInputRegisters(TouchSocket.Modbus.IModbusMaster,System.Byte,System.UInt16,System.UInt16,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            从指定站点读输入寄存器（FC4）。
+            </summary>
+            <param name="master">通讯客户端</param>
+            <param name="slaveId">站点号</param>
+            <param name="startingAddress">起始位置（从0开始）</param>
+            <param name="quantity">读取数量</param>
+            <param name="millisecondsTimeout">超时时间，单位（ms）</param>
+            <param name="token">可取消令箭</param>
+            <returns>响应值</returns>
+        </member>
+        <member name="M:TouchSocket.Modbus.ModbusMasterExtension.ReadCoilsAsync(TouchSocket.Modbus.IModbusMaster,System.Byte,System.UInt16,System.UInt16,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            异步从指定站点读取线圈（FC1）。
+            </summary>
+            <param name="master">通讯客户端</param>
+            <param name="slaveId">站点号</param>
+            <param name="startingAddress">起始位置（从0开始）</param>
+            <param name="quantity">读取数量</param>
+            <param name="millisecondsTimeout">超时时间，单位（ms）</param>
+            <param name="token">可取消令箭</param>
+            <returns>读取到的值集合</returns>
+        </member>
+        <member name="M:TouchSocket.Modbus.ModbusMasterExtension.ReadDiscreteInputsAsync(TouchSocket.Modbus.IModbusMaster,System.Byte,System.UInt16,System.UInt16,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            异步从指定站点读离散输入状态（FC2）。
+            </summary>
+            <param name="master">通讯客户端</param>
+            <param name="slaveId">站点号</param>
+            <param name="startingAddress">起始位置（从0开始）</param>
+            <param name="quantity">读取数量</param>
+            <param name="millisecondsTimeout">超时时间，单位（ms）</param>
+            <param name="token">可取消令箭</param>
+            <returns>读取到的值集合</returns>
+        </member>
+        <member name="M:TouchSocket.Modbus.ModbusMasterExtension.ReadHoldingRegistersAsync(TouchSocket.Modbus.IModbusMaster,System.Byte,System.UInt16,System.UInt16,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            异步从指定站点读保持寄存器（FC3）。
+            </summary>
+            <param name="master">通讯客户端</param>
+            <param name="slaveId">站点号</param>
+            <param name="startingAddress">起始位置（从0开始）</param>
+            <param name="quantity">读取数量</param>
+            <param name="millisecondsTimeout">超时时间，单位（ms）</param>
+            <param name="token">可取消令箭</param>
+            <returns>响应值</returns>
+        </member>
+        <member name="M:TouchSocket.Modbus.ModbusMasterExtension.ReadInputRegistersAsync(TouchSocket.Modbus.IModbusMaster,System.Byte,System.UInt16,System.UInt16,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            异步从指定站点读输入寄存器（FC4）。
+            </summary>
+            <param name="master">通讯客户端</param>
+            <param name="slaveId">站点号</param>
+            <param name="startingAddress">起始位置（从0开始）</param>
+            <param name="quantity">读取数量</param>
+            <param name="millisecondsTimeout">超时时间，单位（ms）</param>
+            <param name="token">可取消令箭</param>
+            <returns>响应值</returns>
+        </member>
+        <member name="M:TouchSocket.Modbus.ModbusMasterExtension.WriteMultipleCoils(TouchSocket.Modbus.IModbusMaster,System.Byte,System.UInt16,System.Boolean[],System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            向指定站点写入多个线圈（FC15）。
+            </summary>
+            <param name="master">通讯客户端</param>
+            <param name="slaveId">站点号</param>
+            <param name="startingAddress">起始位置（从0开始）</param>
+            <param name="values">待写入集合</param>
+            <param name="millisecondsTimeout">超时时间，单位（ms）</param>
+            <param name="token">可取消令箭</param>
+        </member>
+        <member name="M:TouchSocket.Modbus.ModbusMasterExtension.WriteMultipleRegisters(TouchSocket.Modbus.IModbusMaster,System.Byte,System.UInt16,System.Byte[],System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            向指定站点写入多个寄存器（FC16）。
+            </summary>
+            <param name="master">通讯客户端</param>
+            <param name="slaveId">站点号</param>
+            <param name="startingAddress">起始位置（从0开始）</param>
+            <param name="bytes">待写入集合</param>
+            <param name="millisecondsTimeout">超时时间，单位（ms）</param>
+            <param name="token">可取消令箭</param>
+        </member>
+        <member name="M:TouchSocket.Modbus.ModbusMasterExtension.WriteSingleCoil(TouchSocket.Modbus.IModbusMaster,System.Byte,System.UInt16,System.Boolean,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            向指定站点写入单个线圈（FC5）。
+            </summary>
+            <param name="master">通讯客户端</param>
+            <param name="slaveId">站点号</param>
+            <param name="startingAddress">起始位置（从0开始）</param>
+            <param name="value">待写入数值</param>
+            <param name="millisecondsTimeout">超时时间，单位（ms）</param>
+            <param name="token">可取消令箭</param>
+        </member>
+        <member name="M:TouchSocket.Modbus.ModbusMasterExtension.WriteSingleRegister(TouchSocket.Modbus.IModbusMaster,System.Byte,System.UInt16,System.Int16,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            向指定站点写入单个寄存器（FC6）
+            </summary>
+            <param name="master">通讯客户端</param>
+            <param name="slaveId">站点号</param>
+            <param name="startingAddress">起始位置（从0开始）</param>
+            <param name="value">待写入数值</param>
+            <param name="millisecondsTimeout">超时时间，单位（ms）</param>
+            <param name="token">可取消令箭</param>
+        </member>
+        <member name="M:TouchSocket.Modbus.ModbusMasterExtension.WriteSingleRegister(TouchSocket.Modbus.IModbusMaster,System.Byte,System.UInt16,System.UInt16,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            向指定站点写入单个寄存器（FC6）
+            </summary>
+            <param name="master">通讯客户端</param>
+            <param name="slaveId">站点号</param>
+            <param name="startingAddress">起始位置（从0开始）</param>
+            <param name="value">待写入数值</param>
+            <param name="millisecondsTimeout">超时时间，单位（ms）</param>
+            <param name="token">可取消令箭</param>
+        </member>
+        <member name="M:TouchSocket.Modbus.ModbusMasterExtension.WriteMultipleCoilsAsync(TouchSocket.Modbus.IModbusMaster,System.Byte,System.UInt16,System.Boolean[],System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            异步向指定站点写入多个线圈（FC15）。
+            </summary>
+            <param name="master">通讯客户端</param>
+            <param name="slaveId">站点号</param>
+            <param name="startingAddress">起始位置（从0开始）</param>
+            <param name="values">待写入集合</param>
+            <param name="millisecondsTimeout">超时时间，单位（ms）</param>
+            <param name="token">可取消令箭</param>
+        </member>
+        <member name="M:TouchSocket.Modbus.ModbusMasterExtension.WriteMultipleRegistersAsync(TouchSocket.Modbus.IModbusMaster,System.Byte,System.UInt16,System.Byte[],System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            异步向指定站点写入多个寄存器（FC16）。
+            </summary>
+            <param name="master">通讯客户端</param>
+            <param name="slaveId">站点号</param>
+            <param name="startingAddress">起始位置（从0开始）</param>
+            <param name="bytes">待写入集合</param>
+            <param name="millisecondsTimeout">超时时间，单位（ms）</param>
+            <param name="token">可取消令箭</param>
+        </member>
+        <member name="M:TouchSocket.Modbus.ModbusMasterExtension.WriteSingleCoilAsync(TouchSocket.Modbus.IModbusMaster,System.Byte,System.UInt16,System.Boolean,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            异步向指定站点写入单个线圈（FC5）。
+            </summary>
+            <param name="master">通讯客户端</param>
+            <param name="slaveId">站点号</param>
+            <param name="startingAddress">起始位置（从0开始）</param>
+            <param name="value">待写入数值</param>
+            <param name="millisecondsTimeout">超时时间，单位（ms）</param>
+            <param name="token">可取消令箭</param>
+        </member>
+        <member name="M:TouchSocket.Modbus.ModbusMasterExtension.WriteSingleRegisterAsync(TouchSocket.Modbus.IModbusMaster,System.Byte,System.UInt16,System.Int16,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            异步向指定站点写入单个寄存器（FC6）
+            </summary>
+            <param name="master">通讯客户端</param>
+            <param name="slaveId">站点号</param>
+            <param name="startingAddress">起始位置（从0开始）</param>
+            <param name="value">待写入数值</param>
+            <param name="millisecondsTimeout">超时时间，单位（ms）</param>
+            <param name="token">可取消令箭</param>
+        </member>
+        <member name="M:TouchSocket.Modbus.ModbusMasterExtension.WriteSingleRegisterAsync(TouchSocket.Modbus.IModbusMaster,System.Byte,System.UInt16,System.UInt16,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            异步向指定站点写入单个寄存器（FC6）
+            </summary>
+            <param name="master">通讯客户端</param>
+            <param name="slaveId">站点号</param>
+            <param name="startingAddress">起始位置（从0开始）</param>
+            <param name="value">待写入数值</param>
+            <param name="millisecondsTimeout">超时时间，单位（ms）</param>
+            <param name="token">可取消令箭</param>
+        </member>
+        <member name="M:TouchSocket.Modbus.ModbusMasterExtension.ReadWriteMultipleRegisters(TouchSocket.Modbus.IModbusMaster,System.Byte,System.UInt16,System.UInt16,System.UInt16,System.Byte[],System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            读写多个寄存器（FC23）
+            </summary>
+            <param name="master">通讯客户端</param>
+            <param name="slaveId">站点号</param>
+            <param name="startingAddressForRead">读取位置（从0开始）</param>
+            <param name="quantityForRead">读取长度</param>
+            <param name="startingAddress">写入位置（从0开始）</param>
+            <param name="bytes">待写入数据</param>
+            <param name="millisecondsTimeout">超时时间，单位（ms）</param>
+            <param name="token">可取消令箭</param>
+            <returns>响应值</returns>
+        </member>
+        <member name="M:TouchSocket.Modbus.ModbusMasterExtension.ReadWriteMultipleRegistersAsync(TouchSocket.Modbus.IModbusMaster,System.Byte,System.UInt16,System.UInt16,System.UInt16,System.Byte[],System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            读写多个寄存器（FC23）
+            </summary>
+            <param name="master">通讯客户端</param>
+            <param name="slaveId">站点号</param>
+            <param name="startingAddressForRead">读取位置（从0开始）</param>
+            <param name="quantityForRead">读取长度</param>
+            <param name="startingAddress">写入位置（从0开始）</param>
+            <param name="bytes">待写入数据</param>
+            <param name="millisecondsTimeout">超时时间，单位（ms）</param>
+            <param name="token">可取消令箭</param>
+            <returns>响应值</returns>
+        </member>
+        <member name="T:TouchSocket.Modbus.ModbusResponseExtension">
+            <summary>
+            ModbusResponseExtension
+            </summary>
+        </member>
+        <member name="M:TouchSocket.Modbus.ModbusResponseExtension.CreateReader(TouchSocket.Modbus.IModbusResponse)">
+            <summary>
+            获取一个读取器。
+            </summary>
+            <param name="response">The response.</param>
+            <returns></returns>
+        </member>
+        <member name="T:TouchSocket.Modbus.IIgnoreSlaveIdModbusMaster">
+            <summary>
+            可以使用忽略SlaveId的限定接口
+            </summary>
+        </member>
+        <member name="T:TouchSocket.Modbus.IModbusMaster">
+            <summary>
+            提供Modbus的操作接口
+            </summary>
+        </member>
+        <member name="M:TouchSocket.Modbus.IModbusMaster.SendModbusRequestAsync(TouchSocket.Modbus.ModbusRequest,System.Int32,System.Threading.CancellationToken)">
+            <summary>
+            异步发送Modbus请求
+            </summary>
+            <param name="request">要发送的Modbus请求对象</param>
+            <param name="millisecondsTimeout">请求的超时时间（以毫秒为单位）</param>
+            <param name="token">用于取消操作的CancellationToken</param>
+            <returns>返回一个任务，该任务完成后将包含相应的Modbus响应</returns>
+        </member>
+        <member name="T:TouchSocket.Modbus.IModbusRequest">
+            <summary>
+            Modbus请求接口
+            </summary>
+        </member>
+        <member name="P:TouchSocket.Modbus.IModbusRequest.Quantity">
+            <summary>
+            数量
+            </summary>
+        </member>
+        <member name="P:TouchSocket.Modbus.IModbusRequest.StartingAddress">
+            <summary>
+            起始位置
+            </summary>
+        </member>
+        <member name="P:TouchSocket.Modbus.IModbusRequest.Data">
+            <summary>
+            数据
+            </summary>
+        </member>
+        <member name="P:TouchSocket.Modbus.IModbusRequest.SlaveId">
+            <summary>
+            站点号（单元标识符）
+            </summary>
+        </member>
+        <member name="P:TouchSocket.Modbus.IModbusRequest.FunctionCode">
+            <summary>
+            功能码
+            </summary>
+        </member>
+        <member name="P:TouchSocket.Modbus.IModbusRequest.ReadStartAddress">
+            <summary>
+            在读起始位置。
+            </summary>
+        </member>
+        <member name="P:TouchSocket.Modbus.IModbusRequest.ReadQuantity">
+            <summary>
+            读取长度
+            </summary>
+        </member>
+        <member name="T:TouchSocket.Modbus.IModbusResponse">
+            <summary>
+            Modbus响应
+            </summary>
+        </member>
+        <member name="P:TouchSocket.Modbus.IModbusResponse.SlaveId">
+            <summary>
+            站点号
+            </summary>
+        </member>
+        <member name="P:TouchSocket.Modbus.IModbusResponse.Data">
+            <summary>
+            数据
+            </summary>
+        </member>
+        <member name="P:TouchSocket.Modbus.IModbusResponse.FunctionCode">
+            <summary>
+            功能码
+            </summary>
+        </member>
+        <member name="P:TouchSocket.Modbus.IModbusResponse.ErrorCode">
+            <summary>
+            错误码
+            </summary>
+        </member>
+        <member name="P:TouchSocket.Modbus.IModbusResponse.Request">
+            <summary>
+            获取和当前响应对应的请求
+            </summary>
+        </member>
+        <member name="T:TouchSocket.Modbus.IModbusRtuMaster">
+            <summary>
+            基于串口的Modbus主站接口
+            </summary>
+        </member>
+        <member name="T:TouchSocket.Modbus.IModbusRtuOverTcpMaster">
+            <summary>
+            基于Tcp协议，且使用Rtu数据格式的Modbus主站接口
+            </summary>
+        </member>
+        <member name="T:TouchSocket.Modbus.IModbusRtuOverUdpMaster">
+            <summary>
+            基于Udp协议，且使用Rtu格式的Modbus主站接口
+            </summary>
+        </member>
+        <member name="T:TouchSocket.Modbus.IModbusTcpMaster">
+            <summary>
+            基于Tcp协议的Modbus主站接口。
+            </summary>
+        </member>
+        <member name="T:TouchSocket.Modbus.IModbusUdpMaster">
+            <summary>
+            基于Udp协议的Modbus主站接口。
+            </summary>
+        </member>
+        <member name="T:TouchSocket.Core.FastSerializableAttribute">
+            <summary>
+            标识源生成Fast序列化相关的实现。
+            </summary>
+        </member>
+        <member name="T:TouchSocket.Core.GeneratorPackageAttribute">
+            <summary>
+            标识源生成<see cref="T:TouchSocket.Core.IPackage"/>的实现。
+            </summary>
+        </member>
+        <member name="T:TouchSocket.Core.PackageMemberAttribute">
+            <summary>
+            标识源生成<see cref="T:TouchSocket.Core.IPackage"/>成员的特性。
+            </summary>
+        </member>
+        <member name="P:TouchSocket.Core.PackageMemberAttribute.Behavior">
+            <summary>
+            生成行为。一般来说，对于非只读、非重写、且同时拥有get，set（可以私有）访问器的属性，会自动生成。
+            对于字段，均不会自动生成。所以可以使用该设置，来指示生成器的生成行为。
+            </summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.ConstantExpectedAttribute">
+            <summary>
+            Indicates that the specified method parameter expects a constant.
+            </summary>
+            <remarks>
+            This can be used to inform tooling that a constant should be used as an argument for the annotated parameter.
+            </remarks>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.ConstantExpectedAttribute.Min">
+            <summary>
+            Indicates the minimum bound of the expected constant, inclusive.
+            </summary>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.ConstantExpectedAttribute.Max">
+            <summary>
+            Indicates the maximum bound of the expected constant, inclusive.
+            </summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.ExperimentalAttribute">
+            <summary>
+            Indicates that an API is experimental and it may change in the future.
+            </summary>
+            <remarks>
+            This attribute allows call sites to be flagged with a diagnostic that indicates that an experimental
+            feature is used. Authors can use this attribute to ship preview features in their assemblies.
+            </remarks>
+        </member>
+        <member name="M:System.Diagnostics.CodeAnalysis.ExperimentalAttribute.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:System.Diagnostics.CodeAnalysis.ExperimentalAttribute"/> class,
+            specifying the ID that the compiler will use when reporting a use of the API the attribute applies to.
+            </summary>
+            <param name="diagnosticId">The ID that the compiler will use when reporting a use of the API the attribute applies to.</param>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.ExperimentalAttribute.DiagnosticId">
+            <summary>
+            Gets the ID that the compiler will use when reporting a use of the API the attribute applies to.
+            </summary>
+            <value>The unique diagnostic ID.</value>
+            <remarks>
+            The diagnostic ID is shown in build output for warnings and errors.
+            <para>This property represents the unique ID that can be used to suppress the warnings or errors, if needed.</para>
+            </remarks>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.ExperimentalAttribute.UrlFormat">
+            <summary>
+            Gets or sets the URL for corresponding documentation.
+            The API accepts a format string instead of an actual URL, creating a generic URL that includes the diagnostic ID.
+            </summary>
+            <value>The format string that represents a URL to corresponding documentation.</value>
+            <remarks>An example format string is <c>https://contoso.com/obsoletion-warnings/{0}</c>.</remarks>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.MemberNotNullAttribute">
+            <summary>
+            Specifies that the method or property will ensure that the listed field and property members have not-null values.
+            </summary>
+        </member>
+        <member name="M:System.Diagnostics.CodeAnalysis.MemberNotNullAttribute.#ctor(System.String)">
+            <summary>
+            Initializes the attribute with a field or property member.
+            </summary>
+            <param name="member">The field or property member that is promised to be not-null.</param>
+        </member>
+        <member name="M:System.Diagnostics.CodeAnalysis.MemberNotNullAttribute.#ctor(System.String[])">
+            <summary>
+            Initializes the attribute with the list of field and property members.
+            </summary>
+            <param name="members">The list of field and property members that are promised to be not-null.</param>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.MemberNotNullAttribute.Members">
+            <summary>
+            Gets field or property member names.
+            </summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute">
+            <summary>
+            Specifies that the method or property will ensure that the listed field and property
+            members have not-null values when returning with the specified return value condition.
+            </summary>
+        </member>
+        <member name="M:System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute.#ctor(System.Boolean,System.String)">
+            <summary>
+            Initializes the attribute with the specified return value condition and a field or property member.
+            </summary>
+            <param name="returnValue">The return value condition. If the method returns this value, the associated parameter will not be null.</param>
+            <param name="member">The field or property member that is promised to be not-null.</param>
+        </member>
+        <member name="M:System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute.#ctor(System.Boolean,System.String[])">
+            <summary>
+            Initializes the attribute with the specified return value condition and list of field and property members.
+            </summary>
+            <param name="returnValue">The return value condition. If the method returns this value, the associated parameter will not be null.</param>
+            <param name="members">The list of field and property members that are promised to be not-null.</param>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute.ReturnValue">
+            <summary>
+            Gets the return value condition.
+            </summary>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.MemberNotNullWhenAttribute.Members">
+            <summary>
+            Gets field or property member names.
+            </summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.SetsRequiredMembersAttribute">
+            <summary>
+            Specifies that this constructor sets all required members for the current type,
+            and callers do not need to set any required members themselves.
+            </summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute">
+            <summary>
+            Specifies the syntax used in a string.
+            </summary>
+        </member>
+        <member name="M:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.#ctor(System.String)">
+            <summary>
+            Initializes the <see cref="T:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute"/> with the identifier of the syntax used.
+            </summary>
+            <param name="syntax">The syntax identifier.</param>
+        </member>
+        <member name="M:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.#ctor(System.String,System.Object[])">
+            <summary>Initializes the <see cref="T:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute"/> with the identifier of the syntax used.</summary>
+            <param name="syntax">The syntax identifier.</param>
+            <param name="arguments">Optional arguments associated with the specific syntax employed.</param>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.Syntax">
+            <summary>Gets the identifier of the syntax used.</summary>
+        </member>
+        <member name="P:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.Arguments">
+            <summary>Optional arguments associated with the specific syntax employed.</summary>
+        </member>
+        <member name="F:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.CompositeFormat">
+            <summary>The syntax identifier for strings containing composite formats for string formatting.</summary>
+        </member>
+        <member name="F:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.DateOnlyFormat">
+            <summary>The syntax identifier for strings containing date format specifiers.</summary>
+        </member>
+        <member name="F:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.DateTimeFormat">
+            <summary>The syntax identifier for strings containing date and time format specifiers.</summary>
+        </member>
+        <member name="F:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.EnumFormat">
+            <summary>The syntax identifier for strings containing <see cref="T:System.Enum"/> format specifiers.</summary>
+        </member>
+        <member name="F:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.GuidFormat">
+            <summary>The syntax identifier for strings containing <see cref="T:System.Guid"/> format specifiers.</summary>
+        </member>
+        <member name="F:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.Json">
+            <summary>The syntax identifier for strings containing JavaScript Object Notation (JSON).</summary>
+        </member>
+        <member name="F:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.NumericFormat">
+            <summary>The syntax identifier for strings containing numeric format specifiers.</summary>
+        </member>
+        <member name="F:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.Regex">
+            <summary>The syntax identifier for strings containing regular expressions.</summary>
+        </member>
+        <member name="F:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.TimeOnlyFormat">
+            <summary>The syntax identifier for strings containing time format specifiers.</summary>
+        </member>
+        <member name="F:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.TimeSpanFormat">
+            <summary>The syntax identifier for strings containing <see cref="T:System.TimeSpan"/> format specifiers.</summary>
+        </member>
+        <member name="F:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.Uri">
+            <summary>The syntax identifier for strings containing URIs.</summary>
+        </member>
+        <member name="F:System.Diagnostics.CodeAnalysis.StringSyntaxAttribute.Xml">
+            <summary>The syntax identifier for strings containing XML.</summary>
+        </member>
+        <member name="T:System.Diagnostics.CodeAnalysis.UnscopedRefAttribute">
+            <summary>
+            Used to indicate a byref escapes and is not scoped.
+            </summary>
+            <remarks>
+            <para>
+            There are several cases where the C# compiler treats a <see langword="ref"/> as implicitly
+            <see langword="scoped"/> - where the compiler does not allow the <see langword="ref"/> to escape the method.
+            </para>
+            <para>
+            For example:
+            <list type="number">
+                <item><see langword="this"/> for <see langword="struct"/> instance methods.</item>
+                <item><see langword="ref"/> parameters that refer to <see langword="ref"/> <see langword="struct"/> types.</item>
+                <item><see langword="out"/> parameters.</item>
+            </list>
+            </para>
+            <para>
+            This attribute is used in those instances where the <see langword="ref"/> should be allowed to escape.
+            </para>
+            <para>
+            Applying this attribute, in any form, has impact on consumers of the applicable API. It is necessary for
+            API authors to understand the lifetime implications of applying this attribute and how it may impact their users.
+            </para>
+            </remarks>
+        </member>
+        <member name="T:System.Runtime.CompilerServices.CallerArgumentExpressionAttribute">
+            <summary>
+            An attribute that allows parameters to receive the expression of other parameters.
+            </summary>
+        </member>
+        <member name="M:System.Runtime.CompilerServices.CallerArgumentExpressionAttribute.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:System.Runtime.CompilerServices.CallerArgumentExpressionAttribute"/> class.
+            </summary>
+            <param name="parameterName">The condition parameter value.</param>
+        </member>
+        <member name="P:System.Runtime.CompilerServices.CallerArgumentExpressionAttribute.ParameterName">
+            <summary>
+            Gets the parameter name the expression is retrieved from.
+            </summary>
+        </member>
+        <member name="M:System.Runtime.CompilerServices.CollectionBuilderAttribute.#ctor(System.Type,System.String)">
+            <summary>
+            Initialize the attribute to refer to the <paramref name="methodName"/> method on the <paramref name="builderType"/> type.
+            </summary>
+            <param name="builderType">The type of the builder to use to construct the collection.</param>
+            <param name="methodName">The name of the method on the builder to use to construct the collection.</param>
+            <remarks>
+            <paramref name="methodName"/> must refer to a static method that accepts a single parameter of
+            type <see cref="T:System.ReadOnlySpan`1"/> and returns an instance of the collection being built containing
+            a copy of the data from that span.  In future releases of .NET, additional patterns may be supported.
+            </remarks>
+        </member>
+        <member name="P:System.Runtime.CompilerServices.CollectionBuilderAttribute.BuilderType">
+            <summary>
+            Gets the type of the builder to use to construct the collection.
+            </summary>
+        </member>
+        <member name="P:System.Runtime.CompilerServices.CollectionBuilderAttribute.MethodName">
+            <summary>
+            Gets the name of the method on the builder to use to construct the collection.
+            </summary>
+            <remarks>
+            This should match the metadata name of the target method.
+            For example, this might be ".ctor" if targeting the type's constructor.
+            </remarks>
+        </member>
+        <member name="T:System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute">
+            <summary>
+            Indicates that compiler support for a particular feature is required for the location where this attribute is applied.
+            </summary>
+        </member>
+        <member name="M:System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute.#ctor(System.String)">
+            <summary>
+            Creates a new instance of the <see cref="T:System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute"/> type.
+            </summary>
+            <param name="featureName">The name of the feature to indicate.</param>
+        </member>
+        <member name="P:System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute.FeatureName">
+            <summary>
+            The name of the compiler feature.
+            </summary>
+        </member>
+        <member name="P:System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute.IsOptional">
+            <summary>
+            If true, the compiler can choose to allow access to the location where this attribute is applied if it does not understand <see cref="P:System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute.FeatureName"/>.
+            </summary>
+        </member>
+        <member name="F:System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute.RefStructs">
+            <summary>
+            The <see cref="P:System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute.FeatureName"/> used for the ref structs C# feature.
+            </summary>
+        </member>
+        <member name="F:System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute.RequiredMembers">
+            <summary>
+            The <see cref="P:System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute.FeatureName"/> used for the required members C# feature.
+            </summary>
+        </member>
+        <member name="T:System.Runtime.CompilerServices.InterpolatedStringHandlerArgumentAttribute">
+            <summary>
+            Indicates which arguments to a method involving an interpolated string handler should be passed to that handler.
+            </summary>
+        </member>
+        <member name="M:System.Runtime.CompilerServices.InterpolatedStringHandlerArgumentAttribute.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:System.Runtime.CompilerServices.InterpolatedStringHandlerArgumentAttribute"/> class.
+            </summary>
+            <param name="argument">The name of the argument that should be passed to the handler.</param>
+            <remarks><see langword="null"/> may be used as the name of the receiver in an instance method.</remarks>
+        </member>
+        <member name="M:System.Runtime.CompilerServices.InterpolatedStringHandlerArgumentAttribute.#ctor(System.String[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:System.Runtime.CompilerServices.InterpolatedStringHandlerArgumentAttribute"/> class.
+            </summary>
+            <param name="arguments">The names of the arguments that should be passed to the handler.</param>
+            <remarks><see langword="null"/> may be used as the name of the receiver in an instance method.</remarks>
+        </member>
+        <member name="P:System.Runtime.CompilerServices.InterpolatedStringHandlerArgumentAttribute.Arguments">
+            <summary>
+            Gets the names of the arguments that should be passed to the handler.
+            </summary>
+            <remarks><see langword="null"/> may be used as the name of the receiver in an instance method.</remarks>
+        </member>
+        <member name="T:System.Runtime.CompilerServices.InterpolatedStringHandlerAttribute">
+            <summary>
+            Indicates the attributed type is to be used as an interpolated string handler.
+            </summary>
+        </member>
+        <member name="T:System.Runtime.CompilerServices.IsExternalInit">
+            <summary>
+            Reserved to be used by the compiler for tracking metadata.
+            This class should not be used by developers in source code.
+            </summary>
+        </member>
+        <member name="T:System.Runtime.CompilerServices.ModuleInitializerAttribute">
+             <summary>
+             Used to indicate to the compiler that a method should be called
+             in its containing module's initializer.
+             </summary>
+             <remarks>
+             When one or more valid methods
+             with this attribute are found in a compilation, the compiler will
+             emit a module initializer which calls each of the attributed methods.
+            
+             Certain requirements are imposed on any method targeted with this attribute:
+             - The method must be `static`.
+             - The method must be an ordinary member method, as opposed to a property accessor, constructor, local function, etc.
+             - The method must be parameterless.
+             - The method must return `void`.
+             - The method must not be generic or be contained in a generic type.
+             - The method's effective accessibility must be `internal` or `public`.
+            
+             The specification for module initializers in the .NET runtime can be found here:
+             https://github.com/dotnet/runtime/blob/main/docs/design/specs/Ecma-335-Augments.md#module-initializer
+             </remarks>
+        </member>
+        <member name="T:System.Runtime.CompilerServices.OverloadResolutionPriorityAttribute">
+            <summary>
+            Specifies the priority of a member in overload resolution. When unspecified, the default priority is 0.
+            </summary>
+        </member>
+        <member name="M:System.Runtime.CompilerServices.OverloadResolutionPriorityAttribute.#ctor(System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:System.Runtime.CompilerServices.OverloadResolutionPriorityAttribute"/> class.
+            </summary>
+            <param name="priority">The priority of the attributed member. Higher numbers are prioritized, lower numbers are deprioritized. 0 is the default if no attribute is present.</param>
+        </member>
+        <member name="P:System.Runtime.CompilerServices.OverloadResolutionPriorityAttribute.Priority">
+            <summary>
+            The priority of the member.
+            </summary>
+        </member>
+        <member name="T:System.Runtime.CompilerServices.ParamCollectionAttribute">
+            <summary>
+            Indicates that a method will allow a variable number of arguments in its invocation.
+            </summary>
+        </member>
+        <member name="T:System.Runtime.CompilerServices.RequiredMemberAttribute">
+            <summary>
+            Specifies that a type has required members or that a member is required.
+            </summary>
+        </member>
+        <member name="T:System.Runtime.CompilerServices.RequiresLocationAttribute">
+            <summary>
+            Reserved for use by a compiler for tracking metadata.
+            This attribute should not be used by developers in source code.
+            </summary>
+        </member>
+        <member name="T:System.Runtime.CompilerServices.SkipLocalsInitAttribute">
+            <summary>
+            Used to indicate to the compiler that the <c>.locals init</c> flag should not be set in method headers.
+            </summary>
+        </member>
+        <member name="M:System.Runtime.Versioning.RequiresPreviewFeaturesAttribute.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:System.Runtime.Versioning.RequiresPreviewFeaturesAttribute"/> class.
+            </summary>
+        </member>
+        <member name="M:System.Runtime.Versioning.RequiresPreviewFeaturesAttribute.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:System.Runtime.Versioning.RequiresPreviewFeaturesAttribute"/> class with the specified message.
+            </summary>
+            <param name="message">An optional message associated with this attribute instance.</param>
+        </member>
+        <member name="P:System.Runtime.Versioning.RequiresPreviewFeaturesAttribute.Message">
+            <summary>
+            Returns the optional message associated with this attribute instance.
+            </summary>
+        </member>
+        <member name="P:System.Runtime.Versioning.RequiresPreviewFeaturesAttribute.Url">
+            <summary>
+            Returns the optional URL associated with this attribute instance.
+            </summary>
+        </member>
+    </members>
+</doc>

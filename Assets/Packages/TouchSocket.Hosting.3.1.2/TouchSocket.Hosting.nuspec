@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+  <metadata>
+    <id>TouchSocket.Hosting</id>
+    <version>3.1.2</version>
+    <title>TouchSocket.Hosting</title>
+    <authors>若汝棋茗</authors>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <license type="file">LICENSE.txt</license>
+    <licenseUrl>https://aka.ms/deprecateLicenseUrl</licenseUrl>
+    <icon>logo.png</icon>
+    <readme>Readme.md</readme>
+    <projectUrl>https://touchsocket.net/</projectUrl>
+    <description>这是TouchSocket基于通用主机的扩展。目前包括Tcp、Udp、NamedPipe、Dmtp、SerialPort等服务。
+
+说明文档：https://touchsocket.net/</description>
+    <copyright>Copyright © 2025 若汝棋茗</copyright>
+    <tags>Hosting Socket JsonRpc NamedPipe XmlRpc Dmtp TouchSocket</tags>
+    <repository type="git" url="https://github.com/RRQM/TouchSocket" commit="be3f4f8e985bac4e376f507697776473c49d06a7" />
+    <dependencies>
+      <group targetFramework=".NETFramework4.6.2">
+        <dependency id="TouchSocket.Core.DependencyInjection" version="3.1.2" exclude="Build,Analyzers" />
+        <dependency id="TouchSocket" version="3.1.2" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Extensions.Hosting.Abstractions" version="6.0.0" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Extensions.Logging.Abstractions" version="6.0.0" exclude="Build,Analyzers" />
+      </group>
+      <group targetFramework=".NETFramework4.7.2">
+        <dependency id="TouchSocket.Core.DependencyInjection" version="3.1.2" exclude="Build,Analyzers" />
+        <dependency id="TouchSocket" version="3.1.2" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Extensions.Hosting.Abstractions" version="6.0.0" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Extensions.Logging.Abstractions" version="6.0.0" exclude="Build,Analyzers" />
+      </group>
+      <group targetFramework="net6.0">
+        <dependency id="TouchSocket.Core.DependencyInjection" version="3.1.2" exclude="Build,Analyzers" />
+        <dependency id="TouchSocket" version="3.1.2" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Extensions.Hosting.Abstractions" version="6.0.0" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Extensions.Logging.Abstractions" version="6.0.0" exclude="Build,Analyzers" />
+      </group>
+      <group targetFramework="net8.0">
+        <dependency id="TouchSocket.Core.DependencyInjection" version="3.1.2" exclude="Build,Analyzers" />
+        <dependency id="TouchSocket" version="3.1.2" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Extensions.Hosting.Abstractions" version="8.0.0" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Extensions.Logging.Abstractions" version="8.0.0" exclude="Build,Analyzers" />
+      </group>
+      <group targetFramework="net9.0">
+        <dependency id="TouchSocket.Core.DependencyInjection" version="3.1.2" exclude="Build,Analyzers" />
+        <dependency id="TouchSocket" version="3.1.2" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Extensions.Hosting.Abstractions" version="9.0.0" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Extensions.Logging.Abstractions" version="9.0.0" exclude="Build,Analyzers" />
+      </group>
+      <group targetFramework=".NETStandard2.0">
+        <dependency id="TouchSocket.Core.DependencyInjection" version="3.1.2" exclude="Build,Analyzers" />
+        <dependency id="TouchSocket" version="3.1.2" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Extensions.Hosting.Abstractions" version="6.0.0" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Extensions.Logging.Abstractions" version="6.0.0" exclude="Build,Analyzers" />
+      </group>
+      <group targetFramework=".NETStandard2.1">
+        <dependency id="TouchSocket.Core.DependencyInjection" version="3.1.2" exclude="Build,Analyzers" />
+        <dependency id="TouchSocket" version="3.1.2" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Extensions.Hosting.Abstractions" version="6.0.0" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.Extensions.Logging.Abstractions" version="6.0.0" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+  </metadata>
+</package>
