@@ -1,4 +1,4 @@
-# UnityCommonSolution-TouchSocket
+# UnityCommonSolution-UnityTouchSocket
 
 ![GitHub](https://img.shields.io/badge/Unity-2021.3%2B-blue)
 ![GitHub](https://img.shields.io/badge/license-ApacheLicense2.0-green)
